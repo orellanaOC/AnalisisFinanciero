@@ -7,7 +7,7 @@
         <ul class="nav">
             <li @if ($pageSlug == 'dashboard') class="active " @endif>
                 <a href="{{ route('home') }}">
-                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <i class="tim-icons icon-chart-pie-36"></i> 
                     <p>{{ __('Dashboard') }}</p>
                 </a>
             </li>
