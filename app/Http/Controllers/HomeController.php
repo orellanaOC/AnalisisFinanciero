@@ -33,4 +33,25 @@ class HomeController extends Controller
         return view('simpleViews.catalogo.create');
     }
 
+    public function formulas(){
+        return view('simpleViews.formulas.index');
+    }
+    public function analisis_sector(){
+        return view('finanzasViews.analisisSector.index');
+    }
+    public function empresa_individual(){
+        return view('simpleViews.empresa.index');
+    }
+    public function estado_resultado_index(){
+        return view('finanzasViews.estadoResultados.index');
+    }
+    public function estado_resultado_create(){
+        return view('finanzasViews.estadoResultados.create');
+    }
+    public function balance_general_index(){
+        return view('finanzasViews.balanceGeneral.index');
+    }
+    public function balance_general_create(){
+        return view('finanzasViews.balanceGeneral.create');
+    }
 }

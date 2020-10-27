@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-8">
-                            <h4 class="card-title">Registrar cuenta</h4>
+                            <h2 class="card-title">Registrar cuenta</h2>
                         </div>
                     </div>
                 </div>
@@ -26,10 +26,10 @@
                         </div>
                         <div class="col-md-4">
                             <select class="form-control">
-                                <option style="background: black; !important">-Seleccionar un tipo</option>
-                                <option style="background: black; !important">Tipo 1</option>
-                                <option style="background: black; !important">Tipo 2</option>
-                                <option style="background: black; !important">Tipo 3</option>
+                                <option class="selectorCorreccion">--Seleccionar un tipo--</option>
+                                <option class="selectorCorreccion">Tipo 1</option>
+                                <option class="selectorCorreccion">Tipo 2</option>
+                                <option class="selectorCorreccion">Tipo 3</option>
                             </select>                        
                         </div>
                     </div>
@@ -57,6 +57,13 @@
                             </span>
                         </div>
                     </div-->
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8 text-center">
+                            <button class="btn btn-primary"> Guardar </button>                          
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
 
 
 

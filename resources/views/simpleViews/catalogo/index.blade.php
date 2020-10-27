@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-10">
-                            <h4 class="card-title">Catálogo de cuentas</h4>
+                            <h2 class="card-title">Catálogo de cuentas</h2>
                         </div>
                         <div class="col-md-2">
                           <a class="btn btn-primary" href="{{ route('catalogo_prueba_create') }}">+ Cuenta</i></a>
@@ -21,15 +21,9 @@
                         <table class="table tablesorter" id="">
                             <thead class=" text-primary">
                                 <tr>
-                                    <th>
-                                        Código
-                                    </th>
-                                    <th>
-                                        Nombre
-                                    </th>
-                                    <th>
-                                        Tipo
-                                    </th>
+                                    <th>Código</th>
+                                    <th>Nombre</th>
+                                    <th>Tipo</th>
                                     <!--th class="text-center">
                                         Salary
                                     </th-->
@@ -37,81 +31,39 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
-                                      1
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
+                                    <td>1</td>
+                                    <td>activo</td>
+                                    <td>activo</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                      1.1
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
+                                    <td>1.1</td>
+                                    <td>activo</td>
+                                    <td>activo</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                      1.1.1
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
+                                    <td>1.1.1</td>
+                                    <td>activo</td>
+                                    <td>activo</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                      2
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
+                                    <td>2</td>
+                                    <td>activo</td>
+                                    <td>activo</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                      2.1
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
+                                    <td>2.1</td>
+                                    <td>activo</td>
+                                    <td>activo</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                      2.1.1
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
+                                    <td>2.1.1</td>
+                                    <td>activo</td>
+                                    <td>activo</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                      2.1.2
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
-                                    <td>
-                                      activo
-                                    </td>
+                                    <td>2.1.2</td>
+                                    <td>activo</td>
+                                    <td>activo</td>
                                 </tr>
                             </tbody>
                         </table>

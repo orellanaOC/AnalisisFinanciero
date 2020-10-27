@@ -37,27 +37,33 @@
                 </div>
             </li-->
             <li @if ($pageSlug == 'icons') class="active " @endif>
-                <a href="{{ route('pages.icons') }}">
+                <a href="{{ route('balance_general_index') }}">
                     <i class="tim-icons icon-coins"></i>
                     <p>{{ __('Balance general') }}</p>
                 </a>
             </li>
             <li @if ($pageSlug == 'maps') class="active " @endif>
-                <a href="#">
+                <a href="{{ route('estado_resultado_index') }}">
                     <i class="tim-icons icon-money-coins"></i>
                     <p>{{ __('Estado de resultados') }}</p>
                 </a>
             </li>
             <li @if ($pageSlug == 'notifications') class="active " @endif>
-                <a href="{{ route('pages.notifications') }}">
+                <a href="{{ route('analisis_empresa') }}">
                     <i class="tim-icons icon-bank"></i>
                     <p>{{ __('Empresa individual') }}</p>
                 </a>
             </li>
             <li @if ($pageSlug == 'tables') class="active " @endif>
-                <a href="{{ route('pages.tables') }}">
+                <a href="{{ route('analisis') }}">
                     <i class="tim-icons icon-chart-bar-32"></i>
                     <p>{{ __('Análisis del sector') }}</p>
+                </a>
+            </li>
+            <li @if ($pageSlug == 'typography') class="active " @endif>
+                <a href="{{ route('formulas') }}">
+                    <i class="tim-icons icon-bulb-63"></i>
+                    <p>{{ __('Fórmulas de ratios') }}</p>
                 </a>
             </li>
             <li @if ($pageSlug == 'typography') class="active " @endif>
