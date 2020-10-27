@@ -19,9 +19,6 @@ class CreatePermissionsTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->boolean('tipo_permiso')->default(false);
-            $table->integer('id_tabla');
-            $table->foreign('id_tabla')->references('id')->on('tabla')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

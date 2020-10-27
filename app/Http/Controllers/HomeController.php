@@ -23,4 +23,14 @@ class HomeController extends Controller
     {
         return view('dashboard');
     }
+
+    /*voy a usar este controlador para probar vistas y cosas asi*/
+    //vista estatica catalogo de cuentas
+    public function catalogo1(){
+        return view('simpleViews.catalogo.index');
+    }
+    public function catalogo2(){
+        return view('simpleViews.catalogo.create');
+    }
+
 }

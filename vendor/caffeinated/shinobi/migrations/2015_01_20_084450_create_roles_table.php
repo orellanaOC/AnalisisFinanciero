@@ -19,7 +19,6 @@ class CreateRolesTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->boolean('tipo_rol')->default(false);
             $table->timestamps();
         });
     }
