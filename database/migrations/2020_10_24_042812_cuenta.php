@@ -23,6 +23,11 @@ class Cuenta extends Migration
             $table->foreign('tipo_id')->references('id')->on('tipo_cuenta')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
+
+        Schema::table('cuenta', function($table) {
+            $table->integer('padre_id')->nullable();
+            $table->foreign('padre_id')->references('id')->on('cuenta')->onUpdate('cascade')->onDelete('cascade');
+        });
     }
 
     /**
