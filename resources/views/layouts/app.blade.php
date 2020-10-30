@@ -21,7 +21,7 @@
         <link href="{{ asset('black') }}/css/theme.css" rel="stylesheet" />
         <link href="{{ asset('black') }}/css/style.css" rel="stylesheet" />
     </head>
-    <body class="{{ $class ?? '' }}">
+    <body class="{{ $class ?? '' }} white-content">
         @auth()
             <div class="wrapper">
                     @include('layouts.navbars.sidebar')
