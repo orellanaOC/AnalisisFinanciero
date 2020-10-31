@@ -1,7 +1,7 @@
 <div class="sidebar">
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a href="#" class="simple-text text-center logo-normal">{{ __('SIAF') }}</a>
+            <a href={{ route('home')}} class="simple-text text-center logo-normal">{{ __('SIAF') }}</a>
         </div>
         <ul class="nav">
             <li @if ($pageSlug == 'dashboard') class="active " @endif>
@@ -66,12 +66,37 @@
                     <p>{{ __('Fórmulas de ratios') }}</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'typography') class="active " @endif>
-                <a href="{{ route('pages.typography') }}">
-                    <i class="tim-icons icon-lock-circle"></i>
-                    <p>{{ __('Seguridad') }}</p>
+            @canany(['users.index', 'roles.index', 'permission_user.index'])
+            <li>
+                <a data-toggle="collapse" href="#seguridad" aria-expanded="false">
+                    <i class="tim-icons icon-lock-circle" ></i>
+                    <span class="nav-link-text" >{{ __('Seguridad') }}</span>
+                    <b class="caret mt-1"></b>
                 </a>
+
+                <div class="collapse" id="seguridad">
+                    <ul class="nav pl-4">
+                        @can('users.index')
+                            <li @if ($pageSlug == 'usuarios') class="active " @endif>
+                                <a href="{{ route('users.index') }}">
+                                    <i class="tim-icons icon-single-02"></i>
+                                    <p>{{ __('Usuarios') }}</p>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('role.index')
+                            <li @if ($pageSlug == 'permisos') class="active " @endif>
+
+                                <a href="{{ route('roles.index') }}">
+                                    <i class="tim-icons icon-badge"></i>
+                                    <p>{{ __('Roles') }}</p>
+                                </a>
+                            </li>
+                        @endcan
+                    </ul>
+                </div>
             </li>
+            @endcanany
             <!--li @if ($pageSlug == 'rtl') class="active " @endif>
                 <a href="{{ route('pages.rtl') }}">
                     <i class="tim-icons icon-world"></i>

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,3 +54,96 @@ Route::get('/estado_resultados_index', 'HomeController@estado_resultado_index')-
 Route::get('/estado_resultados_create', 'HomeController@estado_resultado_create')->name('estado_resultado_create');
 Route::get('/balance_general_index', 'HomeController@balance_general_index')->name('balance_general_index');
 Route::get('/balance_general_create', 'HomeController@balance_general_create')->name('balance_general_create');
+
+
+Route::middleware(['auth'])->group(function(){
+
+	/*---------------------------------------------- USUARIO ----------------------------------------------*/
+
+		Route::post('users/store', 'UserController@store')->name('users.store')
+		->middleware('has.permission:users.create');
+	
+		Route::get('users', 'UserController@index')->name('users.index')
+		->middleware('has.permission:users.index');
+	
+		Route::get('users/create', 'UserController@create')->name('users.create')
+		->middleware('has.permission:users.create');
+	
+		Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')
+		->middleware('has.permission:users.edit');
+	
+		Route::put('users/{user}', 'UserController@update')->name('users.update')
+		->middleware('has.permission:users.edit');
+	
+		Route::get('users/{user}', 'UserController@show')->name('users.show')
+		->middleware('has.permission:users.show');
+	
+		Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')
+		->middleware('has.permission:users.destroy');
+
+	/*-----------------------------------------------------------------------------------------------------*/
+
+	/*----------------------------------------------- ROLES -----------------------------------------------*/
+
+		Route::post('roles/store', 'RoleController@store')->name('roles.store')
+		->middleware('has.permission:role.create');
+
+		Route::get('roles', 'RoleController@index')->name('roles.index')
+		->middleware('has.permission:role.index');
+
+		Route::get('roles/create', 'RoleController@create')->name('roles.create')
+		->middleware('has.permission:role.create');
+
+		Route::put('roles/{role}', 'RoleController@update')->name('roles.update')
+		->middleware('has.permission:role.edit');
+
+		Route::get('roles/{role}', 'RoleController@show')->name('roles.show')
+		->middleware('has.permission:role.show');
+
+		Route::delete('roles/{role}', 'RoleController@destroy')->name('roles.destroy')
+		->middleware('has.permission:role.destroy');
+
+		Route::get('roles/{role}/edit', 'RoleController@edit')->name('roles.edit')
+		->middleware('has.permission:role.edit');
+
+	/*-----------------------------------------------------------------------------------------------------*/
+
+	/*---------------------------------------------- PERMISOS ---------------------------------------------*/
+
+		Route::get('user/permissions/{user}', 'PermissionController@index')->name('permission.index')
+		->middleware('has.permission:permission_user.index');
+
+		Route::post('user/permissions/', 'PermissionController@store')->name('permission.store')
+		->middleware('has.permission:permission_user.create');
+
+		Route::delete('user/permissions/', 'PermissionController@destroy')->name('permission.destroy')
+		->middleware('has.permission:permission_user.destroy');
+
+	/*-----------------------------------------------------------------------------------------------------*/
+
+	/*------------------------------------------- PERMISO - ROL -------------------------------------------*/
+
+		Route::post('role_permissions/', 'PermissionRoleController@store')->name('role_permission.store')
+		->middleware('has.permission:permission_role.create');
+
+		Route::get('role_permissions/{role}', 'PermissionRoleController@index')->name('roles.permissions')
+		->middleware('has.permission:permission_role.index');
+
+		Route::delete('role_permissions/', 'PermissionRoleController@destroy')->name('role_permission.destroy')
+		->middleware('has.permission:permission_role.destroy');
+
+	/*-----------------------------------------------------------------------------------------------------*/
+
+	/*------------------------------------------- PERMISO - ROL -------------------------------------------*/
+
+	
+
+	/*-----------------------------------------------------------------------------------------------------*/
+
+	/*------------------------------------------- PERMISO - ROL -------------------------------------------*/
+
+	
+
+	/*-----------------------------------------------------------------------------------------------------*/
+
+});
