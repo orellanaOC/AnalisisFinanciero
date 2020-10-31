@@ -10,7 +10,8 @@
                             <h2 class="card-title">Fórmulas para cálculo de ratios</h2>
                         </div>
                         <div class="col-md-2">
-                          <a class="btn btn-primary" href="{{ route('catalogo_prueba_create') }}">+ Fórmula</i></a>
+                            <button class="btn brn-primary" onclick="confirmar()" >sweet</button>
+                          <!--a class="btn btn-primary" href="{{ route('catalogo_prueba_create') }}">+ Fórmula</i></a-->
                         </div>
                     </div>
                 </div>
