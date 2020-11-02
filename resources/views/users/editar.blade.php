@@ -71,7 +71,7 @@
                                 <option value="" selected disabled hidden >Seleccione un rol *</option>
                                 @foreach ($roles as $rol)
                                     @if($roleuser->role_id==$rol->id)
-                                        <option style="color: black !important;" selected>{{ $rol->name }}</option>
+                                        <option style="color: black !important;" selected disabled hidden>{{ $rol->name }}</option>
                                     @endif
                                     <option style="color: black !important;">{{ $rol->name }}</option>
                                 @endforeach
