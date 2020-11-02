@@ -87,7 +87,7 @@
                                 <div id="listaB{{$tb->id}}" class="collapse" aria-labelledby="rec{{$tb->id}}" data-parent="#accordion">
                                     <table width='100%' class="table">
                                         @foreach ($permisos as $permiso)
-                                            @if($permiso->id_tabla==$tb->id && !$permiso->tipo_permiso)  
+                                            @if($permiso->id_tabla==$tb->id)  
                                             <tr  id="p{{$permiso->id}}" onMouseOver="ResaltarFila('p{{$permiso->id}}');" onMouseOut="RestablecerFila('p{{$permiso->id}}', '')" onClick="añadirPermiso({{ $permiso->id }});" >
                                                 <td></td>
                                                 <td>

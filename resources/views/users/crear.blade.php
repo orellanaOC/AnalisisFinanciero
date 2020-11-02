@@ -1,57 +1,8 @@
-@extends('layouts.app',['pageSlug' => 'dashboard'])
+@extends('users.index')  
 @section('title')
     Crear Usuario
 @endsection
-@section('content')
-<div class="row">
-    <div class="col-6">
-        <div class="card">
-            <div class="card-header ">
-                <div class="row">
-                    <div class="col-sm-9 text-left">
-                        <h2 class="card-title"><b>Administración de Usuarios</b></h2>
-                    </div>
-                    <div class="col-sm-3 text-right">
-                        <a role="button" class="btn btn-primary" href="{{ route('users.create')  }}">
-                            <i class="tim-icons icon-simple-add"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="container list-group">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Email</th>
-                                    <th class="text-center" colspan = "3">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($data as $use) 
-                                <tr>                     
-                                    <td id={{$use->id}} onMouseOver="ResaltarFila({{$use->id}});" onMouseOut="RestablecerFila({{$use->id}}, '')" onClick="CrearEnlace('{{ route('users.show', $use->id)}}');">{{$use->email}}</td>
-
-                                    <td width='5%'>
-                                        <a type="button" href="{{ route('permission.index', $use->id)}}" class="btn btn-default btn-sm btn-icon btn-round"><i class="tim-icons icon-key-25"></i></a>
-                                    </td>
-                                    <td width='5%'>
-                                        <a type="button" href="{{ route('users.edit', $use->id)}}" class="btn btn-success btn-sm btn-sm btn-icon btn-round"><i class="tim-icons icon-pencil"></i></a>
-                                    </td>
-                                    <form method="POST" id="formulario{{$use->id}}" action="{{route('users.destroy', $use->id)}}" >
-                                    @csrf
-                                    @method('DELETE')
-                                    <td width='5%'>
-                                        <button type="button" onClick="confirmar({{$use->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar"><i class="tim-icons icon-simple-remove"></i></button> 
-                                    </td></form>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+@section('opcion')
 	<div class="col-6">
         <div class="card">
             <div class="card-header ">
@@ -109,33 +60,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="tim-icons icon-bank"></i>
-                                </div>
-                            </div>
-                            <input type="text" name="institucion" class="form-control{{ $errors->has('institucion') ? ' is-invalid' : '' }}" placeholder="{{ __('Institución de procedencia *') }}">
-                            @include('alerts.feedback', ['field' => 'institucion'])
-                        </div>
-                        <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="tim-icons icon-align-left-2"></i>
-                                </div>
-                            </div>
-                            <input type="text" name="descripcion" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" placeholder="{{ __('Descripción personal *') }}">
-                            @include('alerts.feedback', ['field' => 'descripcion'])
-                        </div>
-                        <div class="input-group{{ $errors->has('fecha_nac') ? ' has-danger' : '' }}">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fa fa-birthday-cake" aria-hidden="true"> *</i>
-                                </div>
-                            </div>
-                            <input type="date" max="2002-01-01" name="fecha_nac" class="form-control {{ $errors->has('fecha_nac') ? ' is-invalid' : '' }}" placeholder="{{ __('Fecha de nacimiento *') }}">
-                            @include('alerts.feedback', ['field' => 'fecha_nac'])
-                        </div>
+                       
                         <div class="input-group{{ $errors->has('rol') ? ' has-danger' : '' }}">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -151,24 +76,10 @@
                             @include('alerts.feedback', ['field' => 'rol'])                        
                         </div>
 
-                        <div class="input-group{{ $errors->has('sexo') ? ' has-danger' : '' }}">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="tim-icons icon-minimal-down"></i>
-                                </div>
-                            </div>
-                            <select class="form-control selectorWapis" id="sexo" name="sexo">
-                            	<option style="color: black !important;" value="" selected disabled hidden>Sexo *</option>
-                                <option style="color: black !important;">Femenino</option>
-                                <option style="color: black !important;">Masculino</option>
-                            </select>
-                            @include('alerts.feedback', ['field' => 'sexo'])                            
-                        </div>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Crear') }}</button>
                     </div>
-                    <br/>
                 </form>
             </div>
         </div>
