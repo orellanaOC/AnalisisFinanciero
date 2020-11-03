@@ -17762,7 +17762,10 @@ Copyright (c) 2015 Daniel Eden
 
 .full-page.pricing-page, .full-page.login-page, .full-page.lock-page, .full-page.register-page {
   min-height: 100vh;
+  /*
+  gradiente modo dark que no se para que sirve
   background: radial-gradient(#1e1e2f, #1e1e24);
+  */
 }
 
 .full-page>.content {
