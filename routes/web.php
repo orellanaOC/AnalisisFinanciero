@@ -45,8 +45,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 /* Vistas de prueba (usualmente estaticas)*/
-Route::get('/catalogo_prueba', 'HomeController@catalogo1')->name('catalogo_prueba');
-Route::get('/catalogo_prueba/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');
 Route::get('/formulas', 'HomeController@formulas')->name('formulas');
 Route::get('/analisis_de_sector', 'HomeController@analisis_sector')->name('analisis');
 Route::get('/analisis_individual', 'HomeController@empresa_individual')->name('analisis_empresa');
@@ -146,4 +144,10 @@ Route::middleware(['auth'])->group(function(){
 
 	/*-----------------------------------------------------------------------------------------------------*/
 
+	/*------------------------------------------- CATALOGO0 ---------------------------------------------*/
+	Route::get('/catalogo', 'CatalogoController@index')->name('catalogo_prueba');
+
+	Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');	
+
+	/*-----------------------------------------------------------------------------------------------------*/
 });
