@@ -24,6 +24,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
+                                <p>Formato admitido: xlsx</p>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <input class="form-control-file" type="file">                        
@@ -86,7 +87,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div>
                     <!--listado de todas las cuentas registradas-->
                     <!--TODO se debe tener un seeder de las cuentas mas basicas, comunes a todas las empresas-->
                         <table class="table tablesorter" id="">
@@ -95,6 +96,8 @@
                                     <th>Código</th>
                                     <th>Nombre</th>
                                     <th>Tipo</th>
+                                    <th>Padre</th>
+                                    <th>Acciones</th>
                                     <!--th class="text-center">
                                         Salary
                                     </th-->
@@ -105,9 +108,30 @@
                                     <td>1</td>
                                     <td>activo</td>
                                     <td>activo</td>
+                                    <td>padre</td>
+                                    <form id="formulario" method="POST" action=""><!--agregar ruta-->
+                                        @csrf
+                                        @method('DELETE')
+                                        <!--td class="text-right"-->
+                                        <td>
+                                            <input hidden name="" value=""/>
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#modalEditarObjetivo" onclick="">
+                                                    <i class="tim-icons icon-pencil"></i>
+                                                </button>
+                                                <!--boton de eliminar-->
+                                                <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('')">
+                                                    <i class="tim-icons icon-simple-remove"></i>
+                                                </button>
+                                            </div>
+                                                
+                                        </!--td>
+                                    </form>
                                 </tr>
                                 <tr>
                                     <td>1.1</td>
+                                    <td>activo</td>
+                                    <td>activo</td>
                                     <td>activo</td>
                                     <td>activo</td>
                                 </tr>
@@ -115,24 +139,6 @@
                                     <td>1.1.1</td>
                                     <td>activo</td>
                                     <td>activo</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>activo</td>
-                                    <td>activo</td>
-                                </tr>
-                                <tr>
-                                    <td>2.1</td>
-                                    <td>activo</td>
-                                    <td>activo</td>
-                                </tr>
-                                <tr>
-                                    <td>2.1.1</td>
-                                    <td>activo</td>
-                                    <td>activo</td>
-                                </tr>
-                                <tr>
-                                    <td>2.1.2</td>
                                     <td>activo</td>
                                     <td>activo</td>
                                 </tr>
