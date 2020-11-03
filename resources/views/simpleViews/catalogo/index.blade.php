@@ -24,7 +24,11 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    ...
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input class="form-control-file" type="file">                        
+                                    </div>
+                                </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -35,7 +39,7 @@
                         </div>
                         <!-- Modal de ingreso manual -->
                         <div class="modal fade" id="aniadir_manual" tabindex="-1" role="dialog" aria-labelledby="manual_label" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="manual_label">Registrar una cuenta nueva</h5>
@@ -44,11 +48,37 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    ...
+                                    <div class="row">
+                                        <div class="ml-auto col-md-5">
+                                            <input class="form-control" placeholder="Código">                        
+                                        </div>
+                                        <div class="col-md-5 mr-auto">
+                                            <input class="form-control" placeholder="Nombre de la cuenta">                        
+                                        </div>
+                                    </div>
+                                    <p><br></p>
+                                    <div class="row">    
+                                        <div class="ml-auto col-md-5">
+                                            <select class="form-control">
+                                                <option value="-1" class="selectorCorreccion">--Seleccionar un tipo--</option>
+                                                @foreach ($tipoCuenta as $tipo)
+                                                <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
+                                                @endforeach
+                                            </select>                        
+                                        </div>
+                                        <div class="mr-auto col-md-5">
+                                            <select class="form-control">
+                                                <option value="-1" class="selectorCorreccion">--Seleccionar un padre de cuenta--</option>
+                                                @foreach ($tipoCuenta as $tipo)
+                                                <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
+                                                @endforeach
+                                            </select>                        
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-primary">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary">Registrar</button>
                                 </div>
                                 </div>
                             </div>
