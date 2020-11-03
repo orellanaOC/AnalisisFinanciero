@@ -1,7 +1,14 @@
 <div class="sidebar">
     <div class="sidebar-wrapper">
-        <div class="logo">
-            <a href={{ route('home')}} class="simple-text text-center logo-normal">{{ __('SIAF') }}</a>
+    <p><br></p>
+        <div class="logo__centered">
+            <a href={{ route('home')}} class="text-center">
+                <img class="logo" src="{{ asset('black') }}/img/stats.png" alt="logo SIAF">
+            </a>
+        </div>
+        <div class="logo_centered text-center ">
+            <a href={{ route('home')}} class="text-white logo-normal">
+                <b>{{ __('SIAF') }}</b></a>
         </div>
         <ul class="nav">
             <li @if ($pageSlug == 'catalogo') class="active " @endif>

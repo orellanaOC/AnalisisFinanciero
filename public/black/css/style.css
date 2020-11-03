@@ -5,5 +5,12 @@
 
 .logo{
     height: 100px;
-    width: 100px;
+    /*width: 100px;*/
+}
+
+.logo__centered{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
