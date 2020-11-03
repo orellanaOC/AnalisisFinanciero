@@ -1,4 +1,4 @@
-@extends('layouts.app', ['pageSlug' => 'dashboard'])
+@extends('layouts.app', ['pageSlug' => 'catalogo_create'])
 
 @section('content')
     <div class="row">
