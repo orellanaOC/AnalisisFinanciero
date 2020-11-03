@@ -4,7 +4,7 @@
             <a href={{ route('home')}} class="simple-text text-center logo-normal">{{ __('SIAF') }}</a>
         </div>
         <ul class="nav">
-            <li @if ($pageSlug == 'dashboard') class="active " @endif>
+            <li @if ($pageSlug == 'catalogo') class="active " @endif>
                 <!--a href="{{ route('home') }}"-->
                 <a href="{{ route('catalogo_prueba') }}">
                     <i class="tim-icons icon-bullet-list-67"></i> 
@@ -36,31 +36,31 @@
                     </ul>
                 </div>
             </li-->
-            <li @if ($pageSlug == 'icons') class="active " @endif>
+            <li @if ($pageSlug == 'balance') class="active " @endif>
                 <a href="{{ route('balance_general_index') }}">
                     <i class="tim-icons icon-coins"></i>
                     <p>{{ __('Balance general') }}</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'maps') class="active " @endif>
+            <li @if ($pageSlug == 'resultados') class="active " @endif>
                 <a href="{{ route('estado_resultado_index') }}">
                     <i class="tim-icons icon-money-coins"></i>
                     <p>{{ __('Estado de resultados') }}</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'notifications') class="active " @endif>
+            <li @if ($pageSlug == 'empresa') class="active " @endif>
                 <a href="{{ route('analisis_empresa') }}">
                     <i class="tim-icons icon-bank"></i>
                     <p>{{ __('Empresa individual') }}</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'tables') class="active " @endif>
+            <li @if ($pageSlug == 'analisis') class="active " @endif>
                 <a href="{{ route('analisis') }}">
                     <i class="tim-icons icon-chart-bar-32"></i>
                     <p>{{ __('Análisis del sector') }}</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'typography') class="active " @endif>
+            <li @if ($pageSlug == 'formulas') class="active " @endif>
                 <a href="{{ route('formulas') }}">
                     <i class="tim-icons icon-bulb-63"></i>
                     <p>{{ __('Fórmulas de ratios') }}</p>

@@ -61,33 +61,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="tim-icons icon-bank"></i>
-                                </div>
-                            </div>
-                            <input type="text" name="institucion" value="{{$user->institucion}}" class="form-control{{ $errors->has('institucion') ? ' is-invalid' : '' }}" placeholder="{{ __('Institución de procedencia *') }}">
-                            @include('alerts.feedback', ['field' => 'institucion'])
-                        </div>
-                        <div class="input-group{{ $errors->has('descripcion') ? ' has-danger' : '' }}">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="tim-icons icon-align-left-2"></i>
-                                </div>
-                            </div>
-                            <input type="text" name="descripcion" value="{{$user->descripcion}}" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }}" placeholder="{{ __('Descripción personal *') }}">
-                            @include('alerts.feedback', ['field' => 'descripcion'])
-                        </div>
-                        <div class="input-group{{ $errors->has('fecha_nac') ? ' has-danger' : '' }}">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fa fa-birthday-cake" aria-hidden="true"> *</i>
-                                </div>
-                            </div>
-                            <input type="date" max="2002-01-01" value="{{$user->fecha_nac}}" name="fecha_nac" class="form-control {{ $errors->has('fecha_nac') ? ' is-invalid' : '' }}" placeholder="{{ __('Fecha de nacimiento *') }}">
-                            @include('alerts.feedback', ['field' => 'fecha_nac'])
-                        </div>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -98,35 +71,16 @@
                                 <option value="" selected disabled hidden >Seleccione un rol *</option>
                                 @foreach ($roles as $rol)
                                     @if($roleuser->role_id==$rol->id)
-                                        <option style="color: black !important;" selected>{{ $rol->name }}</option>
+                                        <option style="color: black !important;" selected disabled hidden>{{ $rol->name }}</option>
                                     @endif
                                     <option style="color: black !important;">{{ $rol->name }}</option>
                                 @endforeach
-                            </select>                            
-                        </div>
-
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="tim-icons icon-minimal-down"></i>
-                                </div>
-                            </div>
-                            <select class="form-control selectorWapis" value="{{$user->sexo}}" id="sexo" name="sexo">
-                            	<option value="" selected disabled hidden>Sexo *</option>
-                                    @if($user->sexo)
-                                        <option style="color: black !important;"selected>Masculino</option>
-                                        <option style="color: black !important;">Femenino</option>
-                                    @else
-                                        <option style="color: black !important;">Masculino</option>
-                                        <option style="color: black !important;"selected>Femenino</option>
-                                    @endif
                             </select>                            
                         </div>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Actualizar') }}</button>
                     </div>
-                    <br/>
                 </form>
             </div>
         </div>
