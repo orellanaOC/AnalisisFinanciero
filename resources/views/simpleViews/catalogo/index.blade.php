@@ -53,7 +53,7 @@
                                         <div class="modal-body">                                        
                                             <div class="row">
                                                 <div class="ml-auto col-md-5">
-                                                    <input class="form-control" placeholder="Código" name="">                        
+                                                    <input class="form-control" placeholder="Código" name="codigo">                        
                                                 </div>
                                                 <div class="col-md-5 mr-auto">
                                                     <input class="form-control" placeholder="Nombre de la cuenta" name="nombre">                        
