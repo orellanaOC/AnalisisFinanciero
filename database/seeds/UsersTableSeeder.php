@@ -34,5 +34,20 @@ class UsersTableSeeder extends Seeder
                 'user_id' => 1,
             ]);
         }
+
+        //Analista de prueba!
+        DB::table('users')->insert([
+            'name' => 'Analista analista',
+            'email' => 'analista@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('secret'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('role_user')->insert([
+            'role_id' => 2,
+            'user_id' => 2,
+        ]);
     }
 }

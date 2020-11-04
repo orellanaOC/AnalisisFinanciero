@@ -150,5 +150,12 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');
     Route::get('download/excel','CatalogoController@dowloadExcel')->name('catalogo.download');
     Route::get('upload/excel','CatalogoController@uploadExcel')->name('catalogo.upload');
+	Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');
+
+	//Guardar cuentas de forma manual
+	Route::post('/catalogo', 'CatalogoController@store')->name('cuenta_store');
+
+
+
 	/*-----------------------------------------------------------------------------------------------------*/
 });

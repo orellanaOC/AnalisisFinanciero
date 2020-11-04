@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-md-4">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_auto">+ Catálogo</i></button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_manual">+ Cuenta</i></button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_manual" onclick="ejecutarBuscador({{$tipoCuenta}})">+ Cuenta</i></button>
                         </div>
                         <!-- Modal de ingreso automatica -->
                         <div class="modal fade" id="aniadir_auto" tabindex="-1" role="dialog" aria-labelledby="auto_label" aria-hidden="true">
@@ -47,45 +47,50 @@
                         <div class="modal fade" id="aniadir_manual" tabindex="-1" role="dialog" aria-labelledby="manual_label" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="manual_label">Registrar una cuenta nueva</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="ml-auto col-md-5">
-                                            <input class="form-control" placeholder="Código">
+                                    <form action="{{route('cuenta_store')}}" method="post" id="formCuenta">
+                                        @csrf
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="manual_label">Registrar una cuenta nueva</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
-                                        <div class="col-md-5 mr-auto">
-                                            <input class="form-control" placeholder="Nombre de la cuenta">
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="ml-auto col-md-5">
+                                                    <input class="form-control" placeholder="Código" name="codigo">
+                                                </div>
+                                                <div class="col-md-5 mr-auto">
+                                                    <input class="form-control" placeholder="Nombre de la cuenta" name="nombre">
+                                                </div>
+                                            </div>
+                                            <p><br></p>
+                                            <div class="row">
+                                                <!--Seleccionador de tipo de cuenta-->
+                                                <div class="ml-auto col-md-5">
+                                                    <select class="form-control" name="tipoCuenta">
+                                                        <option value="-1" class="selectorCorreccion">--Seleccionar un tipo--</option>
+                                                        @foreach ($tipoCuenta as $tipo)
+                                                        <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="mr-auto col-md-5">
+                                                    <!--buscador con autocompletado-->
+                                                    <form autocomplete="off" action="" name="padre">
+                                                        <div>
+                                                            <input id="buscador" class="form-control" type="text" name="cuenta_padre" placeholder="Cuenta padre">
+                                                        </div>
+                                                        <input id="index_buscador" name="id_cuenta_padre" hidden>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <p><br></p>
-                                    <div class="row">
-                                        <div class="ml-auto col-md-5">
-                                            <select class="form-control">
-                                                <option value="-1" class="selectorCorreccion">--Seleccionar un tipo--</option>
-                                                @foreach ($tipoCuenta as $tipo)
-                                                <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
-                                                @endforeach
-                                            </select>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-primary" form="formCuenta">Registrar</button>
                                         </div>
-                                        <div class="mr-auto col-md-5">
-                                            <select class="form-control">
-                                                <option value="-1" class="selectorCorreccion">--Seleccionar un padre de cuenta--</option>
-                                                @foreach ($tipoCuenta as $tipo)
-                                                <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">Registrar</button>
-                                </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -14,20 +14,27 @@ class SectorTableSeeder extends Seeder
     {
         //
 
-        DB::table('sector')->insert([
-            'nombre'=>'Primario',
+         //Sectores Seeder
+         DB::table('sector')->insert([
+            'nombre'=>'Industrial',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('sector')->insert([
-            'nombre'=>'Secundario',
+            'nombre'=>'Minero',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('sector')->insert([
-            'nombre'=>'Terciario',
+            'nombre'=>'Ganaderia y Acuicultura',
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('sector')->insert([
+            'nombre'=>'Servicios',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+      
     }
 }
