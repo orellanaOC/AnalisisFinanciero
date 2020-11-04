@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-md-4">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_auto">+ Catálogo</i></button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_manual">+ Cuenta</i></button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_manual" onclick="ejecutarBuscador({{$tipoCuenta}})">+ Cuenta</i></button>
                         </div>
                         <!-- Modal de ingreso automatica -->
                         <div class="modal fade" id="aniadir_auto" tabindex="-1" role="dialog" aria-labelledby="auto_label" aria-hidden="true">
@@ -68,12 +68,13 @@
                                             </select>                        
                                         </div>
                                         <div class="mr-auto col-md-5">
-                                            <select class="form-control">
-                                                <option value="-1" class="selectorCorreccion">--Seleccionar un padre de cuenta--</option>
-                                                @foreach ($tipoCuenta as $tipo)
-                                                <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
-                                                @endforeach
-                                            </select>                        
+                                            <!--buscador con autocompletado-->
+                                            <form autocomplete="off" action="">
+                                            <div>
+                                                <input id="buscador" class="form-control" type="text" name="cuenta_padre" placeholder="Cuenta padre">
+                                            </div>
+                                            <input id="index_buscador" name="id_cuenta_padre" hidden>
+                                            </form>                      
                                         </div>
                                     </div>
                                 </div>
