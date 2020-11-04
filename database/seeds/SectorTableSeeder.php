@@ -12,10 +12,7 @@ class SectorTableSeeder extends Seeder
      */
     public function run()
     {
-        //
-
-         //Sectores Seeder
-         DB::table('sector')->insert([
+        DB::table('sector')->insert([
             'nombre'=>'Industrial',
             'created_at' => now(),
             'updated_at' => now()
@@ -35,6 +32,5 @@ class SectorTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-      
     }
 }
