@@ -24,10 +24,15 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
+                                <a href="{{URL::signedRoute('catalogo.download')}}" class="btn btn-primary">Presione aqui para descargar plantila</a>
                                 <p>Formato admitido: xlsx</p>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input class="form-control-file" type="file">                        
+                                        <form action="{{route('catalogo.upload')}}">
+                                            @csrf
+                                            <input class="form-control-file" type="file" name="archivo" accept=".xlsx">
+                                        </form>
+
                                     </div>
                                 </div>
                                 </div>
@@ -51,21 +56,21 @@
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="ml-auto col-md-5">
-                                            <input class="form-control" placeholder="Código">                        
+                                            <input class="form-control" placeholder="Código">
                                         </div>
                                         <div class="col-md-5 mr-auto">
-                                            <input class="form-control" placeholder="Nombre de la cuenta">                        
+                                            <input class="form-control" placeholder="Nombre de la cuenta">
                                         </div>
                                     </div>
                                     <p><br></p>
-                                    <div class="row">    
+                                    <div class="row">
                                         <div class="ml-auto col-md-5">
                                             <select class="form-control">
                                                 <option value="-1" class="selectorCorreccion">--Seleccionar un tipo--</option>
                                                 @foreach ($tipoCuenta as $tipo)
                                                 <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
                                                 @endforeach
-                                            </select>                        
+                                            </select>
                                         </div>
                                         <div class="mr-auto col-md-5">
                                             <select class="form-control">
@@ -73,7 +78,7 @@
                                                 @foreach ($tipoCuenta as $tipo)
                                                 <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
                                                 @endforeach
-                                            </select>                        
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +95,7 @@
                     <div>
                     <!--listado de todas las cuentas registradas-->
                     <!--TODO se debe tener un seeder de las cuentas mas basicas, comunes a todas las empresas-->
-                        <table class="table tablesorter" id="">
+                        <table class="table tablesorter" id="tabla_catalogo_cuentas">
                             <thead class=" text-primary">
                                 <tr>
                                     <th>Código</th>
@@ -124,7 +129,7 @@
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button>
                                             </div>
-                                                
+
                                         </!--td>
                                     </form>
                                 </tr>

@@ -60,22 +60,22 @@ Route::middleware(['auth'])->group(function(){
 
 		Route::post('users/store', 'UserController@store')->name('users.store')
 		->middleware('has.permission:users.create');
-	
+
 		Route::get('users', 'UserController@index')->name('users.index')
 		->middleware('has.permission:users.index');
-	
+
 		Route::get('users/create', 'UserController@create')->name('users.create')
 		->middleware('has.permission:users.create');
-	
+
 		Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')
 		->middleware('has.permission:users.edit');
-	
+
 		Route::put('users/{user}', 'UserController@update')->name('users.update')
 		->middleware('has.permission:users.edit');
-	
+
 		Route::get('users/{user}', 'UserController@show')->name('users.show')
 		->middleware('has.permission:users.show');
-	
+
 		Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')
 		->middleware('has.permission:users.destroy');
 
@@ -134,20 +134,21 @@ Route::middleware(['auth'])->group(function(){
 
 	/*------------------------------------------- PERMISO - ROL -------------------------------------------*/
 
-	
+
 
 	/*-----------------------------------------------------------------------------------------------------*/
 
 	/*------------------------------------------- PERMISO - ROL -------------------------------------------*/
 
-	
+
 
 	/*-----------------------------------------------------------------------------------------------------*/
 
 	/*------------------------------------------- CATALOGO0 ---------------------------------------------*/
 	Route::get('/catalogo', 'CatalogoController@index')->name('catalogo_prueba');
 
-	Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');	
-
+    Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');
+    Route::get('download/excel','CatalogoController@dowloadExcel')->name('catalogo.download');
+    Route::get('upload/excel','CatalogoController@uploadExcel')->name('catalogo.upload');
 	/*-----------------------------------------------------------------------------------------------------*/
 });
