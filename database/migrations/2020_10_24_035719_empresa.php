@@ -17,7 +17,7 @@ class Empresa extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('nit')->unique();
-            $table->timestamp('nrc')->unique();
+            $table->string('nrc')->unique();
             $table->integer('sector_id');
             $table->foreign('sector_id')->references('id')->on('sector')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('user_id');
