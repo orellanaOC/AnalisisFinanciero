@@ -147,7 +147,12 @@ Route::middleware(['auth'])->group(function(){
 	/*------------------------------------------- CATALOGO0 ---------------------------------------------*/
 	Route::get('/catalogo', 'CatalogoController@index')->name('catalogo_prueba');
 
-	Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');	
+	Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');
+
+	//Guardar cuentas de forma manual
+	Route::post('/catalogo', 'CatalogoController@store')->name('cuenta_store');
+	
+	
 
 	/*-----------------------------------------------------------------------------------------------------*/
 });

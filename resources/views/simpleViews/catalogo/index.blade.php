@@ -48,33 +48,35 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="row">
-                                        <div class="ml-auto col-md-5">
-                                            <input class="form-control" placeholder="Código">                        
+                                    <form action="{{route('cuenta_store')}}" method="post">
+                                        <div class="row">
+                                            <div class="ml-auto col-md-5">
+                                                <input class="form-control" placeholder="Código">                        
+                                            </div>
+                                            <div class="col-md-5 mr-auto">
+                                                <input class="form-control" placeholder="Nombre de la cuenta">                        
+                                            </div>
                                         </div>
-                                        <div class="col-md-5 mr-auto">
-                                            <input class="form-control" placeholder="Nombre de la cuenta">                        
+                                        <p><br></p>
+                                        <div class="row">    
+                                            <div class="ml-auto col-md-5">
+                                                <select class="form-control">
+                                                    <option value="-1" class="selectorCorreccion">--Seleccionar un tipo--</option>
+                                                    @foreach ($tipoCuenta as $tipo)
+                                                    <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
+                                                    @endforeach
+                                                </select>                        
+                                            </div>
+                                            <div class="mr-auto col-md-5">
+                                                <select class="form-control">
+                                                    <option value="-1" class="selectorCorreccion">--Seleccionar un padre de cuenta--</option>
+                                                    @foreach ($tipoCuenta as $tipo)
+                                                    <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
+                                                    @endforeach
+                                                </select>                        
+                                            </div>
                                         </div>
-                                    </div>
-                                    <p><br></p>
-                                    <div class="row">    
-                                        <div class="ml-auto col-md-5">
-                                            <select class="form-control">
-                                                <option value="-1" class="selectorCorreccion">--Seleccionar un tipo--</option>
-                                                @foreach ($tipoCuenta as $tipo)
-                                                <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
-                                                @endforeach
-                                            </select>                        
-                                        </div>
-                                        <div class="mr-auto col-md-5">
-                                            <select class="form-control">
-                                                <option value="-1" class="selectorCorreccion">--Seleccionar un padre de cuenta--</option>
-                                                @foreach ($tipoCuenta as $tipo)
-                                                <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
-                                                @endforeach
-                                            </select>                        
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
