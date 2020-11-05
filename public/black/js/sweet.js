@@ -16,7 +16,9 @@ tomar en cuenta que es la versión 1 de la librería, no la 2
             swal("Registro eliminado", {
               icon: "success",
             });
+            console.log(valor)
             document.getElementById("formulario"+valor).submit();
+            
           } else {
             swal("Eliminación cancelada");
           }
