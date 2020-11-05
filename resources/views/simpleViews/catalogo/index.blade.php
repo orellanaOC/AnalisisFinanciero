@@ -62,11 +62,17 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
+                                                
                                                 <div class="ml-auto col-md-5">
                                                     <input id="codigoCatalogo" class="form-control" placeholder="Código" name="codigo" onclick="ejecutarBuscador({{$cuentas}},'codigo', 'codigoCatalogo')">
                                                 </div>
                                                 <div class="col-md-5 mr-auto">
                                                     <input class="form-control" placeholder="Nombre de la cuenta" name="nombre">
+                                                    @if ($errors->has('nombre'))
+                                                    <small class="form-text text-danger">
+                                                        {{ $errors->first('nombre') }}
+                                                    </small>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <p><br></p>
@@ -79,6 +85,11 @@
                                                         <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
                                                         @endforeach
                                                     </select>
+                                                    @if ($errors->has('tipoCuenta'))
+                                                    <small class="form-text text-danger">
+                                                        {{ $errors->first('tipoCuenta') }}
+                                                    </small>
+                                                    @endif
                                                 </div>
                                                 <div class="mr-auto col-md-5">
                                                     <!--buscador con autocompletado-->
