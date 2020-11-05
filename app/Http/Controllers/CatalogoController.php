@@ -106,7 +106,6 @@ class CatalogoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd([$request->request, $id]);
         //dd($request->request);
         //Validación de campos
         request()->validate([
@@ -123,10 +122,11 @@ class CatalogoController extends Controller
         //La empresa sera tomada directamente de la empresa del usuario logeado
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+        $request->idCuenta=$id;
         //Llamada a la funcion para guardar cuentas
         $respuesta= $this->guardarCuenta($request, $empresa, FALSE);
         if($respuesta===TRUE){
-            return redirect()->route('catalogo_prueba')->with('status', 'Cuenta '.$request->nombre.' creada exitosamente');
+            return redirect()->route('catalogo_prueba')->with('status', 'Cuenta '.$request->nombre.' actualizada exitosamente');
         }
         else{
             return back()->withErrors(['msg'=>$respuesta]);
@@ -244,8 +244,8 @@ class CatalogoController extends Controller
         Storage::delete($ruta);
         return redirect()->route('catalogo_prueba');
     }
-    
-    public function guardarCuenta($request, $empresa, $cuenta, $metodo){
+
+    public function guardarCuenta($request, $empresa, $metodo){
         if($metodo){
             $cuenta= new Cuenta();
             //Validacion de que la cuenta no sea repetida
@@ -256,7 +256,8 @@ class CatalogoController extends Controller
             }
         }
         else{
-            $cuenta=Cuenta::Where('codigo', $request->codigo)->where('empresa_id', $empresa->id)->first();
+            $cuenta=Cuenta::Where('id', $request->idCuenta)->where('empresa_id', $empresa->id)->first();
+            $cuenta->padre_id=NULL;
         }        
         $cuenta->codigo= $request->codigo;
         $cuenta->nombre= $request->nombre;
