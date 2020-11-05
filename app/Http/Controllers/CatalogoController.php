@@ -21,11 +21,13 @@ class CatalogoController extends Controller
     public function index()
     {
         $tipoCuenta= TipoCuenta::all();
-        //Cuentas de la empresa del usuario logeado
+
         $idUsuarioLogeado=auth()->user()->id;
-        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();        
-        $cuentas= Cuenta::where('empresa_id', $empresa->id)->get();
-        return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta, 'cuentas'=> $cuentas]);
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+        $cuentas=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->get();
+        //$cuentas=Cuenta::all();
+
+        return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
     }
 
     /**
@@ -71,18 +73,18 @@ class CatalogoController extends Controller
         $cuenta= new Cuenta();
         $cuenta->codigo= $request->codigo;
         $cuenta->nombre= $request->nombre;
-        
+
         $cuenta->empresa_id= $empresa->id;
         $cuenta->tipo_id= $request->tipoCuenta;
-        //Se guardara el id del padre solo si escribio un codigo de cuenta padre 
+        //Se guardara el id del padre solo si escribio un codigo de cuenta padre
         if ($request->cuenta_padre) {
             //Validación si la cuenta padre que ingreso es correcta
             if($cuentaPadre= Cuenta::Where('codigo', $request->cuenta_padre)->where('empresa_id', $empresa->id)->first()){
                 //dd([gettype($cuenta->codigo) , gettype($cuentaPadre->codigo)]);
                 if((strpos(strval($cuenta->codigo), strval($cuentaPadre->codigo)))===FALSE){
-                    return back()->withErrors(['msg'=>'El codigo debe iniciar con el codigo de su cuenta padre']);    
+                    return back()->withErrors(['msg'=>'El codigo debe iniciar con el codigo de su cuenta padre']);
                 }
-                $cuenta->padre_id=$cuentaPadre->id;                
+                $cuenta->padre_id=$cuentaPadre->id;
             }
             else {
                 //dd('se escribio cuenta padre pero es incorrecta');
@@ -90,7 +92,7 @@ class CatalogoController extends Controller
             }
         }
         $cuenta->save();
-        
+
         return redirect()->route('catalogo_prueba')->with('status', 'Cuenta '.$cuenta->nombre.' creada exitosamente');
     }
 
@@ -145,11 +147,13 @@ class CatalogoController extends Controller
         $ruta='plantillasExcel/Plantilla-Catalogo-Cuentas.xlsx';
         return Storage::download($ruta,$nombre_descarga);
     }
+
     public function uploadExcel(Request $request){
-        //Buscamos el usuario logueado
+
         $id_user = auth()->user()->id;
         //Guardamos el archivo en una ruta temporal
         $ruta=Storage::putFileAs('importExcel',$request->file('archivo'),$id_user.Carbon::now()->format('His')."Excel.xlsx");
+
         //$ruta='plantillasExcel/Plantilla-Catalogo-Cuentas.xlsx';
         $spreadsheet=null;
         $data=null;
@@ -159,22 +163,20 @@ class CatalogoController extends Controller
             //Se carga el archivo que subio el archivo para poder acceder a los datos
             $path = "app/".$ruta;
             $spreadsheet = IOFactory::load(storage_path($path));
-            //return $spreadsheet;
             //Todas las filas se convierten en un array que puede ser accedido por las letras de las columnas de archivo excel
             $data = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-            //return $data;
+
 
 
         }catch(Exception $e){
            return response()->json($message.$e);
         }
-        //$variable=[];
+
         for ($i=2; $i < count($data); $i++) {
             if($data[$i]["A"]!=null)
             {
                 //En caso de ser nula es una cuenta padre
                 if($data[$i]["C"]==null){
-                    //$variable[$i]="Cod_cuenta: ".$data[$i]["A"]." Nombre: ".$data[$i]["B"]." Cuenta padre: "."CUENTA PADRE"." Tipo Cuenta: ".$data[$i]["D"];
                     //Creando la nueva cuenta y asignando sus valores
                     $cuenta= new Cuenta();
                     $cuenta->codigo= $data[$i]["A"];
@@ -231,7 +233,12 @@ class CatalogoController extends Controller
                 }
 
             }
+
+            $message=['success'=>'La importacion de preguntas se efectuo exitosamente.'];
         }
+
+        //Eliminar el archivo subido, solo se utiliza para la importacion y luego de desecha
+        Storage::delete($ruta);
         return redirect()->route('catalogo_prueba');
 
 
