@@ -18,15 +18,48 @@
                     </ul>
                 </div>
             @endif
-            <div class="card ">                
+            <div class="card ">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-5">
                             <h2 class="card-title">Catálogo de cuentas</h2>
                         </div>
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_auto">+ Catálogo</i></button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_manual">+ Cuenta</i></button>
+                        <div class="col-md-7">
+                            <form action="" method="post">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#descarte">- Descartar todo</i></button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_auto">+ Catálogo</i></button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_manual">+ Cuenta</i></button>
+                            </form>
+
+                        </div>
+                        <!-- Modal descarte Catalogo -->
+                        <div class="modal fade" id="descarte" tabindex="-1" role="dialog" aria-labelledby="auto_label" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="auto_label">Descarte del catalogo</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3>¿Esta Seguro de descartar el catalogo de cuentas?</h3>
+                                        <p>Recuerda que esta acción no podrá revertirse </p>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <form action="{{route('cuenta.deleteall')}}" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary " >SI</button>
+                                    </form>
+
+                                </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- Modal de ingreso automatica -->
                         <div class="modal fade" id="aniadir_auto" tabindex="-1" role="dialog" aria-labelledby="auto_label" aria-hidden="true">
@@ -75,7 +108,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
-                                                
+
                                                 <div class="ml-auto col-md-5">
                                                     <input id="codigoCatalogo" class="form-control" placeholder="Código" name="codigo" onclick="ejecutarBuscador({{$cuentas}},'codigo', 'codigoCatalogo')">
                                                 </div>
@@ -152,8 +185,7 @@
 
 
                                     </td>
-                                    <form id="formularioD{{$cuenta->id}}" action="{{route('cuenta_destroy', $cuenta->id)}}" method="POST"><!--agregar ruta-->
-                                        @csrf
+                                    <form id="formulario{{$cuenta->id}}" action="{{route('cuenta.destroy', $cuenta->id)}}" method="POST">
                                         @method('delete')
                                         <!--td class="text-right"-->
                                         <td>
@@ -164,7 +196,7 @@
                                                     <i class="tim-icons icon-pencil"></i>
                                                 </button>
                                                 <!--boton de eliminar-->
-                                                <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('formularioD{{$cuenta->id}}')">
+                                                <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('formulario{{$cuenta->id}}')">
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button>
                                             </div>
@@ -185,7 +217,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="row">                                                                
+                                                        <div class="row">
                                                             <div class="ml-auto col-md-5">
                                                             <input value="{{$cuenta->codigo}}" id="codigoCatalogo{{$cuenta->id}}" class="form-control" placeholder="Código" name="codigo" onclick="ejecutarBuscador({{$cuentas}},'codigo', 'codigoCatalogo{{$cuenta->id}}')">
                                                             </div>
@@ -201,11 +233,11 @@
                                                                     <option value="-1" class="selectorCorreccion">--Seleccionar un tipo--</option>
                                                                     @foreach ($tipoCuenta as $tipo)
                                                                         @if ($tipo->id==$cuenta->tipo_id)
-                                                                            <option selected value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>    
+                                                                            <option selected value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
                                                                         @else
                                                                             <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
                                                                         @endif
-                                                                        
+
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -220,7 +252,7 @@
                                                                 </div>
                                                             @else
                                                                 @foreach ($cuentas as $cuenta2)
-                                                                @if ($cuenta->padre_id==$cuenta2->id)                                                                    
+                                                                @if ($cuenta->padre_id==$cuenta2->id)
                                                                     <div class="mr-auto col-md-5">
                                                                         <!--buscador con autocompletado-->
                                                                         <form autocomplete="off" action="" name="padre">
@@ -231,7 +263,7 @@
                                                                     </div>
                                                                 @endif
                                                                 @endforeach
-                                                            @endif                                                            
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -252,7 +284,7 @@
             </div>
         </div>
     </div>
-    
+
 
 
   <!-- Modal -->
@@ -260,7 +292,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-         
+
         </div>
         <div class="modal-body">
             <div class="loader">

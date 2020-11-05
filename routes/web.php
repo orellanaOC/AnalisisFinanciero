@@ -155,7 +155,8 @@ Route::middleware(['auth'])->group(function(){
 	//Guardar cuentas de forma manual
 	Route::post('/catalogo', 'CatalogoController@store')->name('cuenta_store');
 	Route::put('/catalogo/{id}','CatalogoController@update')->name('cuenta_update');
-	Route::delete('/catalogo/{id}', 'CatalogoController@destroy')->name('cuenta_destroy');
+    Route::delete('/catalogo/{id}', 'CatalogoController@destroy')->name('cuenta.destroy');
+    Route::post('catalogo/deleteall','CatalogoController@BorrarCuentas')->name('cuenta.deleteall');
 
 
 	/*-----------------------------------------------------------------------------------------------------*/
