@@ -25,12 +25,13 @@ class CatalogoController extends Controller
 
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
-        $cuentas=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->get();
+        //Cuentas de primer nivel (Que no tienen padre)
+        $cuentas=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'asc')->get();
         //$cuentas=Cuenta::all();
 
         return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -65,16 +66,28 @@ class CatalogoController extends Controller
         //La empresa sera tomada directamente de la empresa del usuario logeado
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
-        //Validación de que el usuario no haya escrito una cuenta con codigo repetido
+        //Llamada a la funcion para guardar cuentas
+        $respuesta= $this->guardarCuenta($request, $empresa);
+        if($respuesta===TRUE){
+            return redirect()->route('catalogo_prueba')->with('status', 'Cuenta '.$request->nombre.' creada exitosamente');
+        }
+        else{
+            return back()->withErrors(['msg'=>$respuesta]);
+        }
+
+        
+    }
+
+    public function guardarCuenta($request, $empresa){
+        //Validacion de que la cuenta no sea repetida
         if(Cuenta::Where('codigo', $request->codigo)->where('empresa_id', $empresa->id)->first()){
             //dd('Codigo de cuenta repetido');
-            return back()->withErrors(['msg'=>'Codigo de cuenta repetido, vuelva a intentarlo']);
+            //return back()->withErrors(['msg'=>'Codigo de cuenta repetido, vuelva a intentarlo']);
+            return 'Codigo de cuenta repetido, vuelva a intentarlo';
         }
-        //Creando la nueva cuenta y asignando sus valors
         $cuenta= new Cuenta();
         $cuenta->codigo= $request->codigo;
         $cuenta->nombre= $request->nombre;
-
         $cuenta->empresa_id= $empresa->id;
         $cuenta->tipo_id= $request->tipoCuenta;
         //Se guardara el id del padre solo si escribio un codigo de cuenta padre
@@ -83,20 +96,20 @@ class CatalogoController extends Controller
             if($cuentaPadre= Cuenta::Where('codigo', $request->cuenta_padre)->where('empresa_id', $empresa->id)->first()){
                 //dd([gettype($cuenta->codigo) , gettype($cuentaPadre->codigo)]);
                 if((strpos(strval($cuenta->codigo), strval($cuentaPadre->codigo)))===FALSE){
-                    return back()->withErrors(['msg'=>'El codigo debe iniciar con el codigo de su cuenta padre']);
+                    //return back()->withErrors(['msg'=>'El codigo debe iniciar con el codigo de su cuenta padre']);
+                    return 'El codigo debe iniciar con el codigo de su cuenta padre';
                 }
                 $cuenta->padre_id=$cuentaPadre->id;
             }
             else {
                 //dd('se escribio cuenta padre pero es incorrecta');
-                return back()->withErrors(['msg'=>'El codigo de cuenta padre es incorrecta, vuelva a intentarlo']);
+                //return back()->withErrors(['msg'=>'El codigo de cuenta padre es incorrecta, vuelva a intentarlo']);
+                return 'El codigo de cuenta padre es incorrecta, vuelva a intentarlo';
             }
         }
         $cuenta->save();
-
-        return redirect()->route('catalogo_prueba')->with('status', 'Cuenta '.$cuenta->nombre.' creada exitosamente');
+        return TRUE;
     }
-
     /**
      * Display the specified resource.
      *
