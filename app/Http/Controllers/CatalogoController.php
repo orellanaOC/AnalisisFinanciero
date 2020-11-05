@@ -140,8 +140,17 @@ class CatalogoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        //TODO No se puede eliminar cuentas padre, o se eliminarian todas las cuentas hijos de un solo
+        if($cuenta=Cuenta::Where('id',$id)->first()){
+            if($hijos=Cuenta::Where('padre_id', $cuenta->id)->first()){
+                return "Esta cuenta tiene hijos, por lo cual no esta permitido eliminarla";                
+            }
+            else{
+                $cuenta->destroy();
+            }
+            
+        }
     }
 
     public function dowloadExcel(Request $request){
@@ -258,6 +267,12 @@ class CatalogoController extends Controller
         else{
             $cuenta=Cuenta::Where('id', $request->idCuenta)->where('empresa_id', $empresa->id)->first();
             $cuenta->padre_id=NULL;
+            //Si la cuenta a actualizar tiene hijos, no se le permitira cambiar su codigo
+            if($hijos=Cuenta::Where('padre_id', $cuenta->id)->first()){
+                if($request->codigo!=$cuenta->codigo){
+                    return 'Esta cuenta tiene hijos, por lo cual no esta permitido cambiar su codigo';
+                }                
+            }
         }        
         $cuenta->codigo= $request->codigo;
         $cuenta->nombre= $request->nombre;

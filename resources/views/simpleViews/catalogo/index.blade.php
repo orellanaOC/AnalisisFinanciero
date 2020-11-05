@@ -152,9 +152,9 @@
 
 
                                     </td>
-                                    <form id="formulario{{$cuenta->id}}" action="{{route('cuenta_destroy', $cuenta->id)}}" method="POST" action=""><!--agregar ruta-->
+                                    <form id="formularioD{{$cuenta->id}}" action="{{route('cuenta_destroy', $cuenta->id)}}" method="POST"><!--agregar ruta-->
                                         @csrf
-                                        @method('DELETE')
+                                        @method('delete')
                                         <!--td class="text-right"-->
                                         <td>
                                             <!--input hidden name="id_cuenta" value=""/-->
@@ -164,7 +164,7 @@
                                                     <i class="tim-icons icon-pencil"></i>
                                                 </button>
                                                 <!--boton de eliminar-->
-                                                <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('formulario{{$cuenta->id}}')">
+                                                <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('formularioD{{$cuenta->id}}')">
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button>
                                             </div>
