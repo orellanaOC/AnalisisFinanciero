@@ -25,7 +25,8 @@ class CatalogoController extends Controller
 
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
-        $cuentas=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->get();
+        //Cuentas de primer nivel (Que no tienen padre)
+        $cuentas=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'asc')->get();
         //$cuentas=Cuenta::all();
 
         return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
