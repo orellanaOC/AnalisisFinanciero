@@ -13,8 +13,8 @@
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
-                        <li>
-                        {{ $error }}
+                        <li class="alerta-error">
+                        {{ $error }}&nbsp;&nbsp;<i class="tim-icons icon-alert-circle-exc"></i>
                         </li>
                         @endforeach
                     </ul>

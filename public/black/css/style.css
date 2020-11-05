@@ -58,3 +58,9 @@ input[type=text] {
   color: #ffffff; 
 }
 /* fin del buscador-------------------------------------------------------------------*/
+
+/* para notificaciones en pantalla :
+ Listas*/
+.alerta-error{
+  list-style: none;
+}
