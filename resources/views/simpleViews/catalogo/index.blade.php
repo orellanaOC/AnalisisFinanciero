@@ -1,6 +1,86 @@
 @extends('layouts.app', ['pageSlug' => 'catalogo'])
 
 @section('content')
+<style>
+
+
+.loader {
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  display: flex;
+  background: white;
+  padding: 150px;
+  box-shadow: 0px 40px 60px -20px rgba(0, 0, 0, 0.2);
+}
+
+.loader span {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: #eee;
+  border-radius: 50%;
+  margin: 0 5px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.loader span:nth-child(2) {
+  background: #f07e6e;
+}
+
+.loader span:nth-child(3) {
+  background: #84cdfa;
+}
+
+.loader span:nth-child(4) {
+  background: #5ad1cd;
+}
+
+.loader span:not(:last-child) {
+  animation: animate 1.5s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(30px);
+  }
+}
+
+.loader span:last-child {
+  animation: jump 1.5s ease-in-out infinite;
+}
+
+@keyframes jump {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(10px, -10px);
+  }
+  20% {
+    transform: translate(20px, 10px);
+  }
+  30% {
+    transform: translate(30px, -50px);
+  }
+  70% {
+    transform: translate(-150px, -50px);
+  }
+  80% {
+    transform: translate(-140px, 10px);
+  }
+  90% {
+    transform: translate(-130px, -10px);
+  }
+  100% {
+    transform: translate(-120px, 0);
+  }
+}
+</style>
     <div class="row">
         <div class="col-md-12">
             <div class="card ">
@@ -23,23 +103,26 @@
                                     <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
+
                                 <div class="modal-body">
                                 <a href="{{URL::signedRoute('catalogo.download')}}" class="btn btn-primary">Presione aqui para descargar plantila</a>
                                 <p>Formato admitido: xlsx</p>
+
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form action="{{route('catalogo.upload')}}">
+                                        <form action="{{route('catalogo.upload')}}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <input class="form-control-file" type="file" name="archivo" accept=".xlsx">
+                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Guardar</button>
                                         </form>
-
                                     </div>
                                 </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-primary">Guardar</button>
+
                                 </div>
+
                                 </div>
                             </div>
                         </div>
@@ -114,11 +197,25 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($cuentas as $cuenta)
                                 <tr>
-                                    <td>1</td>
-                                    <td>activo</td>
-                                    <td>activo</td>
-                                    <td>padre</td>
+                                    <td>{{$cuenta->codigo}}</td>
+                                    <td>{{$cuenta->nombre}}</td>
+                                    <td>{{$cuenta->tipo->nombre}}</td>
+                                    <td>
+                                        @if ($cuenta->padre_id==null)
+                                            Cuenta Padre
+                                        @else
+                                            @foreach ($cuentas as $cuenta2)
+                                               @if ($cuenta->padre_id==$cuenta2->id)
+                                                    {{$cuenta2->codigo}}
+                                               @endif
+                                            @endforeach
+
+                                        @endif
+
+
+                                    </td>
                                     <form id="formulario" method="POST" action=""><!--agregar ruta-->
                                         @csrf
                                         @method('DELETE')
@@ -126,7 +223,7 @@
                                         <td>
                                             <input hidden name="" value=""/>
                                             <div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#modalEditarObjetivo" onclick="">
+                                                <button type="button" class="btn btn-success btn-sm btn-round btn-icon" >
                                                     <i class="tim-icons icon-pencil"></i>
                                                 </button>
                                                 <!--boton de eliminar-->
@@ -138,20 +235,7 @@
                                         </!--td>
                                     </form>
                                 </tr>
-                                <tr>
-                                    <td>1.1</td>
-                                    <td>activo</td>
-                                    <td>activo</td>
-                                    <td>activo</td>
-                                    <td>activo</td>
-                                </tr>
-                                <tr>
-                                    <td>1.1.1</td>
-                                    <td>activo</td>
-                                    <td>activo</td>
-                                    <td>activo</td>
-                                    <td>activo</td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -159,4 +243,27 @@
             </div>
         </div>
     </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+         
+        </div>
+        <div class="modal-body">
+            <div class="loader">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 @endsection
