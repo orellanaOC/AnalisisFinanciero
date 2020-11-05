@@ -89,6 +89,17 @@
             @if (session('status'))
                 <div class="alert alert-success">{{ session('status') }}</div>
             @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li class="alerta-error">
+                        {{ $error }}&nbsp;&nbsp;<i class="tim-icons icon-alert-circle-exc"></i>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="card ">                
                 <div class="card-header">
                     <div class="row">
@@ -152,11 +163,6 @@
                                                 </div>
                                                 <div class="col-md-5 mr-auto">
                                                     <input class="form-control" placeholder="Nombre de la cuenta" name="nombre">
-                                                    @if ($errors->has('nombre'))
-                                                    <small class="form-text text-danger">
-                                                        {{ $errors->first('nombre') }}
-                                                    </small>
-                                                    @endif
                                                 </div>
                                             </div>
                                             <p><br></p>
@@ -169,11 +175,7 @@
                                                         <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
                                                         @endforeach
                                                     </select>
-                                                    @if ($errors->has('tipoCuenta'))
-                                                    <small class="form-text text-danger">
-                                                        {{ $errors->first('tipoCuenta') }}
-                                                    </small>
-                                                    @endif
+
                                                 </div>
                                                 <div class="mr-auto col-md-5">
                                                     <!--buscador con autocompletado-->
