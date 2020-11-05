@@ -145,7 +145,7 @@ class CatalogoController extends Controller
         //TODO No se puede eliminar cuentas padre, o se eliminarian todas las cuentas hijos de un solo
         if($cuenta=Cuenta::Where('id',$id)->first()){
             if($hijos=Cuenta::Where('padre_id', $cuenta->id)->first()){
-                return "Esta cuenta tiene hijos, por lo cual no esta permitido eliminarla";
+                return back()->withErrors(['msg'=>"Esta cuenta tiene hijos, por lo cual no esta permitido eliminarla"]);
             }
             else{
                 $cuenta->destroy();
