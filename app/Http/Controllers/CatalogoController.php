@@ -27,7 +27,6 @@ class CatalogoController extends Controller
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
         //Cuentas de primer nivel (Que no tienen padre)
         $cuentas=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'asc')->get();
-        //$cuentas=Cuenta::all();
 
         return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
     }
@@ -65,51 +64,17 @@ class CatalogoController extends Controller
         ]);
         //La empresa sera tomada directamente de la empresa del usuario logeado
         $idUsuarioLogeado=auth()->user()->id;
-        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();        
         //Llamada a la funcion para guardar cuentas
-        $respuesta= $this->guardarCuenta($request, $empresa);
+        $respuesta= $this->guardarCuenta($request, $empresa, TRUE);
         if($respuesta===TRUE){
             return redirect()->route('catalogo_prueba')->with('status', 'Cuenta '.$request->nombre.' creada exitosamente');
         }
         else{
             return back()->withErrors(['msg'=>$respuesta]);
-        }
-
-        
+        }        
     }
-
-    public function guardarCuenta($request, $empresa){
-        //Validacion de que la cuenta no sea repetida
-        if(Cuenta::Where('codigo', $request->codigo)->where('empresa_id', $empresa->id)->first()){
-            //dd('Codigo de cuenta repetido');
-            //return back()->withErrors(['msg'=>'Codigo de cuenta repetido, vuelva a intentarlo']);
-            return 'Codigo de cuenta repetido, vuelva a intentarlo';
-        }
-        $cuenta= new Cuenta();
-        $cuenta->codigo= $request->codigo;
-        $cuenta->nombre= $request->nombre;
-        $cuenta->empresa_id= $empresa->id;
-        $cuenta->tipo_id= $request->tipoCuenta;
-        //Se guardara el id del padre solo si escribio un codigo de cuenta padre
-        if ($request->cuenta_padre) {
-            //Validación si la cuenta padre que ingreso es correcta
-            if($cuentaPadre= Cuenta::Where('codigo', $request->cuenta_padre)->where('empresa_id', $empresa->id)->first()){
-                //dd([gettype($cuenta->codigo) , gettype($cuentaPadre->codigo)]);
-                if((strpos(strval($cuenta->codigo), strval($cuentaPadre->codigo)))===FALSE){
-                    //return back()->withErrors(['msg'=>'El codigo debe iniciar con el codigo de su cuenta padre']);
-                    return 'El codigo debe iniciar con el codigo de su cuenta padre';
-                }
-                $cuenta->padre_id=$cuentaPadre->id;
-            }
-            else {
-                //dd('se escribio cuenta padre pero es incorrecta');
-                //return back()->withErrors(['msg'=>'El codigo de cuenta padre es incorrecta, vuelva a intentarlo']);
-                return 'El codigo de cuenta padre es incorrecta, vuelva a intentarlo';
-            }
-        }
-        $cuenta->save();
-        return TRUE;
-    }
+    
     /**
      * Display the specified resource.
      *
@@ -141,7 +106,31 @@ class CatalogoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd([$request->request, $id]);
+        //dd($request->request);
+        //Validación de campos
+        request()->validate([
+            'codigo'=> 'required',
+            'nombre'=> 'required',
+            'tipoCuenta'=> 'required',
+            //'padre'=> 'required',
+        ],
+        [
+            'codigo.required' => "El campo 'codigo' es obligatorio.",
+            'nombre.required' => "El campo 'nombre' es obligatorio.",
+            'tipoCuenta.required' => "Seleccione un tipo de cuenta.",
+        ]);
+        //La empresa sera tomada directamente de la empresa del usuario logeado
+        $idUsuarioLogeado=auth()->user()->id;
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+        //Llamada a la funcion para guardar cuentas
+        $respuesta= $this->guardarCuenta($request, $empresa, FALSE);
+        if($respuesta===TRUE){
+            return redirect()->route('catalogo_prueba')->with('status', 'Cuenta '.$request->nombre.' creada exitosamente');
+        }
+        else{
+            return back()->withErrors(['msg'=>$respuesta]);
+        }   
     }
 
     /**
@@ -254,7 +243,43 @@ class CatalogoController extends Controller
         //Eliminar el archivo subido, solo se utiliza para la importacion y luego de desecha
         Storage::delete($ruta);
         return redirect()->route('catalogo_prueba');
-
-
+    }
+    
+    public function guardarCuenta($request, $empresa, $cuenta, $metodo){
+        if($metodo){
+            $cuenta= new Cuenta();
+            //Validacion de que la cuenta no sea repetida
+            if(Cuenta::Where('codigo', $request->codigo)->where('empresa_id', $empresa->id)->first()){
+                //dd('Codigo de cuenta repetido');
+                //return back()->withErrors(['msg'=>'Codigo de cuenta repetido, vuelva a intentarlo']);
+                return 'Codigo de cuenta repetido, vuelva a intentarlo';
+            }
+        }
+        else{
+            $cuenta=Cuenta::Where('codigo', $request->codigo)->where('empresa_id', $empresa->id)->first();
+        }        
+        $cuenta->codigo= $request->codigo;
+        $cuenta->nombre= $request->nombre;
+        $cuenta->empresa_id= $empresa->id;
+        $cuenta->tipo_id= $request->tipoCuenta;
+        //Se guardara el id del padre solo si escribio un codigo de cuenta padre
+        if ($request->cuenta_padre) {
+            //Validación si la cuenta padre que ingreso es correcta
+            if($cuentaPadre= Cuenta::Where('codigo', $request->cuenta_padre)->where('empresa_id', $empresa->id)->first()){
+                //dd([gettype($cuenta->codigo) , gettype($cuentaPadre->codigo)]);
+                if((strpos(strval($cuenta->codigo), strval($cuentaPadre->codigo)))===FALSE){
+                    //return back()->withErrors(['msg'=>'El codigo debe iniciar con el codigo de su cuenta padre']);
+                    return 'El codigo debe iniciar con el codigo de su cuenta padre';
+                }
+                $cuenta->padre_id=$cuentaPadre->id;
+            }
+            else {
+                //dd('se escribio cuenta padre pero es incorrecta');
+                //return back()->withErrors(['msg'=>'El codigo de cuenta padre es incorrecta, vuelva a intentarlo']);
+                return 'El codigo de cuenta padre es incorrecta, vuelva a intentarlo';
+            }
+        }
+        $cuenta->save();
+        return TRUE;
     }
 }

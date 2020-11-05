@@ -154,7 +154,7 @@ Route::middleware(['auth'])->group(function(){
 
 	//Guardar cuentas de forma manual
 	Route::post('/catalogo', 'CatalogoController@store')->name('cuenta_store');
-
+	Route::put('/catalogo/{id}','CatalogoController@update')->name('cuenta_update');
 
 
 	/*-----------------------------------------------------------------------------------------------------*/
