@@ -83,7 +83,13 @@
 </style>
     <div class="row">
         <div class="col-md-12">
-            <div class="card ">
+            @if ($errors->has('msg'))
+                <div class="alert alert-danger">{{ $errors->first('msg') }}</div>
+            @endif
+            @if (session('status'))
+                <div class="alert alert-success">{{ session('status') }}</div>
+            @endif
+            <div class="card ">                
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-8">
@@ -91,7 +97,7 @@
                         </div>
                         <div class="col-md-4">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_auto">+ Catálogo</i></button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_manual" onclick="ejecutarBuscador({{$tipoCuenta}})">+ Cuenta</i></button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_manual">+ Cuenta</i></button>
                         </div>
                         <!-- Modal de ingreso automatica -->
                         <div class="modal fade" id="aniadir_auto" tabindex="-1" role="dialog" aria-labelledby="auto_label" aria-hidden="true">
@@ -140,11 +146,17 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
+                                                
                                                 <div class="ml-auto col-md-5">
-                                                    <input class="form-control" placeholder="Código" name="codigo">
+                                                    <input id="codigoCatalogo" class="form-control" placeholder="Código" name="codigo" onclick="ejecutarBuscador({{$cuentas}},'codigo', 'codigoCatalogo')">
                                                 </div>
                                                 <div class="col-md-5 mr-auto">
                                                     <input class="form-control" placeholder="Nombre de la cuenta" name="nombre">
+                                                    @if ($errors->has('nombre'))
+                                                    <small class="form-text text-danger">
+                                                        {{ $errors->first('nombre') }}
+                                                    </small>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <p><br></p>
@@ -157,14 +169,18 @@
                                                         <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
                                                         @endforeach
                                                     </select>
+                                                    @if ($errors->has('tipoCuenta'))
+                                                    <small class="form-text text-danger">
+                                                        {{ $errors->first('tipoCuenta') }}
+                                                    </small>
+                                                    @endif
                                                 </div>
                                                 <div class="mr-auto col-md-5">
                                                     <!--buscador con autocompletado-->
                                                     <form autocomplete="off" action="" name="padre">
                                                         <div>
-                                                            <input id="buscador" class="form-control" type="text" name="cuenta_padre" placeholder="Cuenta padre">
+                                                            <input id="buscador" class="form-control" type="text" name="cuenta_padre" placeholder="Codigo de cuenta padre" onclick="ejecutarBuscador({{$cuentas}},'codigo', 'buscador')">
                                                         </div>
-                                                        <input id="index_buscador" name="id_cuenta_padre" hidden>
                                                     </form>
                                                 </div>
                                             </div>
