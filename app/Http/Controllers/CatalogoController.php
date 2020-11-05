@@ -20,6 +20,7 @@ class CatalogoController extends Controller
      */
     public function index()
     {
+        return PHP_OS;
         $tipoCuenta= TipoCuenta::all();
 
         $idUsuarioLogeado=auth()->user()->id;
