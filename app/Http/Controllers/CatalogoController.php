@@ -42,7 +42,7 @@ class CatalogoController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->request);
+        //dd($request->request);
         //Validación de campos
         request()->validate([
             'codigo'=> 'required',
