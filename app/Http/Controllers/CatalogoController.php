@@ -191,21 +191,31 @@ class CatalogoController extends Controller
                 //En caso de ser nula es una cuenta padre
                 if($data[$i]["C"]==null){
                     //Creando la nueva cuenta y asignando sus valores
-                    $cuenta= new Cuenta();
-                    $cuenta->codigo= $data[$i]["A"];
-                    $cuenta->nombre= $data[$i]["B"];
-                    //La empresa sera tomada directamente de la empresa del usuario logeado
                     $idUsuarioLogeado=auth()->user()->id;
                     $empresa= Empresa::where('user_id', $idUsuarioLogeado)->get();
-                    $cuenta->empresa_id= $empresa[0]->id;
-                    if(strtoupper($data[$i]["D"])=="A"){
-                        $cuenta->tipo_id= 1;
+                    $busqueda_existe=Cuenta::where('codigo', $data[$i]["C"])->where('empresa_id',$empresa[0]->id)->first();
+                    //si no existe una cuenta con ese codigo si la crea
+                    if($busqueda_existe==null){
+                        $cuenta= new Cuenta();
+                        $cuenta->codigo= $data[$i]["A"];
+                        $cuenta->nombre= $data[$i]["B"];
+                        //La empresa sera tomada directamente de la empresa del usuario logeado
+                        $idUsuarioLogeado=auth()->user()->id;
+                        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->get();
+                        $cuenta->empresa_id= $empresa[0]->id;
+                        if(strtoupper($data[$i]["D"])=="A"){
+                            $cuenta->tipo_id= 1;
+                        }
+                        else{
+                            $cuenta->tipo_id= 2;
+                        }
+                        $cuenta->padre_id=null;
+                        $cuenta->save();
                     }
                     else{
-                        $cuenta->tipo_id= 2;
+
                     }
-                    $cuenta->padre_id=null;
-                    $cuenta->save();
+
                 }
                 else{
                     $padre=$data[$i]["C"];
