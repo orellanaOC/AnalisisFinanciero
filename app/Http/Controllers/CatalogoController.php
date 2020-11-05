@@ -28,7 +28,9 @@ class CatalogoController extends Controller
         //Cuentas de primer nivel (Que no tienen padre)
         $cuentas=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'asc')->get();
 
+        //Vista con catalogo_listo= falso
         return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
+        //Vista con catalogo_listo=true
         //return view('simpleViews.empresa.cuentas', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
     }
 
