@@ -126,7 +126,7 @@ class CatalogoController extends Controller
         //Llamada a la funcion para guardar cuentas
         $respuesta= $this->guardarCuenta($request, $empresa, FALSE);
         if($respuesta===TRUE){
-            return redirect()->route('catalogo_prueba')->with('status', 'Cuenta '.$request->nombre.' creada exitosamente');
+            return redirect()->route('catalogo_prueba')->with('status', 'Cuenta '.$request->nombre.' actualizada exitosamente');
         }
         else{
             return back()->withErrors(['msg'=>$respuesta]);
@@ -257,6 +257,7 @@ class CatalogoController extends Controller
         }
         else{
             $cuenta=Cuenta::Where('id', $request->idCuenta)->where('empresa_id', $empresa->id)->first();
+            $cuenta->padre_id=NULL;
         }        
         $cuenta->codigo= $request->codigo;
         $cuenta->nombre= $request->nombre;
