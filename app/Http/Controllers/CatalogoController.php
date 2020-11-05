@@ -31,7 +31,7 @@ class CatalogoController extends Controller
         return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
         //return view('simpleViews.empresa.cuentas', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -65,7 +65,7 @@ class CatalogoController extends Controller
         ]);
         //La empresa sera tomada directamente de la empresa del usuario logeado
         $idUsuarioLogeado=auth()->user()->id;
-        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();        
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
         //Llamada a la funcion para guardar cuentas
         $respuesta= $this->guardarCuenta($request, $empresa, TRUE);
         if($respuesta===TRUE){
@@ -73,9 +73,9 @@ class CatalogoController extends Controller
         }
         else{
             return back()->withErrors(['msg'=>$respuesta]);
-        }        
+        }
     }
-    
+
     /**
      * Display the specified resource.
      *
@@ -131,7 +131,7 @@ class CatalogoController extends Controller
         }
         else{
             return back()->withErrors(['msg'=>$respuesta]);
-        }   
+        }
     }
 
     /**
@@ -141,17 +141,17 @@ class CatalogoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
+    {
         //TODO No se puede eliminar cuentas padre, o se eliminarian todas las cuentas hijos de un solo
         if($cuenta=Cuenta::Where('id',$id)->first()){
             if($hijos=Cuenta::Where('padre_id', $cuenta->id)->first()){
-                return "Esta cuenta tiene hijos, por lo cual no esta permitido eliminarla";                
+                return "Esta cuenta tiene hijos, por lo cual no esta permitido eliminarla";
             }
             else{
                 $cuenta->destroy();
                 return redirect()->route('catalogo_prueba')->with('status', 'Cuenta eliminada');
             }
-            
+
         }
     }
 
@@ -273,9 +273,9 @@ class CatalogoController extends Controller
             if($hijos=Cuenta::Where('padre_id', $cuenta->id)->first()){
                 if($request->codigo!=$cuenta->codigo){
                     return 'Esta cuenta tiene hijos, por lo cual no esta permitido cambiar su codigo';
-                }                
+                }
             }
-        }        
+        }
         $cuenta->codigo= $request->codigo;
         $cuenta->nombre= $request->nombre;
         $cuenta->empresa_id= $empresa->id;
@@ -299,5 +299,14 @@ class CatalogoController extends Controller
         }
         $cuenta->save();
         return TRUE;
+    }
+
+    public function BorrarCuentas(){
+        $idUsuarioLogeado=auth()->user()->id;
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+
+        $cuentas=Cuenta::where('empresa_id',$empresa->id)->delete();
+        return redirect()->route('catalogo_prueba');
+
     }
 }
