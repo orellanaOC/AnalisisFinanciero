@@ -28,8 +28,8 @@ class CatalogoController extends Controller
         //Cuentas de primer nivel (Que no tienen padre)
         $cuentas=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'asc')->get();
 
-        //return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
-        return view('simpleViews.empresa.cuentas', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
+        return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
+        //return view('simpleViews.empresa.cuentas', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
     }
     
     /**
@@ -149,6 +149,7 @@ class CatalogoController extends Controller
             }
             else{
                 $cuenta->destroy();
+                return redirect()->route('catalogo_prueba')->with('status', 'Cuenta eliminada');
             }
             
         }
