@@ -33,8 +33,7 @@
                     <!--listado de todas las cuentas registradas-->
                         <table class="table tablesorter" id="tabla_catalogo_cuentas">
                             <thead class=" text-primary">
-                                <tr>
-                                    <th>Código</th>
+                                <tr>                                    
                                     <th>Nombre</th>
                                     <th>Descripción</th>
                                     <th>Establecer vínculo</th>
@@ -42,18 +41,14 @@
                             </thead>
                             <tbody>
                                 @foreach ($cuentas as $cuenta)
-                                <tr>
-                                    <td>--</td>
+                                <tr>                                    
                                     <td>{{$cuenta->nombre}}</td>
                                     <td>{{$cuenta->descripcion}}</td>
-
                                     <td>
                                         <!--buscador con autocompletado-->
                                         <form autocomplete="off" action="" name="padre">
                                             <div>
-
-                                                
-
+                                                <input id="buscador{{$cuenta->id}}" class="form-control" type="text" name="cuenta_empresa" placeholder="Cuenta de la empresa" onclick="ejecutarBuscador({{$cuentasEmpresa}}, 'nombre' , 'buscador{{$cuenta->id}}')">
                                             </div>
                                         </form>
                                     </td>

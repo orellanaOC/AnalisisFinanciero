@@ -29,7 +29,7 @@ class CatalogoController extends Controller
         $cuentas=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'asc')->get();
         //Si su catalogo ya esta confirmado
         if($empresa->catalogo_listo){
-            return view('simpleViews.empresa.cuentas', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
+            return redirect()->route('cuenta_sistema.index');
         }
         else{
             return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas,'empresa'=>$empresa]);

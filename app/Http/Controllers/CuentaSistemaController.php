@@ -19,6 +19,7 @@ class CuentaSistemaController extends Controller
         $cuentasEmpresa=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'asc')->get();
 
         //Vista con catalogo_listo= falso
+        dd($cuentasEmpresa);
         return view('simpleViews.empresa.cuentas', ['cuentas'=>$cuentas, 'cuentasEmpresa'=>$cuentasEmpresa]);
     }
 }
