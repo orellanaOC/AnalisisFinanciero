@@ -28,8 +28,10 @@ class CatalogoController extends Controller
         //Cuentas de primer nivel (Que no tienen padre)
         $cuentas=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'asc')->get();
 
-        //return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
-        return view('simpleViews.empresa.cuentas', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
+        //Vista con catalogo_listo= falso
+        return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
+        //Vista con catalogo_listo=true
+        //return view('simpleViews.empresa.cuentas', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
     }
 
     /**
@@ -145,10 +147,11 @@ class CatalogoController extends Controller
         //TODO No se puede eliminar cuentas padre, o se eliminarian todas las cuentas hijos de un solo
         if($cuenta=Cuenta::Where('id',$id)->first()){
             if($hijos=Cuenta::Where('padre_id', $cuenta->id)->first()){
-                return "Esta cuenta tiene hijos, por lo cual no esta permitido eliminarla";
+                return back()->withErrors(['msg'=>"Esta cuenta tiene hijos, por lo cual no esta permitido eliminarla"]);
             }
             else{
                 $cuenta->destroy();
+                return redirect()->route('catalogo_prueba')->with('status', 'Cuenta eliminada');
             }
 
         }
