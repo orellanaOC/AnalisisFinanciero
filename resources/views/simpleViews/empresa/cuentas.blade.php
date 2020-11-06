@@ -17,7 +17,7 @@
                     </ul>
                 </div>
             @endif
-            <div class="card ">                
+            <div class="card ">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-12">
@@ -51,7 +51,9 @@
                                         <!--buscador con autocompletado-->
                                         <form autocomplete="off" action="" name="padre">
                                             <div>
-                                                <input id="buscador{{$cuenta->id}}" class="form-control" type="text" name="cuenta_empresa" placeholder="Cuenta de la empresa" onclick="ejecutarBuscador({{$cuentasEmpresa}}, 'nombre' , 'buscador{{$cuenta->id}}')">
+
+                                                
+
                                             </div>
                                         </form>
                                     </td>

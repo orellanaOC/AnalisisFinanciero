@@ -27,11 +27,14 @@ class CatalogoController extends Controller
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
         //Cuentas de primer nivel (Que no tienen padre)
         $cuentas=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'asc')->get();
+        //Si su catalogo ya esta confirmado
+        if($empresa->catalogo_listo){
+            return view('simpleViews.empresa.cuentas', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
+        }
+        else{
+            return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas,'empresa'=>$empresa]);
+        }
 
-        //Vista con catalogo_listo= falso
-        return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas,'empresa'=>$empresa]);
-        //Vista con catalogo_listo=true
-        //return view('simpleViews.empresa.cuentas', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
     }
 
     /**
@@ -266,6 +269,7 @@ class CatalogoController extends Controller
         //Eliminar el archivo subido, solo se utiliza para la importacion y luego de desecha
         Storage::delete($ruta);
         return redirect()->route('catalogo_prueba');
+        //return view('simpleViews.empresa.cuentas', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
     }
 
     public function guardarCuenta($request, $empresa, $metodo){
