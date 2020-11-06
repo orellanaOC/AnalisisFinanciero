@@ -186,6 +186,7 @@
 
                                     </td>
                                     <form id="formulario{{$cuenta->id}}" action="{{route('cuenta.destroy', $cuenta->id)}}" method="POST">
+                                        @csrf
                                         @method('delete')
                                         <!--td class="text-right"-->
                                         <td>
