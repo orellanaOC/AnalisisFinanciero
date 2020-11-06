@@ -12,6 +12,7 @@ class CuentaSistemaSeeder extends Seeder
      */
     public function run()
     {
+        //Cuentas para Ratios
         DB::table('cuenta_sistema')->insert([
             'nombre'=>'Activos',
             'descripcion'=>'Es la cuenta que almacena los activos totales en tu empresa',
@@ -61,14 +62,8 @@ class CuentaSistemaSeeder extends Seeder
             'updated_at' => now()
         ]);
         DB::table('cuenta_sistema')->insert([
-            'nombre'=>'Ventas',
-            'descripcion'=>'Es la cuenta que almacena las ventas en tu empresa',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('cuenta_sistema')->insert([
-            'nombre'=>'Cuentas por cobrar comerciales',
-            'descripcion'=>'Es la cuenta que almacena las cuentas por cobrar comerciales en tu empresa',
+            'nombre'=>'Cuentas por cobrar',
+            'descripcion'=>'Es la cuenta que almacena las cuentas por cobrar en tu empresa',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -79,10 +74,85 @@ class CuentaSistemaSeeder extends Seeder
             'updated_at' => now()
         ]);
         DB::table('cuenta_sistema')->insert([
-            'nombre'=>'Cuentas por pagar comerciales',
-            'descripcion'=>'Es la cuenta que almacena las cuentas por pagar comerciales en tu empresa',
+            'nombre'=>'Cuentas por pagar',
+            'descripcion'=>'Es la cuenta que almacena las cuentas por pagar en tu empresa',
             'created_at' => now(),
             'updated_at' => now()
-        ]);        
+        ]);
+        DB::table('cuenta_sistema')->insert([
+            'nombre'=>'Patrimonio',
+            'descripcion'=>'Es la cuenta que almacena el patrimonio total en tu empresa',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('cuenta_sistema')->insert([
+            'nombre'=>'Gastos Financieros',
+            'descripcion'=>'Es la cuenta que almacena los gastos financieros en tu empresa',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('cuenta_sistema')->insert([
+            'nombre'=>'Ingresos',
+            'descripcion'=>'Es la cuenta que almacena los ingresos en tu empresa',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('cuenta_sistema')->insert([
+            'nombre'=>'Inversion',
+            'descripcion'=>'Es la cuenta que almacena las inversiones en tu empresa',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('cuenta_sistema')->insert([
+            'nombre'=>'Activos fijos',
+            'descripcion'=>'Es la cuenta que almacena los activos fijos en tu empresa',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        
+        //Cuentas para estado de resultado
+        DB::table('cuenta_sistema')->insert([
+            'nombre'=>'Gastos de operación',
+            'descripcion'=>'Es la cuenta que almacena los gastos de operación en tu empresa',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('cuenta_sistema')->insert([
+            'nombre'=>'Ventas',
+            'descripcion'=>'Es la cuenta que almacena las ventas en tu empresa',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('cuenta_sistema')->insert([
+            'nombre'=>'Gastos de ventas',
+            'descripcion'=>'Es la cuenta que almacena los gastos de ventas en tu empresa',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('cuenta_sistema')->insert([
+            'nombre'=>'Ingresos no operativos',
+            'descripcion'=>'Es la cuenta que almacena los ingresos no operativos en tu empresa',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('cuenta_sistema')->insert([
+            'nombre'=>'Gastos no operativos',
+            'descripcion'=>'Es la cuenta que almacena los gastos no operativos en tu empresa',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('cuenta_sistema')->insert([
+            'nombre'=>'Devolución sobre ventas',
+            'descripcion'=>'Es la cuenta que almacena la devolución sobre ventas en tu empresa',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('cuenta_sistema')->insert([
+            'nombre'=>'Descuento sobre ventas',
+            'descripcion'=>'Es la cuenta que almacena el descuento sobre ventas en tu empresa',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
     }
 }
