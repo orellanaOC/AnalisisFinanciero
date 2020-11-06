@@ -1,7 +1,6 @@
-@extends('layouts.app', ['pageSlug' => 'catalogo'])
+@extends('layouts.app', ['pageSlug' => 'vincular_cuenta'])
 
 @section('content')
-<!--incluir el css de la barra de loading (está en style.css) sino llega a servir la importación-->
     <div class="row">
         <div class="col-md-12">
             @if (session('status'))
@@ -37,40 +36,24 @@
                                 <tr>
                                     <th>Código</th>
                                     <th>Nombre</th>
-                                    <th>Tipo</th>
-                                    <th>Padre</th>
-                                    <th>&nbsp;</th>
-                                    <!--th class="text-center">
-                                        Salary
-                                    </th-->
+                                    <th>Descripción</th>
+                                    <th>Establecer vínculo</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($cuentas as $cuenta)
                                 <tr>
-                                    <td>{{$cuenta->codigo}}</td>
+                                    <td>--</td>
                                     <td>{{$cuenta->nombre}}</td>
-                                    <td>{{$cuenta->tipo->nombre}}</td>
+                                    <td>{{$cuenta->descripcion}}</td>
+
                                     <td>
-                                        @if ($cuenta->padre_id==null)
-                                            -
-                                        @else
-                                            @foreach ($cuentas as $cuenta2)
-                                               @if ($cuenta->padre_id==$cuenta2->id)
-                                                    {{$cuenta2->codigo}}
-                                               @endif
-                                            @endforeach
-
-                                        @endif
-
-
-                                    </td>
-                                    <td>
-                                        <select class="form-control" name="" id="">
-                                            <option class="selectorCorreccion" value="-1">--Vincular con algo--</option>
-                                            <option class="selectorCorreccion" value="-1">--algo1</option>
-                                            <option class="selectorCorreccion" value="-1">--algo2</option>
-                                        </select>
+                                        <!--buscador con autocompletado-->
+                                        <form autocomplete="off" action="" name="padre">
+                                            <div>
+                                                <input id="buscador{{$cuenta->id}}" class="form-control" type="text" name="cuenta_empresa" placeholder="Cuenta de la empresa" onclick="ejecutarBuscador({{$cuentasEmpresa}}, 'nombre' , 'buscador{{$cuenta->id}}')">
+                                            </div>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

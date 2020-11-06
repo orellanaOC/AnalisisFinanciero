@@ -21,10 +21,10 @@
             <div class="card ">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-7">
                             <h2 class="card-title">Catálogo de cuentas</h2>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-5">
                             <form action="" method="post">
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#descarte">- Descartar todo</i></button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_auto">+ Catálogo</i></button>
