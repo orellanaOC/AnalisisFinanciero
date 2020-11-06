@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call([TipoCuentaSeeder::class]);
         $this->call(SectorTableSeeder::class);
         $this->call(EmpresaTableSeeder::class);
+        $this->call(CuentaSistemaSeeder::class);
     }
 }
