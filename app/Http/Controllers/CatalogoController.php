@@ -29,7 +29,7 @@ class CatalogoController extends Controller
         $cuentas=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'asc')->get();
 
         //Vista con catalogo_listo= falso
-        return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
+        return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas,'empresa'=>$empresa]);
         //Vista con catalogo_listo=true
         //return view('simpleViews.empresa.cuentas', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
     }
@@ -318,6 +318,16 @@ class CatalogoController extends Controller
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
 
         $cuentas=Cuenta::where('empresa_id',$empresa->id)->delete();
+        return redirect()->route('catalogo_prueba');
+
+    }
+
+    public function ConfirmarCatalogo()
+    {
+        $idUsuarioLogeado=auth()->user()->id;
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+        $empresa->catalogo_listo=TRUE;
+        $empresa->save();
         return redirect()->route('catalogo_prueba');
 
     }

@@ -150,13 +150,15 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');
     Route::get('download/excel','CatalogoController@dowloadExcel')->name('catalogo.download');
     Route::post('upload/excel','CatalogoController@uploadExcel')->name('catalogo.upload');
-	Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');
+    Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');
+    Route::post('catalogo/deleteall','CatalogoController@BorrarCuentas')->name('cuenta.deleteall');
+    Route::post('catalogo/confirmar','CatalogoController@ConfirmarCatalogo')->name('catalogo.confirmar');
 
 	//Guardar cuentas de forma manual
 	Route::post('/catalogo', 'CatalogoController@store')->name('cuenta_store');
 	Route::put('/catalogo/{id}','CatalogoController@update')->name('cuenta_update');
     Route::delete('/catalogo/{id}', 'CatalogoController@destroy')->name('cuenta.destroy');
-    Route::post('catalogo/deleteall','CatalogoController@BorrarCuentas')->name('cuenta.deleteall');
+
 
 
 	/*-----------------------------------------------------------------------------------------------------*/

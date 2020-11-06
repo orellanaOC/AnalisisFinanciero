@@ -274,11 +274,18 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        @if (count($cuentas)>0)
+                        <form action="{{route('catalogo.confirmar')}}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-secondary">Confirmar Catalogo</button>
+                        </form>
+
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -295,6 +302,7 @@
 
         </div>
         <div class="modal-body">
+            <h6 class="text-center">Cargando...</h6>
             <div class="loader">
                 <span></span>
                 <span></span>
