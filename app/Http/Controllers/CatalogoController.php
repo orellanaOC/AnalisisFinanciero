@@ -150,7 +150,7 @@ class CatalogoController extends Controller
                 return back()->withErrors(['msg'=>"Esta cuenta tiene hijos, por lo cual no esta permitido eliminarla"]);
             }
             else{
-                $cuenta->destroy();
+                $cuenta->delete();
                 return redirect()->route('catalogo_prueba')->with('status', 'Cuenta eliminada');
             }
 
