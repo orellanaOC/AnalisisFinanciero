@@ -45,24 +45,33 @@
                                 <tr>                                    
                                     <td>{{$cuenta->nombre}}</td>
                                     <td>{{$cuenta->descripcion}}</td>
-                                    <td>
-                                        <!--buscador con autocompletado-->                                        
-                                        <div class="mr-auto col-md-12">
-                                            <input id="buscador{{$cuenta->id}}" class="form-control" name="{{$cuenta->nombre}}" placeholder="Cuenta de la empresa" onclick="ejecutarBuscador({{$cuentasEmpresa}},'nombre' ,'buscador{{$cuenta->id}}')">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <!--boton de editar-->
-                                            <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#editar_cuenta{{$cuenta->id}}">
-                                                <i class="tim-icons icon-pencil"></i>
-                                            </button>
-                                            <!--boton de eliminar-->
-                                            <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('formulario{{$cuenta->id}}')">
-                                                <i class="tim-icons icon-simple-remove"></i>
-                                            </button>
-                                        </div>
-                                    </td>
+                                <form id="vinculacion{{$cuenta->id}}" action="{{route('cuenta_sistema.vinculacion',$cuenta->id)}}" method="POST">
+                                        @csrf
+                                        <td>
+                                            <!--buscador con autocompletado--> 
+                                            @if ($cuenta->vinculada)
+                                                <div class="mr-auto col-md-12">
+                                                    <input value="{{$cuenta->cuentaCatalogo}}" id="buscador{{$cuenta->id}}" class="form-control" name="cuenta" placeholder="Cuenta de la empresa" onclick="ejecutarBuscador({{$cuentasEmpresa}},'nombre' ,'buscador{{$cuenta->id}}')">
+                                                </div>
+                                            @else
+                                                <div class="mr-auto col-md-12">
+                                                    <input id="buscador{{$cuenta->id}}" class="form-control" name="cuenta" placeholder="Cuenta de la empresa" onclick="ejecutarBuscador({{$cuentasEmpresa}},'nombre' ,'buscador{{$cuenta->id}}')">
+                                                </div>
+                                            @endif                                                                                  
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <!--boton de guardar-->
+                                                <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                    <i class="tim-icons icon-pencil"></i>
+                                                </button>
+                                                <!--boton de eliminar-->
+                                                <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('vinculacion{{$cuenta->id}}')">
+                                                    <i class="tim-icons icon-simple-remove"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </form>                  
                                 </tr>
                                 @endforeach
                             </tbody>

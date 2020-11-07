@@ -18,8 +18,10 @@ class CreateVinculacionCuentasTable extends Migration
             $table->foreign('id_cuenta')->references('id')->on('cuenta')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('id_cuenta_sistema');
             $table->foreign('id_cuenta_sistema')->references('id')->on('cuenta_sistema')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('id_empresa');
+            $table->foreign('id_empresa')->references('id')->on('empresa')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
-            $table->primary(['id_cuenta', 'id_cuenta_sistema']);
+            $table->primary(['id_cuenta', 'id_cuenta_sistema', 'id_empresa']);
         });
     }
 
