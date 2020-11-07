@@ -3,6 +3,14 @@
     color: #32325d !important;
 }
 
+.selectorWapis{
+  -o-appearance: none;
+ -ms-appearance: none;
+ -webkit-appearance: none;
+ -moz-appearance: none;
+ appearance: none;
+}
+
 .logo{
     height: 100px;
     /*width: 100px;*/
@@ -14,7 +22,6 @@
     align-items: center;
     width: 100%;
 }
-
 /* Buscador -------------------------------------------------------------------------*/
 
 .autocomplete {
