@@ -43,7 +43,7 @@ class HomeController extends Controller
         return view('finanzasViews.estadoResultados.create');
     }
     public function balance_general_index(){
-        return view('finanzasViews.balanceGeneral.index');
+        return view('finanzasViews.periodo.index');
     }
     public function balance_general_create(){
         return view('finanzasViews.balanceGeneral.create');

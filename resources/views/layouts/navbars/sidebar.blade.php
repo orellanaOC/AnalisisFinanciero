@@ -46,15 +46,15 @@
             <li @if ($pageSlug == 'balance') class="active " @endif>
                 <a href="{{ route('balance_general_index') }}">
                     <i class="tim-icons icon-coins"></i>
-                    <p>{{ __('Balance general') }}</p>
+                    <p>{{ __('Periodos') }}</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'resultados') class="active " @endif>
+            <!--li @if ($pageSlug == 'resultados') class="active " @endif>
                 <a href="{{ route('estado_resultado_index') }}">
                     <i class="tim-icons icon-money-coins"></i>
                     <p>{{ __('Estado de resultados') }}</p>
                 </a>
-            </li>
+            </li-->
             <li @if ($pageSlug == 'empresa') class="active " @endif>
                 <a href="{{ route('analisis_empresa') }}">
                     <i class="tim-icons icon-bank"></i>
