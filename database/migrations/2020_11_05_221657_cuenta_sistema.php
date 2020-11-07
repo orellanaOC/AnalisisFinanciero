@@ -16,6 +16,7 @@ class CuentaSistema extends Migration
         Schema::create('cuenta_sistema', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->integer('uso');
             $table->string('descripcion');
             $table->timestamps();
         });
