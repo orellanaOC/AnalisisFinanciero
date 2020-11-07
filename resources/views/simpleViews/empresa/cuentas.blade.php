@@ -37,6 +37,7 @@
                                     <th>Nombre</th>
                                     <th>Descripción</th>
                                     <th>Establecer vínculo</th>
+                                    <th>Guardar/Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,12 +46,22 @@
                                     <td>{{$cuenta->nombre}}</td>
                                     <td>{{$cuenta->descripcion}}</td>
                                     <td>
-                                        <!--buscador con autocompletado-->
-                                        <form autocomplete="off" action="" name="padre">
-                                            <div>
-                                                <input id="buscador{{$cuenta->id}}" class="form-control" type="text" name="cuenta_empresa" placeholder="Cuenta de la empresa" onclick="ejecutarBuscador({{$cuentasEmpresa}}, 'nombre' , 'buscador{{$cuenta->id}}')">
-                                            </div>
-                                        </form>
+                                        <!--buscador con autocompletado-->                                        
+                                        <div class="mr-auto col-md-12">
+                                            <input id="buscador{{$cuenta->id}}" class="form-control" name="{{$cuenta->nombre}}" placeholder="Cuenta de la empresa" onclick="ejecutarBuscador({{$cuentasEmpresa}},'nombre' ,'buscador{{$cuenta->id}}')">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <!--boton de editar-->
+                                            <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#editar_cuenta{{$cuenta->id}}">
+                                                <i class="tim-icons icon-pencil"></i>
+                                            </button>
+                                            <!--boton de eliminar-->
+                                            <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('formulario{{$cuenta->id}}')">
+                                                <i class="tim-icons icon-simple-remove"></i>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach
