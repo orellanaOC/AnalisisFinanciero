@@ -66,5 +66,14 @@ class CuentaSistemaController extends Controller
         $vinculacion->id_empresa=$empresa->id;
         $vinculacion->save();
         return back()->with('status', 'Cuenta '.$request->cuenta.' vinculada exitosamente');
+
+        /*
+        if(!($empresa->catalogo_listo)){
+            return redirect()->route('catalogo_prueba');
+        }
+        //Vista con catalogo_listo= falso
+        //dd($cuentasEmpresa);
+        return view('simpleViews.empresa.cuentas', ['cuentas'=>$cuentas, 'cuentasEmpresa'=>$cuentasEmpresa,'empresa'=>$empresa]);
+         */
     }
 }

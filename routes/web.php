@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 /*
@@ -153,6 +154,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');
     Route::post('catalogo/deleteall','CatalogoController@BorrarCuentas')->name('cuenta.deleteall');
     Route::post('catalogo/confirmar','CatalogoController@ConfirmarCatalogo')->name('catalogo.confirmar');
+    Route::post('catalogo/confirmarVinculacion','CuentaSistemaController@confirmarVinculacion')->name('cuenta.vinculacion');
 
 	//Guardar cuentas de forma manual
 	Route::post('/catalogo', 'CatalogoController@store')->name('cuenta_store');
