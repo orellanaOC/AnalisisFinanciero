@@ -24,9 +24,12 @@
                         <div class="col-md-5">
                             <h2 class="card-title">Catálogo de cuentas</h2>
                         </div>
-                        <div class="col-md-7">
-                            <form action="" method="post">
+                        <div class="col-md-7 text-right">
+                            <form action="">
+                                @if (count($cuentas)>0)
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#descarte">- Descartar todo</i></button>
+                                @endif
+
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_auto">+ Catálogo</i></button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_manual">+ Cuenta</i></button>
                             </form>
@@ -80,8 +83,8 @@
                                     <div class="col-md-12">
                                         <form action="{{route('catalogo.upload')}}" method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            <input class="form-control-file" type="file" name="archivo" accept=".xlsx">
-                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Guardar</button>
+                                            <input class="form-control-file" id="archivo" type="file" name="archivo" accept=".xlsx" required>
+                                            <button disabled type="submit" class="btn btn-primary" id="botonarchivo" data-toggle="modal" data-target="#exampleModal">Guardar</button>
                                         </form>
                                     </div>
                                 </div>
@@ -149,6 +152,14 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @if (count($cuentas)>0)
+                    @if (!($empresa->catalogo_listo))
+                        <form action="{{route('catalogo.confirmar')}}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-secondary">Confirmar Catalogo</button>
+                        </form>
+                    @endif
+                @endif
                     <div>
                     <!--listado de todas las cuentas registradas-->
                     <!--TODO se debe tener un seeder de las cuentas mas basicas, comunes a todas las empresas-->
@@ -279,16 +290,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        @if (count($cuentas)>0)
-                            @if (!($empresa->catalogo_listo))
-                                <form action="{{route('catalogo.confirmar')}}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-secondary">Confirmar Catalogo</button>
-                                </form>
-                            @endif
 
-
-                        @endif
 
                     </div>
                 </div>
@@ -319,5 +321,11 @@
       </div>
     </div>
   </div>
-
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+    $("#archivo").change(function(){
+       
+        $("#botonarchivo").prop("disabled", this.files.length == 0);
+    });
+</script>
 @endsection

@@ -22,18 +22,27 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h2 class="card-title">Vinculación de catálogo de la empresa</h2>
+
                         </div>
                         <div class="col-md-12">
                             <h4 class="card-title">Para realizar los análisis respectivos a tus cuentas, primero debes vincularlas a nuestra base de datos.</h4>
+                            @if (!($empresa->vinculacion_listo))
+                            <form action="{{route('cuenta.vinculacion')}}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-secondary">Confirmar Vinculacion de Catalogo</button>
+                            </form>
+                            @endif
+
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
+
                     <div>
                     <!--listado de todas las cuentas registradas-->
                         <table class="table tablesorter" id="tabla_catalogo_cuentas">
                             <thead class=" text-primary">
-                                <tr>                                    
+                                <tr>
                                     <th>Nombre</th>
                                     <th>Descripción</th>
                                     <th>Establecer vínculo</th>
@@ -41,7 +50,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($cuentas as $cuenta)
-                                <tr>                                    
+                                <tr>
                                     <td>{{$cuenta->nombre}}</td>
                                     <td>{{$cuenta->descripcion}}</td>
                                     <td>
@@ -56,6 +65,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
