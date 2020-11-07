@@ -20,8 +20,17 @@
             <div class="card ">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-10">
                             <h2 class="card-title">Vinculación de catálogo de la empresa</h2>
+                        </div>
+                        <div class="col-md-2">                            
+                            <form id="formularioDescartarVinculo" action="" method="POST">
+                            @csrf
+                            @method('delete')
+                                <!--boton de eliminar-->
+                                 <button type="button" class="btn btn-primary" onclick="confirmar('formularioDescartarVinculo')">- Descartar todo
+                                 </button>
+                            </form>
                         </div>
                         <div class="col-md-12">
                             <h4 class="card-title">Para realizar los análisis respectivos a tus cuentas, primero debes vincularlas a nuestra base de datos.</h4>

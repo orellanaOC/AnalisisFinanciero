@@ -58,9 +58,14 @@
                                     <td>2016</td>
                                     <td>
                                         <div class="btn-group">
-                                            <button class="btn btn-info btn-sm">+ Balance general</button>
-                                            <button class="btn btn-info btn-sm">+ Estado de resultados</button>
-                                            <button class="btn btn-danger btn-sm">- Eliminar</button>
+                                        <!--agregar al id del formulario el id del periodo y el route-->
+                                            <!--form id="formulario" action="" method="post">
+                                            @csrf
+                                            @method('delete')-->
+                                                <a class="btn btn-info btn-sm" href="{{ route('balance_general_create') }}">+ Balance general</a>
+                                                <a class="btn btn-info btn-sm" href="{{ route('estado_resultado_create') }}">+ Estado de resultados</a>
+                                                <button class="btn btn-danger btn-sm" onclick="confirmar('formulario')">- Eliminar</button>
+                                            <!--/form-->
                                         </div>
                                     </td>
                                 </tr>
