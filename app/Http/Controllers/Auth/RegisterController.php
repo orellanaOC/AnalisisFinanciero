@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use DB;
+use App\Sector;
+use App\Empresa;
 
 class RegisterController extends Controller
 {
@@ -54,6 +56,17 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'empresa' => ['required', 'string', 'max:255'],
+            'nit' => ['required', 'max:14'],
+            'nrc' => ['required',  'max:14'],
+        ],
+        [
+            'name.required' => "El nombre de usuario es requerido.",
+            'email.required' => "El correo electrónico es requerido.",
+            'password.required' => "La contraseña es obligatoria",
+            'nit.required' => "Ingrese el NIT con el formato correcto.",
+            'nrc.required' => "Ingrese el NRC con el formato correcto.",
+            'empresa.required' => "El nombre de la empresa es requerido.",
         ]);
     }
 
@@ -63,6 +76,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+    public function showRegistrationForm()
+    {
+        $sectores = Sector::all();
+        return view("auth.register", [
+            "sectores" => $sectores
+        ]);
+    }
+
     protected function create(array $data)
     {
         $user = User::create([
@@ -84,6 +105,12 @@ class RegisterController extends Controller
                 'user_id' => $user->id,
             ]);
         }
+
+        $empresa = new Empresa();
+        $empresa->nombre = $data['empresa'];
+        $empresa->nit = $data['nit'];
+        $empresa->nrc = $data['nrc'];
+        $empresa->sector = $data['sector'];
 
         return $user;
     }
