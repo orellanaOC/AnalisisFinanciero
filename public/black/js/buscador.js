@@ -3,7 +3,8 @@ function autocomplete(inp, arr) {
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
-    inp.addEventListener("input", function(e) {
+  inp.addEventListener("input", function (e) {
+        //console.log('escribio');
         var a, b, i, val = this.value;
         /*close any already open lists of autocompleted values*/
         closeAllLists();
@@ -117,10 +118,13 @@ function autocomplete(inp, arr) {
     //llenado de la lista de nombres
     for (let i=0; i<arr.length; i++){
       nombres.push(arr[i][atributo]);
-    }
-    //console.log(nombres);
+    }    
     /*initiate the autocomplete function on the "buscador" element*/
     //console.log(document.getElementById(id));
+    //console.log(arr);
+    //console.log(atributo);
+    //console.log(nombres);
+    //console.log(id);
     autocomplete(document.getElementById(id), nombres);
   }
 

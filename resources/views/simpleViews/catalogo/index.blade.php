@@ -220,7 +220,7 @@
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="ml-auto col-md-5">
-                                                            <input value="{{$cuenta->codigo}}" id="codigoCatalogo{{$cuenta->id}}" class="form-control" placeholder="Código" name="codigo" onclick="ejecutarBuscador({{$cuentas}},'codigo', 'codigoCatalogo{{$cuenta->id}}')">
+                                                                <input value="{{$cuenta->codigo}}" id="codigoCatalogo{{$cuenta->id}}" class="form-control" placeholder="Código" name="codigo" onclick="ejecutarBuscador({{$cuentas}},'codigo', 'codigoCatalogo{{$cuenta->id}}')">
                                                             </div>
                                                             <div class="col-md-5 mr-auto">
                                                                 <input value="{{$cuenta->nombre}}" class="form-control" placeholder="Nombre de la cuenta" name="nombre">
