@@ -20,17 +20,8 @@
             <div class="card ">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <h2 class="card-title">Vinculación de catálogo de la empresa</h2>
-                        </div>
-                        <div class="col-md-2">                            
-                            <form id="formularioDescartarVinculo" action="" method="POST">
-                            @csrf
-                            @method('delete')
-                                <!--boton de eliminar-->
-                                 <button type="button" class="btn btn-primary" onclick="confirmar('formularioDescartarVinculo')">- Descartar todo
-                                 </button>
-                            </form>
                         </div>
                         <div class="col-md-12">
                             <h4 class="card-title">Para realizar los análisis respectivos a tus cuentas, primero debes vincularlas a nuestra base de datos.</h4>
@@ -54,10 +45,10 @@
                                 <tr>                                    
                                     <td>{{$cuenta->nombre}}</td>
                                     <td>{{$cuenta->descripcion}}</td>
-                                    <form id="vinculacion{{$cuenta->id}}" action="{{route('cuenta_sistema.vinculacion',$cuenta->id)}}" method="POST">
+                                    <td>
+                                        <form id="vinculacion{{$cuenta->id}}" action="{{route('cuenta_sistema.vinculacion',$cuenta->id)}}" method="POST">
                                         @csrf
                                         @method('post')
-                                        <td>
                                             <!--buscador con autocompletado--> 
                                             @if ($cuenta->vinculada)
                                                 <div class="mr-auto col-md-12">
@@ -67,26 +58,26 @@
                                                 <div class="mr-auto col-md-12">
                                                     <input id="buscador{{$cuenta->id}}" class="form-control" name="cuenta" placeholder="Cuenta de la empresa" onclick="ejecutarBuscador({{$cuentasEmpresa}},'nombre' ,'buscador{{$cuenta->id}}')">
                                                 </div>
-                                            @endif                                                                                  
-                                        </td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <!--boton de guardar-->
-                                                <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
-                                                    <i class="tim-icons icon-pencil"></i>
-                                                </button>
-                                            </form>
-                                                <!--boton de eliminar-->
-                                                <form id="elimarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('elimarVinculacion{{$cuenta->id}}')">
-                                                        <i class="tim-icons icon-simple-remove"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                                      
+                                            @endif  
+                                        </form>                                                                                
+                                    </td>                                        
+                                    <td>                                    
+                                        <div class="btn-group" role="group">
+                                        <!--boton de guardar-->
+                                            <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                <i class="tim-icons icon-pencil"></i>
+                                            </button>
+                                            
+                                        <!--boton de eliminar-->
+                                            <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
+                                                <i class="tim-icons icon-simple-remove"></i>
+                                            </button>
+                                        </div>
+                                        <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
+                                            @csrf
+                                            @method('delete')         
+                                        </form>
+                                    </td>                                                      
                                 </tr>
                                 @endforeach
                             </tbody>
