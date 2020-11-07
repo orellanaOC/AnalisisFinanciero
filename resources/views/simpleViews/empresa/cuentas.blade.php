@@ -54,8 +54,9 @@
                                 <tr>                                    
                                     <td>{{$cuenta->nombre}}</td>
                                     <td>{{$cuenta->descripcion}}</td>
-                                <form id="vinculacion{{$cuenta->id}}" action="{{route('cuenta_sistema.vinculacion',$cuenta->id)}}" method="POST">
+                                    <form id="vinculacion{{$cuenta->id}}" action="{{route('cuenta_sistema.vinculacion',$cuenta->id)}}" method="POST">
                                         @csrf
+                                        @method('post')
                                         <td>
                                             <!--buscador con autocompletado--> 
                                             @if ($cuenta->vinculada)
@@ -74,13 +75,18 @@
                                                 <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
                                                     <i class="tim-icons icon-pencil"></i>
                                                 </button>
+                                            </form>
                                                 <!--boton de eliminar-->
-                                                <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('vinculacion{{$cuenta->id}}')">
-                                                    <i class="tim-icons icon-simple-remove"></i>
-                                                </button>
+                                                <form id="elimarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('elimarVinculacion{{$cuenta->id}}')">
+                                                        <i class="tim-icons icon-simple-remove"></i>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
-                                    </form>                  
+                                                      
                                 </tr>
                                 @endforeach
                             </tbody>

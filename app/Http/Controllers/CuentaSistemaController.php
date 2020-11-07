@@ -76,4 +76,20 @@ class CuentaSistemaController extends Controller
         return view('simpleViews.empresa.cuentas', ['cuentas'=>$cuentas, 'cuentasEmpresa'=>$cuentasEmpresa,'empresa'=>$empresa]);
          */
     }
+
+    public function destroy($id){
+        $idUsuarioLogeado=auth()->user()->id;
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();  
+        if(!$vinculacion= VinculacionCuenta::Where('id_cuenta_sistema',$id)->Where('id_empresa',$empresa->id)->get()){
+            return back()->withErrors(['msg'=>"Esta cuenta no esta vinculada"]);
+        }
+        else{
+            $elimacion=DB::select('Delete from vinculacion_cuenta
+            where id_empresa=?
+            and id_cuenta_sistema=?',[$empresa->id, $id]);
+        }
+            
+        return back()->with('status', 'Cuenta desvinculada exitosamente');
+    }
+        
 }

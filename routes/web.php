@@ -169,6 +169,6 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('/cuenta_sistema', 'CuentaSistemaController@index')->name('cuenta_sistema.index');
 	//Vinculacion de cuenta
 	Route::post('/cuenta_sistema/{id_cuenta_sistema}', 'CuentaSistemaController@vinculacion')->name('cuenta_sistema.vinculacion');
-
+	Route::delete('/cuenta_sistema_d/{id_cuenta_sistema}', 'CuentaSistemaController@destroy')->name('vinculacion.destroy');
 	/*-----------------------------------------------------------------------------------------------------*/
 });
