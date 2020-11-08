@@ -65,7 +65,7 @@
                                         <div class="btn-group" role="group">
                                         <!--boton de guardar-->
                                             <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
-                                                <i class="tim-icons icon-pencil"></i>
+                                                <i class="tim-icons icon-check-2"></i>
                                             </button>
                                             
                                         <!--boton de eliminar-->
