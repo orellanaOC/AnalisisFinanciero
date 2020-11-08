@@ -171,5 +171,10 @@ Route::middleware(['auth'])->group(function(){
 	//Vinculacion de cuenta
 	Route::post('/cuenta_sistema/{id_cuenta_sistema}', 'CuentaSistemaController@vinculacion')->name('cuenta_sistema.vinculacion');
 	Route::delete('/cuenta_sistema_d/{id_cuenta_sistema}', 'CuentaSistemaController@destroy')->name('vinculacion.destroy');
-	/*-----------------------------------------------------------------------------------------------------*/
+    /*-----------------------------------------------------------------------------------------------------*/
+    Route::get('/periodos','PeriodoController@index')->name('periodo.index');
+    Route::post('periodo/create','PeriodoController@store')->name('periodo.create');
+
+
+
 });

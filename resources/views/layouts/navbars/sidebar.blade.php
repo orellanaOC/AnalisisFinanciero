@@ -14,7 +14,7 @@
             <li @if ($pageSlug == 'catalogo') class="active " @endif>
                 <!--a href="{{ route('home') }}"-->
                 <a href="{{ route('catalogo_prueba') }}">
-                    <i class="tim-icons icon-bullet-list-67"></i> 
+                    <i class="tim-icons icon-bullet-list-67"></i>
                     <p>{{ __('Catalogo de cuentas') }}</p>
                 </a>
             </li>
@@ -44,7 +44,7 @@
                 </div>
             </li-->
             <li @if ($pageSlug == 'balance') class="active " @endif>
-                <a href="{{ route('balance_general_index') }}">
+                <a href="{{ route('periodo.index') }}">
                     <i class="tim-icons icon-coins"></i>
                     <p>{{ __('Periodos') }}</p>
                 </a>

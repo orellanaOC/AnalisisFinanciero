@@ -25,7 +25,7 @@ class HomeController extends Controller
     }
 
     /*voy a usar este controlador para probar vistas y cosas asi*/
-    //vista estatica catalogo de cuentas    
+    //vista estatica catalogo de cuentas
 
     public function formulas(){
         return view('simpleViews.formulas.index');
@@ -43,6 +43,8 @@ class HomeController extends Controller
         return view('finanzasViews.estadoResultados.create');
     }
     public function balance_general_index(){
+
+        
         return view('finanzasViews.periodo.index');
     }
     public function balance_general_create(){

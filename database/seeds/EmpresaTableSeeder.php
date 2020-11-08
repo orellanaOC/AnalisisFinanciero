@@ -12,7 +12,7 @@ class EmpresaTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        /*
         DB::table('empresa')->insert([
             'nombre'=>'O.Gar todo lo encuentras aqui',
             'nit'=>'032-310477-434',
@@ -21,6 +21,6 @@ class EmpresaTableSeeder extends Seeder
             'user_id'=>2,
             'created_at' => now(),
             'updated_at' => now()
-        ]);
+        ]);*/
     }
 }
