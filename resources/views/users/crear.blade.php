@@ -87,7 +87,7 @@
 </div>
 @endsection
 
-<script src="sweetalert2.all.min.js"></script>
+<!---script src="sweetalert2.all.min.js"></!---script>
 <script langiage="javascript" type="text/javascript">
     // RESALTAR LAS FILAS AL PASAR EL MOUSE
     function ResaltarFila(id_fila) {
@@ -124,4 +124,4 @@
     }
 
     
-</script>
+</script>-->
