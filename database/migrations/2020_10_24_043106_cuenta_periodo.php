@@ -16,7 +16,7 @@ class CuentaPeriodo extends Migration
         Schema::create('cuenta_periodo', function (Blueprint $table) {
             $table->id();
             $table->decimal('total');
-            $table->boolean('lado');
+            //$table->boolean('lado');
             $table->integer('cuenta_id');
             $table->foreign('cuenta_id')->references('id')->on('cuenta')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('periodo_id');
