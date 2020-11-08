@@ -8,8 +8,8 @@
                     <div class="row">
                         <div class="col-md-8">
                             <h2 class="card-title">Registrar balance general</h2>
-                            <!--no se si es correlativo o año-->
-                            <input class="form-class" placeholder="Correlativo del balance">
+                            <!--TODO mostrar correlativo-->
+                            
                         </div>
                     </div>
                 </div>
@@ -20,63 +20,249 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-5">
+                        
+                        <div class="col-md-6">
+                            <!--Tabla para activos-->
                             <table class="table tablesorter">
-                                <tr>
-                                    <td>1.11.111</td>
-                                    <th>Activo corriente</th>
-                                    <td><input class="form-class" type="number"></td>
-                                </tr>
-                                <tr>
-                                    <td>1.11.1</td>
-                                    <th>Efectivo y equivalente</th>
-                                    <td><input class="form-class" type="number"></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">+</button>
-                                    </td>
-                                </tr>
+                                @foreach ($cuentasEmpresa as $cuenta)
+                                    @if ($cuenta->padre_id==$activo[0]->id)
+                                        @foreach ($cuentasEmpresa as $cuenta2)
+                                        @if ($cuenta2->padre_id==$cuenta->id)
+                                        <tr>
+                                            <td>{{$cuenta2->codigo}}</td>
+                                            <th>{{$cuenta2->nombre}}</th>
+                                            <td><input class="form-control" type="number"></td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <!--boton de guardar-->
+                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                            <i class="tim-icons icon-check-2"></i>
+                                                        </button>
+                                                        
+                                                    <!--boton de eliminar-->
+                                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
+                                                            <i class="tim-icons icon-simple-remove"></i>
+                                                        </button>
+                                                    </div>
+                                                    <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
+                                                        @csrf
+                                                        @method('delete')         
+                                                    </form>
+                                            </td>
+                                        </tr>                                    
+                                        @endif
+                                        @endforeach
+                                        <tr>
+                                            <td>{{$cuenta->codigo}}</td>
+                                            <th class="text-primary">Total {{$cuenta->nombre}}</th>
+                                            <td><input class="form-control" type="number"></td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <!--boton de guardar-->
+                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                            <i class="tim-icons icon-check-2"></i>
+                                                        </button>
+                                                        
+                                                    <!--boton de eliminar-->
+                                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
+                                                            <i class="tim-icons icon-simple-remove"></i>
+                                                        </button>
+                                                    </div>
+                                                    <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
+                                                        @csrf
+                                                        @method('delete')         
+                                                    </form>
+                                            </td>
+                                        </tr> 
+                                    @endif
+                                    @if ($cuenta->id==$activo[0]->id)
+                                    <tr>
+                                        <td>{{$cuenta->codigo}}</td>
+                                        <th class="text-danger">Total {{$cuenta->nombre}}</th>
+                                        <td><input class="form-control" type="number"></td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <!--boton de guardar-->
+                                                    <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                        <i class="tim-icons icon-check-2"></i>
+                                                    </button>
+                                                    
+                                                <!--boton de eliminar-->
+                                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
+                                                        <i class="tim-icons icon-simple-remove"></i>
+                                                    </button>
+                                                </div>
+                                                <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
+                                                    @csrf
+                                                    @method('delete')         
+                                                </form>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                @endforeach                                                                    
                             </table> 
                         </div>
-                        <div class="col-md-5">
-                            <table class="table tablesorter">
+                            <div class="col-md-6">
+                                <!--Tabla para pasivos-->
+                                <table class="table tablesorter">
+                                    @foreach ($cuentasEmpresa as $cuenta)
+                                    @if ($cuenta->padre_id==$pasivo[0]->id)
+                                        @foreach ($cuentasEmpresa as $cuenta2)
+                                        @if ($cuenta2->padre_id==$cuenta->id)
+                                        <tr>
+                                            <td>{{$cuenta2->codigo}}</td>
+                                            <th>{{$cuenta2->nombre}}</th>
+                                            <td><input class="form-control" type="number"></td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <!--boton de guardar-->
+                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                            <i class="tim-icons icon-check-2"></i>
+                                                        </button>
+                                                        
+                                                    <!--boton de eliminar-->
+                                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
+                                                            <i class="tim-icons icon-simple-remove"></i>
+                                                        </button>
+                                                    </div>
+                                                    <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
+                                                        @csrf
+                                                        @method('delete')         
+                                                    </form>
+                                            </td>
+                                        </tr>                                    
+                                        @endif
+                                        @endforeach
+                                        <tr>
+                                            <td>{{$cuenta->codigo}}</td>
+                                            <th class="text-primary">Total {{$cuenta->nombre}}</th>
+                                            <td><input class="form-control" type="number"></td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <!--boton de guardar-->
+                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                            <i class="tim-icons icon-check-2"></i>
+                                                        </button>
+                                                        
+                                                    <!--boton de eliminar-->
+                                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
+                                                            <i class="tim-icons icon-simple-remove"></i>
+                                                        </button>
+                                                    </div>
+                                                    <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
+                                                        @csrf
+                                                        @method('delete')         
+                                                    </form>
+                                            </td>
+                                        </tr> 
+                                    @endif
+                                    @if ($cuenta->id==$pasivo[0]->id)
                                     <tr>
-                                        <td>1.11.111</td>
-                                        <th>Pasivo</th>
-                                        <td><input class="form-class" type="number"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>1.11.1</td>
-                                        <th>Cuentas por pagar</th>
-                                        <td><input class="form-class" type="number"></td>
-                                    </tr>
-                                    <tr>
+                                        <td>{{$cuenta->codigo}}</td>
+                                        <th class="text-danger">Total {{$cuenta->nombre}}</th>
+                                        <td><input class="form-control" type="number"></td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm">+</button>
+                                            <div class="btn-group" role="group">
+                                                <!--boton de guardar-->
+                                                    <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                        <i class="tim-icons icon-check-2"></i>
+                                                    </button>
+                                                    
+                                                <!--boton de eliminar-->
+                                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
+                                                        <i class="tim-icons icon-simple-remove"></i>
+                                                    </button>
+                                                </div>
+                                                <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
+                                                    @csrf
+                                                    @method('delete')         
+                                                </form>
                                         </td>
                                     </tr>
-
-                                    <table class="table tablesorter">
-                                    <tr>
-                                        <td>1.11.111</td>
-                                        <th>Patrimonio</th>
-                                        <td><input class="form-class" type="number"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>1.11.1</td>
-                                        <th>Acciones</th>
-                                        <td><input class="form-class" type="number"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <button class="btn btn-primary btn-sm">+</button>
-                                        </td>
-                                    </tr>
+                                    @endif
+                                @endforeach                                                       
                                 </table>
-                        </div>
-                        <div class="col-md-1"></div>
+                                <!--Tabla para capital-->
+                                <table class="table tablesorter">
+                                    @foreach ($cuentasEmpresa as $cuenta)
+                                    @if ($cuenta->padre_id==$capital[0]->id)
+                                        @foreach ($cuentasEmpresa as $cuenta2)
+                                        @if ($cuenta2->padre_id==$cuenta->id)
+                                        <tr>
+                                            <td>{{$cuenta2->codigo}}</td>
+                                            <th>{{$cuenta2->nombre}}</th>
+                                            <td><input class="form-control" type="number"></td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <!--boton de guardar-->
+                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                            <i class="tim-icons icon-check-2"></i>
+                                                        </button>
+                                                        
+                                                    <!--boton de eliminar-->
+                                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
+                                                            <i class="tim-icons icon-simple-remove"></i>
+                                                        </button>
+                                                    </div>
+                                                    <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
+                                                        @csrf
+                                                        @method('delete')         
+                                                    </form>
+                                            </td>
+                                        </tr>                                    
+                                        @endif
+                                        @endforeach
+                                        <tr>
+                                            <td>{{$cuenta->codigo}}</td>
+                                            <th class="text-primary">Total {{$cuenta->nombre}}</th>
+                                            <td><input class="form-control" type="number"></td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <!--boton de guardar-->
+                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                            <i class="tim-icons icon-check-2"></i>
+                                                        </button>
+                                                        
+                                                    <!--boton de eliminar-->
+                                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
+                                                            <i class="tim-icons icon-simple-remove"></i>
+                                                        </button>
+                                                    </div>
+                                                    <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
+                                                        @csrf
+                                                        @method('delete')         
+                                                    </form>
+                                            </td>
+                                        </tr> 
+                                    @endif
+                                    @if ($cuenta->id==$capital[0]->id)
+                                    <tr>
+                                        <td>{{$cuenta->codigo}}</td>
+                                        <th class="text-danger">Total {{$cuenta->nombre}}</th>
+                                        <td><input class="form-control" type="number"></td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <!--boton de guardar-->
+                                                    <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                        <i class="tim-icons icon-check-2"></i>
+                                                    </button>
+                                                    
+                                                <!--boton de eliminar-->
+                                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
+                                                        <i class="tim-icons icon-simple-remove"></i>
+                                                    </button>
+                                                </div>
+                                                <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
+                                                    @csrf
+                                                    @method('delete')         
+                                                </form>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                @endforeach                                                                                           
+                                </table>
+                            </div>
+                                                
                     </div>
                     <div class="row">
                         <div class="col-md-12">

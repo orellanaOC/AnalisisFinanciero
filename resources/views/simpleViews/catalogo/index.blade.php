@@ -179,8 +179,12 @@
                             <tbody>
                                 @foreach ($cuentas as $cuenta)
                                 <tr>
-                                    <td>{{$cuenta->codigo}}</td>
-                                    <td>{{$cuenta->nombre}}</td>
+                                    <td>{{$cuenta->codigo}}</td>                                    
+                                    @if ($cuenta->padre_id==null)
+                                        <td><p class="text-danger">{{$cuenta->nombre}}</p></td>
+                                    @else
+                                        <td>{{$cuenta->nombre}}</td> 
+                                    @endif
                                     <td>{{$cuenta->tipo->nombre}}</td>
                                     <td>
                                         @if ($cuenta->padre_id==null)

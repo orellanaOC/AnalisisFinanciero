@@ -14,12 +14,13 @@ class EstadoResultado extends Migration
     public function up()
     {
         Schema::create('estado_resultado', function (Blueprint $table) {
-            $table->id();
-            $table->decimal('debe');
-            $table->decimal('haber');
-            $table->decimal('renta');
-            $table->decimal('utilidad_neta');
-            $table->decimal('utilidad');
+            $table->id();            
+            $table->double('ventas_netas');
+            $table->double('utilidad_bruta');
+            $table->double('utilidad_operativa');
+            $table->double('utilidad_antes_de_i');
+            $table->double('impuestos');
+            $table->double('utilidad_neta');
             $table->integer('periodo_id');
             $table->foreign('periodo_id')->references('id')->on('periodo')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

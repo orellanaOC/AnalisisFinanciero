@@ -50,10 +50,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/formulas', 'HomeController@formulas')->name('formulas');
 Route::get('/analisis_de_sector', 'HomeController@analisis_sector')->name('analisis');
 Route::get('/analisis_individual', 'HomeController@empresa_individual')->name('analisis_empresa');
-Route::get('/estado_resultados_index', 'HomeController@estado_resultado_index')->name('estado_resultado_index');
-Route::get('/estado_resultados_create', 'HomeController@estado_resultado_create')->name('estado_resultado_create');
-Route::get('/balance_general_index', 'HomeController@balance_general_index')->name('balance_general_index');
-Route::get('/balance_general_create', 'HomeController@balance_general_create')->name('balance_general_create');
+
+
 
 
 Route::middleware(['auth'])->group(function(){
@@ -177,4 +175,15 @@ Route::middleware(['auth'])->group(function(){
 
 
 
+	/*-----------------------------------------------------------------------------------------------------*/
+	//TODO agregar id periodo en ruta
+	/*------------------------------------------- BALANCE-GENERAL -------------------------------------------*/
+	Route::get('/balance_general_index', 'HomeController@balance_general_index')->name('balance_general_index');
+	Route::get('/{id_periodo}/balance_general_create', 'BalanceGeneralController@create')->name('balance_general_create');
+	/*-----------------------------------------------------------------------------------------------------*/
+
+	/*------------------------------------------- ESTADO-RESULTADO -------------------------------------------*/
+	Route::get('/estado_resultados_index', 'HomeController@estado_resultado_index')->name('estado_resultado_index');
+	Route::get('{id_periodo}/estado_resultados_create', 'EstadoResultadoController@create')->name('estado_resultado_create');
+	/*-----------------------------------------------------------------------------------------------------*/
 });
