@@ -78,6 +78,17 @@ function displayRadioValue() {
 
 //Dentro de aquí se pueden cargar funciones que necesitan que el html se carguen primero
 $(document).ready(function(){//lo que este dentro de aquí se cargara hasta que la pagina este totalmente cargada
+    let cartitas1=document.querySelector('#card1');
+    let cartitas2=document.querySelector('#card2');        
+    let cartitas3=document.querySelector('#card3');
+    //let alto1=cartitas1.offsetHeight;
+    //let alto2=cartitas2.offsetHeight;       
+    let alto3=cartitas3.offsetHeight;
+    console.log("alto3:"+alto3);
+
+    $('#card1').css("height", +alto3+"px");
+    $('#card2').css("height", +alto3+"px");;
+    
     $('#selector1').change(function () {
         $('#selector2').show();
         $('#prepend').show();

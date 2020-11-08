@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-4">
-            <div class="card">
+            <div id="card1"class="card">
                 <div class="card-header">
                     <h5 class="title">{{ __('Actualizar información personal') }}</h5>
                 </div>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card">
+            <div id="card2" class="card">
                 <div class="card-header">
                     <h5 class="title">{{ __('Contraseña') }}</h5>
                 </div>
@@ -62,7 +62,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card">
+            <div id="card3" class="card">
                 <div class="card-header">
                     <h5 class="title">{{ __('Empresa') }}</h5>
                 </div>
