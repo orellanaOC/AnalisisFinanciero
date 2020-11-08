@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">{{ __('Edit Profile') }}</h5>
+                    <h5 class="title">{{ __('Actualizar información personal') }}</h5>
                 </div>
                 <form method="post" action="{{ route('profile.update') }}" autocomplete="off">
                     <div class="card-body">
@@ -15,26 +15,25 @@
                             @include('alerts.success')
 
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                <label>{{ __('Name') }}</label>
                                 <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->name) }}">
                                 @include('alerts.feedback', ['field' => 'name'])
                             </div>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                                <label>{{ __('Email address') }}</label>
                                 <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email address') }}" value="{{ old('email', auth()->user()->email) }}">
                                 @include('alerts.feedback', ['field' => 'email'])
                             </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-fill btn-primary">{{ __('Save') }}</button>
+                        <button type="submit" class="btn btn-fill btn-primary">{{ __('Guardar') }}</button>
                     </div>
                 </form>
             </div>
-
+        </div>
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">{{ __('Password') }}</h5>
+                    <h5 class="title">{{ __('Contraseña') }}</h5>
                 </div>
                 <form method="post" action="{{ route('profile.password') }}" autocomplete="off">
                     <div class="card-body">
@@ -44,62 +43,84 @@
                         @include('alerts.success', ['key' => 'password_status'])
 
                         <div class="form-group{{ $errors->has('old_password') ? ' has-danger' : '' }}">
-                            <label>{{ __('Current Password') }}</label>
                             <input type="password" name="old_password" class="form-control{{ $errors->has('old_password') ? ' is-invalid' : '' }}" placeholder="{{ __('Current Password') }}" value="" required>
                             @include('alerts.feedback', ['field' => 'old_password'])
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
-                            <label>{{ __('New Password') }}</label>
                             <input type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('New Password') }}" value="" required>
                             @include('alerts.feedback', ['field' => 'password'])
                         </div>
                         <div class="form-group">
-                            <label>{{ __('Confirm New Password') }}</label>
                             <input type="password" name="password_confirmation" class="form-control" placeholder="{{ __('Confirm New Password') }}" value="" required>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-fill btn-primary">{{ __('Change password') }}</button>
+                        <button type="submit" class="btn btn-fill btn-primary">{{ __('Guardar') }}</button>
                     </div>
                 </form>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card card-user">
-                <div class="card-body">
-                    <p class="card-text">
-                        <div class="author">
-                            <div class="block block-one"></div>
-                            <div class="block block-two"></div>
-                            <div class="block block-three"></div>
-                            <div class="block block-four"></div>
-                            <a href="#">
-                                <img class="avatar" src="{{ asset('black') }}/img/emilyz.jpg" alt="">
-                                <h5 class="title">{{ auth()->user()->name }}</h5>
-                            </a>
-                            <p class="description">
-                                {{ __('Ceo/Co-Founder') }}
-                            </p>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">{{ __('Empresa') }}</h5>
+                </div>
+                <form method="post" action="{{ route('profile.empresa') }}" autocomplete="off">
+                    @csrf
+                    @method('put')
+                    
+                    <div class="card-body">
+                        @include('alerts.success', ['key' => 'empresa_status'])
+                        <div class="input-group{{ $errors->has('empresa') ? ' has-danger' : '' }}">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="tim-icons icon-bank"></i>
+                                </div>
+                            </div>
+                        <input required name="empresa" class="form-control" placeholder="{{ __('Nombre de la empresa') }}" value="{{$empresa->nombre}}">
+                            @include('alerts.feedback', ['field' => 'empresa'])
                         </div>
-                    </p>
-                    <div class="card-description">
-                        {{ __('Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...') }}
+                        <div class="input-group {{ $errors->has('sector') ? ' has-danger' : '' }}">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="tim-icons icon-minimal-down"></i>
+                                </div>
+                            </div>
+                            <select required class="form-control selectorWapis" id="sector" name="sector">
+                                <option value="" selected disabled hidden>Seleccione un sector *</option>
+                                @foreach ($sectores as $sector)
+                                    @if (old('sector') == $sector->id || $empresa->sector_id == $sector->id)                                     
+                                        <option style="color: black !important;" value="{{$sector->id}}" selected>{{ $sector->nombre }}</option>
+                                    @else
+                                        <option style="color: black !important;" value="{{$sector->id}}">{{ $sector->nombre }}</option>
+                                    @endif                                
+                                @endforeach
+                            </select>                             
+                        </div>
+                        <div class="input-group{{ $errors->has('nit') ? ' has-danger' : '' }}">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="tim-icons icon-badge"></i>
+                                </div>
+                            </div>
+                            <input required pattern="[0-9]{14}" maxlength="14" name="nit" class="form-control" placeholder="{{ __('Número de Identificación Tributaria') }}" value="{{$empresa->nit}}">
+                            @include('alerts.feedback', ['field' => 'nit'])
+                        </div>
+                        <div class="input-group{{ $errors->has('nrc') ? ' has-danger' : '' }}">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="tim-icons icon-badge"></i>
+                                </div>
+                            </div>
+                            <input required pattern="[0-9]{14}" maxlength="14" name="nrc" class="form-control" placeholder="{{ __('Número de Registro de Contribuyentes') }}" value="{{$empresa->nrc}}">
+                            @include('alerts.feedback', ['field' => 'nrc'])
+                        </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <div class="button-container">
-                        <button class="btn btn-icon btn-round btn-facebook">
-                            <i class="fab fa-facebook"></i>
-                        </button>
-                        <button class="btn btn-icon btn-round btn-twitter">
-                            <i class="fab fa-twitter"></i>
-                        </button>
-                        <button class="btn btn-icon btn-round btn-google">
-                            <i class="fab fa-google-plus"></i>
-                        </button>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-fill btn-primary">{{ __('Guardar') }}</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

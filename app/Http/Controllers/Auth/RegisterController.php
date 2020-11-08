@@ -111,6 +111,8 @@ class RegisterController extends Controller
         $empresa->nit = $data['nit'];
         $empresa->nrc = $data['nrc'];
         $empresa->sector = $data['sector'];
+        $empresa->user_id = $user->id;
+        $empresa->save();
 
         return $user;
     }
