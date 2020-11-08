@@ -53,9 +53,10 @@ class EstadoResultadoController extends Controller
         }
         $vinculos= array($ventas, $costoVentas, $gastosOperacion, $GastosVentas, $IngresosNoOperativos, 
         $GastosNoOperativos, $DevolucionVentas, $DescuentoVentas);
-        dd($vinculos);        
-        $cuentasEmpresa=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'desc')->get();
-        return view('finanzasViews.estadoResultados.create', ['cuentasEmpresa'=>$cuentasEmpresa, 'vinculos'=>$vinculos]);
+        //  dd($vinculos);
+        //dd($vinculos[0][0]->nombre);
+        //$cuentasEmpresa=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'desc')->get();
+        return view('finanzasViews.estadoResultados.create', ['vinculos'=>$vinculos]);
     }
 
     /**

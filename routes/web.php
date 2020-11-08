@@ -176,7 +176,7 @@ Route::middleware(['auth'])->group(function(){
 
 
 	/*-----------------------------------------------------------------------------------------------------*/
-	//TODO agregar id periodo en ruta
+	
 	/*------------------------------------------- BALANCE-GENERAL -------------------------------------------*/
 	Route::get('/balance_general_index', 'HomeController@balance_general_index')->name('balance_general_index');
 	Route::get('/{id_periodo}/balance_general_create', 'BalanceGeneralController@create')->name('balance_general_create');

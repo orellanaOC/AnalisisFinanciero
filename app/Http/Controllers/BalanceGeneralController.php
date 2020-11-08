@@ -29,6 +29,14 @@ class BalanceGeneralController extends Controller
     public function create($id_periodo)
     {   
         //TODO Validacion del periodo para la empresa
+        /*
+        select c.id, c.codigo, c.nombre, c.padre_id, cp.total from
+        cuenta as c
+        left join (select * from cuenta_periodo where periodo_id=1) as cp
+        on c.id = cp.cuenta_id
+        where c.empresa_id=1
+        order by c.codigo asc
+         */
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
         //Traer las cuentas (Activo, Pasivo y Patrimonio) del catalogo de usuario, vinculadas a nuestras cuentas

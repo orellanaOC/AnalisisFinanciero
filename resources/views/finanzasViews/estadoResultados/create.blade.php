@@ -22,57 +22,45 @@
                         <div class="col-md-8">
                             <table class="table tablesorter">
                                 <tr>
+                                    <th>{{$vinculos[0][0]->nombre}}</th>
+                                    <td>00.00</td>
+                                </tr>
+                                <tr>
+                                    <th>{{$vinculos[6][0]->nombre}}</th>
+                                    <td>00.00</td>
+                                </tr> 
+                                <tr>
+                                    <th>{{$vinculos[7][0]->nombre}}</th>
+                                    <td>00.00</td>
+                                </tr> 
+                                <tr>
+                                    <th class="text-primary">Ventas netas</th>
+                                    <td>00.00</td>
+                                </tr> 
+                                <tr>
+                                    <th>{{$vinculos[1][0]->nombre}}</th>
+                                    <td>00.00</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-primary">Utilidad Bruta</th>
+                                    <td>00.00</td>
+                                </tr>
+                                <tr>
                                     <th>Activo corriente</th>
                                     <td>00.00</td>
-                                    <td> 
-                                        <select class="form-control">
-                                            <option class="selectorCorreccion">--Seleccionar cuenta--</option>
-                                            <option class="selectorCorreccion">Inventario</option>
-                                            <option class="selectorCorreccion">Activos circulantes</option>
-                                            <option class="selectorCorreccion">Capital</option>
-                                        </select>
-                                    </td>
-                                </tr>
+                                </tr> 
                                 <tr>
-                                    <th>Efectivo y equivalente</th>
+                                    <th class="text-primary">Utilidad antes de impuestos</th>
                                     <td>00.00</td>
-                                    <td> 
-                                        <select class="form-control">
-                                            <option class="selectorCorreccion">--Seleccionar cuenta--</option>
-                                            <option class="selectorCorreccion">Inventario</option>
-                                            <option class="selectorCorreccion">Activos circulantes</option>
-                                            <option class="selectorCorreccion">Capital</option>
-                                        </select>
-                                    </td>
-                                </tr>
+                                </tr> 
                                 <tr>
-                                    <th>Activo corriente</th>
+                                    <th>Impuestos</th>
                                     <td>00.00</td>
-                                    <td> 
-                                        <select class="form-control">
-                                            <option class="selectorCorreccion">--Seleccionar cuenta--</option>
-                                            <option class="selectorCorreccion">Inventario</option>
-                                            <option class="selectorCorreccion">Activos circulantes</option>
-                                            <option class="selectorCorreccion">Capital</option>
-                                        </select>
-                                    </td>
-                                </tr>
+                                </tr> 
                                 <tr>
-                                    <th>Efectivo y equivalente</th>
+                                    <th class="text-primary">Utilida neta</th>
                                     <td>00.00</td>
-                                    <td> 
-                                        <select class="form-control">
-                                            <option class="selectorCorreccion">--Seleccionar cuenta--</option>
-                                            <option class="selectorCorreccion">Inventario</option>
-                                            <option class="selectorCorreccion">Activos circulantes</option>
-                                            <option class="selectorCorreccion">Capital</option>
-                                        </select>
-                                    </td>
-                                </tr><tr>
-                                    <th>Total de pasivo de patrimonio</th>
-                                    <td>00.00</td>
-                                    <td>&nbsp;</td>
-                                </tr>
+                                </tr>                                 
                             </table>                        
                         </div>
                         <div class="col-md-2"></div>
