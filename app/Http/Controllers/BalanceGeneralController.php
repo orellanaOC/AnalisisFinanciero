@@ -41,6 +41,7 @@ class BalanceGeneralController extends Controller
         where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=?)',[$empresa->id,12]);
         if(!$activo || !$pasivo || !$capital){
             //dd('nulos');
+            return redirect()->route('cuenta_sistema.index')->withErrors(['msg'=>'No ha vinculado las cuentas de Activo, Pasivo o Patrimonio']);
         }
         $cuentasEmpresa=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'desc')->get();
         //dd([$activo, $pasivo, $capital, $cuentasEmpresa]);     
