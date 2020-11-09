@@ -37,7 +37,7 @@
                                     </tr> 
                                     <tr>
                                         <th class="text-primary">Ventas netas</th>
-                                        <td><input value="{{$ER->ventas_netas ?? '0'}}" name="ventas_neta"  class="form-control form-control-sm" type="number"></td>
+                                        <td><input value="{{$ER->ventas_netas ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr> 
                                     <tr>
                                         <th>{{$vinculos[3][0]->nombre}}</th>
@@ -45,7 +45,7 @@
                                     </tr>
                                     <tr>
                                         <th class="text-primary">Utilidad Bruta</th>
-                                        <td><input value="{{$ER->utilidad_bruta ?? '0'}}" name="utilidad_bruta"  class="form-control form-control-sm" type="number"></td>
+                                        <td><input value="{{$ER->utilidad_bruta ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>{{$vinculos[4][0]->nombre}}</th>
@@ -53,7 +53,7 @@
                                     </tr>
                                     <tr>
                                         <th class="text-primary">Utilidad operativa</th>
-                                        <td><input value="{{$ER->utilidad_operativa ?? '0'}}" name="utilidad_operativa"  class="form-control form-control-sm" type="number"></td>
+                                        <td><input value="{{$ER->utilidad_operativa ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>{{$vinculos[5][0]->nombre}}</th>
@@ -65,7 +65,7 @@
                                     </tr>
                                     <tr>
                                         <th class="text-primary">Utilidad antes de impuestos</th>
-                                        <td><input value="{{$ER->utilidad_antes_de_i ?? '0'}}" name="utilidad_adi"  class="form-control form-control-sm" type="number"></td>
+                                        <td><input value="{{$ER->utilidad_antes_de_i ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr> 
                                     <tr>
                                         <th>Impuestos sobre la renta</th>
@@ -73,7 +73,7 @@
                                     </tr> 
                                     <tr>
                                         <th class="text-primary">Utilida neta</th>
-                                        <td><input value="{{$ER->utilidad_neta ?? '0'}}" name="utilidad_neta"  class="form-control form-control-sm" type="number"></td>
+                                        <td><input value="{{$ER->utilidad_neta ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr>
                                 </form>                                
                             </table>                        
