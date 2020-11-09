@@ -68,8 +68,6 @@ input[type=text] {
 
 /* barrita setzi de loading ----------------------------------------------------------*/
 
-
-/* fin de barrita setzi de loading ----------------------------------------------------------*/
 .loader {
   text-align: center;
   vertical-align: middle;
@@ -146,8 +144,17 @@ input[type=text] {
     transform: translate(-120px, 0);
   }
 }
+
+/* fin de barrita setzi de loading ----------------------------------------------------------*/
+
 /* para notificaciones en pantalla :
  Listas*/
 .alerta-error{
   list-style: none;
+}
+
+/* borde tabla */
+.tablaCustom{
+  border: #ccc 1px solid;
+  border-radius: 15px;
 }

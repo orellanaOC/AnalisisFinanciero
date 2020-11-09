@@ -50,6 +50,12 @@
 
                 </div>
                 <div class="card-body">
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ session('error') }}
+                        </div>
+                    @endif
                         <table class="table tablesorter" id="">
                             <thead class=" text-primary">
                                 <tr>
@@ -64,14 +70,14 @@
                                     <td>
                                         <div class="btn-group">
                                         <!--agregar al id del formulario el id del periodo y el route-->
-                                            <!--form id="formulario" action="" method="post">
+                                            <form id="formulario" action="{{route('periodo.delete',$periodo->id)}}" method="post">
                                             @csrf
-                                            @method('delete')-->
+                                            @method('delete')
                                             <!--Todo agregar id del periodo-->
                                                 <a class="btn btn-info btn-sm" href="{{ route('balance_general_create',$periodo->id) }}">+ Balance general</a>
                                                 <a class="btn btn-info btn-sm" href="{{ route('estado_resultado_create',$periodo->id) }}">+ Estado de resultados</a>
-                                                <button class="btn btn-danger btn-sm" onclick="confirmar('formulario')">- Eliminar</button>
-                                            <!--/form-->
+                                                <button class="btn btn-danger btn-sm" type="submit">- Eliminar</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

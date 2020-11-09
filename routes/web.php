@@ -154,6 +154,8 @@ Route::middleware(['auth'])->group(function(){
     Route::post('catalogo/deleteall','CatalogoController@BorrarCuentas')->name('cuenta.deleteall');
     Route::post('catalogo/confirmar','CatalogoController@ConfirmarCatalogo')->name('catalogo.confirmar');
     Route::post('catalogo/confirmarVinculacion','CuentaSistemaController@confirmarVinculacion')->name('cuenta.vinculacion');
+    Route::get('/catalogo/show', 'CatalogoController@show')->name('catalogo_show');
+
 
 	//Guardar cuentas de forma manual
 	Route::post('/catalogo', 'CatalogoController@store')->name('cuenta_store');
@@ -171,7 +173,9 @@ Route::middleware(['auth'])->group(function(){
 	Route::delete('/cuenta_sistema_d/{id_cuenta_sistema}', 'CuentaSistemaController@destroy')->name('vinculacion.destroy');
     /*-----------------------------------------------------------------------------------------------------*/
     Route::get('/periodos','PeriodoController@index')->name('periodo.index');
-    Route::post('periodo/create','PeriodoController@store')->name('periodo.create');
+	Route::post('periodo/create','PeriodoController@store')->name('periodo.create');
+	Route::delete('periodo/delete/{id}','PeriodoController@destroy')->name('periodo.delete');
+
 	/*-----------------------------------------------------------------------------------------------------*/
 	
 	/*------------------------------------------- BALANCE-GENERAL -------------------------------------------*/

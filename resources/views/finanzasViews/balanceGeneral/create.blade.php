@@ -23,7 +23,7 @@
                         
                         <div class="col-md-6">
                             <!--Tabla para activos-->
-                            <table class="table tablesorter">
+                            <table class="table tablesorter tablaCustom">
                                 @foreach ($cuentasEmpresa as $cuenta)
                                     @if ($cuenta->padre_id==$activo[0]->id)
                                         @foreach ($cuentasEmpresa as $cuenta2)
@@ -94,7 +94,7 @@
                         </div>
                             <div class="col-md-6">
                                 <!--Tabla para pasivos-->
-                                <table class="table tablesorter">
+                                <table class="table tablesorter tablaCustom">
                                     @foreach ($cuentasEmpresa as $cuenta)
                                     @if ($cuenta->padre_id==$pasivo[0]->id)
                                         @foreach ($cuentasEmpresa as $cuenta2)
@@ -163,7 +163,7 @@
                                 @endforeach                                                       
                                 </table>
                                 <!--Tabla para capital-->
-                                <table class="table tablesorter">
+                                <table class="table tablesorter tablaCustom">
                                     @foreach ($cuentasEmpresa as $cuenta)
                                     @if ($cuenta->padre_id==$capital[0]->id)
                                         @foreach ($cuentasEmpresa as $cuenta2)
