@@ -46,9 +46,10 @@ class BalanceGeneralController extends Controller
         //Traer las cuentas (Activo, Pasivo y Patrimonio) del catalogo de usuario, vinculadas a nuestras cuentas
         $activo=DB::select('select * from cuenta 
         where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=?)',[$empresa->id,1]);
-        //dd($activo[0]->id);
-        $pasivo=DB::select('select * from cuenta 
-        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=?)',[$empresa->id,2]);
+        $pasivo=DB::select('select c.*, cp.total from (select * from cuenta 
+        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=2)) as c
+        left join (select * from cuenta_periodo where periodo_id=?) as cp
+        on c.id= cp.cuenta_id',[$empresa->id,$id_periodo]);
         $capital=DB::select('select * from cuenta 
         where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=?)',[$empresa->id,12]);
         if(!$activo || !$pasivo || !$capital){

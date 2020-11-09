@@ -99,11 +99,61 @@ class CuentaPerioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_cuenta, $id_periodo)
     {
-        //
+        //dd([$id_cuenta, $id_periodo]);
+        //Validacion del periodo    
+        $idUsuarioLogeado=auth()->user()->id;
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+        if(!$periodo= Periodo::Where('id',$id_periodo)->Where('empresa_id',$empresa->id)->first()){
+            abort(403);
+        }
+        //dd([$id_periodo, $id_cuenta, 'Hijo', ($request->cuenta+100)]);
+        //Validacion si la cuenta que manda como parametro le pertenece al usuario
+        if(!$cuenta=Cuenta::Where('id', $id_cuenta)->Where('empresa_id',$empresa->id)->first()){
+            abort(403);
+        }
+        //Si la cuenta periodo ya existe se actualiza
+        if($cuentaP=CuentaPeriodo::Where('cuenta_id',$id_cuenta)->Where('periodo_id',$id_periodo)->first()){
+            $cuentaP=$this->actualizar(0, $cuentaP);
+            //Actualizacion del total de la cuenta padre        
+            $cuentaPPadre=$this->modificarPadre($cuenta->padre_id, $id_periodo);
+            //Regresar a la vista            
+            return back()->with('status', 'Valor agregado exitosamente');
+        }else{            
+            return back();
+        }
     }
 
+    public function destroyPadre($id_cuenta, $id_periodo)
+    {
+        //dd([$id_cuenta, $id_periodo]);
+        //Validacion del periodo    
+        $idUsuarioLogeado=auth()->user()->id;
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+        if(!$periodo= Periodo::Where('id',$id_periodo)->Where('empresa_id',$empresa->id)->first()){
+            abort(403);
+        }
+        //dd([$id_periodo, $id_cuenta, 'Hijo', ($request->cuenta+100)]);
+        //Validacion si la cuenta que manda como parametro le pertenece al usuario
+        if(!$cuenta=Cuenta::Where('id', $id_cuenta)->Where('empresa_id',$empresa->id)->first()){
+            abort(403);
+        }
+        //Si la cuenta periodo ya existe se actualiza
+        if($cuentaP=CuentaPeriodo::Where('cuenta_id',$id_cuenta)->Where('periodo_id',$id_periodo)->first()){
+            $cuentaP=$this->actualizar(0, $cuentaP);
+            //Actualizacion del total de la cuenta padre        
+            $cuentaPPadre=$this->modificarPadre($cuenta->padre_id, $id_periodo);
+            //Regresar a la vista
+            //Actualizar valor de sus hijos
+            $cuentasHijos=$this->modificarHijos($cuentaP);            
+            return back()->with('status', 'Valor agregado exitosamente');
+        }else{
+            return back();
+        }
+    }
+
+    //Funcion para insertar cuentas Periodo
     public function insertar($total, $idCuenta, $idPeriodo){
         $cuentaP= new CuentaPeriodo();
         $cuentaP->total=$total;
@@ -113,20 +163,14 @@ class CuentaPerioController extends Controller
         return $cuentaP;
     }
 
+    //Funcion para actualizar cuentas Periodo
     public function actualizar($total, $cuentaPeriodo){
         $cuentaPeriodo->total= $total;
         $cuentaPeriodo->save();
         return $cuentaPeriodo;
     }
     
-    public function crearPadre($id, $id_periodo){
-        //Si la cuenta periodo del padre existe
-        if(!$cuentaPPadre=CuentaPeriodo::Where('cuenta_id',$cuenta->padre_id)->Where('periodo_id',$id_periodo)->first()){
-            $cuentaPPadre=$this->insertar(0, $cuenta->padre_id, $id_periodo);
-        }
-        return $cuentaPPadre;
-    }
-
+    //Funcion para modificar el total de la cuenta padre
     public function modificarPadre($id, $id_periodo){
         //Si la cuenta Periodo del padre no existe se crea
         if(!$cuentaPeriodoPadre=CuentaPeriodo::Where('cuenta_id',$id)->Where('periodo_id',$id_periodo)->first()){
@@ -144,6 +188,19 @@ class CuentaPerioController extends Controller
         $cuenta=Cuenta::Where('id', $cuentaPeriodoPadre->cuenta_id)->first();
         if($cuenta->padre_id!=null){
             $repeticion=$this->modificarPadre($cuenta->padre_id, $id_periodo);
+        }
+        return true;
+    }
+
+    //Funcion para modificar el total de las cuentas hijas
+    public function modificarHijos($cuentaPadre){
+        $cuentasPHijos= CuentaPeriodo::whereRaw('  
+        cuenta_id in 
+        (select id from cuenta where padre_id=?)
+        and periodo_id=?', [$cuentaPadre->cuenta_id, $cuentaPadre->periodo_id])->get();
+        //dd([$cuentaPadre]);
+        foreach ($cuentasPHijos as $cuentaHijo) {                        
+            $cuentaHijoM=$this->actualizar(0, $cuentaHijo);
         }
         return true;
     }

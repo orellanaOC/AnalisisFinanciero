@@ -38,19 +38,19 @@
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <!--boton de guardar-->
-                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="insertar{{$cuenta2->id}}" >
-                                                            <i class="tim-icons icon-check-2"></i>
-                                                        </button>
+                                                    <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="insertar{{$cuenta2->id}}" >
+                                                        <i class="tim-icons icon-check-2"></i>
+                                                    </button>
                                                         
                                                     <!--boton de eliminar-->
-                                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
-                                                            <i class="tim-icons icon-simple-remove"></i>
-                                                        </button>
-                                                    </div>
-                                                    <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
-                                                        @csrf
-                                                        @method('delete')         
-                                                    </form>
+                                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarCuentaPeriodo{{$cuenta2->id}}')">
+                                                        <i class="tim-icons icon-simple-remove"></i>
+                                                    </button>
+                                                </div>
+                                                <form id="eliminarCuentaPeriodo{{$cuenta2->id}}" action="{{route('cuenta_periodo.destroy',[$cuenta2->id, $periodo])}}" method="post">
+                                                    @csrf
+                                                    @method('delete')         
+                                                </form>
                                             </td>                                  
                                         </tr>                                    
                                         @endif
@@ -70,14 +70,14 @@
                                                         </button>
                                                         
                                                     <!--boton de eliminar-->
-                                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
-                                                            <i class="tim-icons icon-simple-remove"></i>
-                                                        </button>
-                                                    </div>
-                                                    <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
-                                                        @csrf
-                                                        @method('delete')         
-                                                    </form>
+                                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarCuentaPeriodo{{$cuenta->id}}')">
+                                                        <i class="tim-icons icon-simple-remove"></i>
+                                                    </button>
+                                                </div>
+                                                <form id="eliminarCuentaPeriodo{{$cuenta->id}}" action="{{route('cuenta_periodo.destroyPadre',[$cuenta->id, $periodo])}}" method="post">
+                                                    @csrf
+                                                    @method('delete')         
+                                                </form>
                                             </td>
                                         </tr> 
                                     @endif
@@ -114,11 +114,11 @@
                                                         </button>
                                                         
                                                     <!--boton de eliminar-->
-                                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
+                                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarCuentaPeriodo{{$cuenta2->id}}')">
                                                             <i class="tim-icons icon-simple-remove"></i>
                                                         </button>
                                                     </div>
-                                                    <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
+                                                    <form id="eliminarCuentaPeriodo{{$cuenta2->id}}" action="{{route('cuenta_periodo.destroy',[$cuenta2->id, $periodo])}}" method="post">
                                                         @csrf
                                                         @method('delete')         
                                                     </form>
@@ -136,19 +136,19 @@
                                             </form>                                                
                                                 <div class="btn-group" role="group">
                                                     <!--boton de guardar-->
-                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="insertar{{$cuenta->id}}" >
-                                                            <i class="tim-icons icon-check-2"></i>
-                                                        </button>
+                                                    <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="insertar{{$cuenta->id}}" >
+                                                        <i class="tim-icons icon-check-2"></i>
+                                                    </button>
                                                         
                                                     <!--boton de eliminar-->
-                                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
-                                                            <i class="tim-icons icon-simple-remove"></i>
-                                                        </button>
-                                                    </div>
-                                                    <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
-                                                        @csrf
-                                                        @method('delete')         
-                                                    </form>
+                                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarCuentaPeriodo{{$cuenta->id}}')">
+                                                        <i class="tim-icons icon-simple-remove"></i>
+                                                    </button>
+                                                </div>
+                                                <form id="eliminarCuentaPeriodo{{$cuenta->id}}" action="{{route('cuenta_periodo.destroyPadre',[$cuenta->id, $periodo])}}" method="post">
+                                                    @csrf
+                                                    @method('delete')         
+                                                </form>
                                             </td>
                                         </tr> 
                                     @endif
@@ -178,19 +178,19 @@
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <!--boton de guardar-->
-                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="insertar{{$cuenta2->id}}" >
-                                                            <i class="tim-icons icon-check-2"></i>
-                                                        </button>
+                                                    <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="insertar{{$cuenta2->id}}" >
+                                                        <i class="tim-icons icon-check-2"></i>
+                                                    </button>
                                                         
                                                     <!--boton de eliminar-->
-                                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
-                                                            <i class="tim-icons icon-simple-remove"></i>
-                                                        </button>
-                                                    </div>
-                                                    <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
-                                                        @csrf
-                                                        @method('delete')         
-                                                    </form>
+                                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarCuentaPeriodo{{$cuenta2->id}}')">
+                                                        <i class="tim-icons icon-simple-remove"></i>
+                                                    </button>
+                                                </div>
+                                                <form id="eliminarCuentaPeriodo{{$cuenta2->id}}" action="{{route('cuenta_periodo.destroy',[$cuenta2->id, $periodo])}}" method="post">
+                                                    @csrf
+                                                    @method('delete')         
+                                                </form>
                                             </td>
                                         </tr>                                    
                                         @endif
@@ -210,14 +210,14 @@
                                                         </button>
                                                         
                                                     <!--boton de eliminar-->
-                                                        <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
-                                                            <i class="tim-icons icon-simple-remove"></i>
-                                                        </button>
-                                                    </div>
-                                                    <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
-                                                        @csrf
-                                                        @method('delete')         
-                                                    </form>
+                                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarCuentaPeriodo{{$cuenta->id}}')">
+                                                        <i class="tim-icons icon-simple-remove"></i>
+                                                    </button>
+                                                </div>
+                                                <form id="eliminarCuentaPeriodo{{$cuenta->id}}" action="{{route('cuenta_periodo.destroyPadre',[$cuenta->id, $periodo])}}" method="post">
+                                                    @csrf
+                                                    @method('delete')         
+                                                </form>
                                             </td>
                                         </tr> 
                                     @endif
@@ -231,7 +231,7 @@
                                     <tr>
                                         <td></td>
                                         <th class="text-danger">Total Pasivo + Capital</th>
-                                        <td><input value="{{$cuenta->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                                        <td><input value="{{$cuenta->total+$pasivo[0]->total}}" name="cuenta" class="form-control" type="number" disabled></td>
                                         <td></td>
                                     </tr>
                                     @endif

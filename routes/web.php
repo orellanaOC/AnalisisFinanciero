@@ -188,8 +188,10 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('/{id_periodo}/estado_resultados_create', 'EstadoResultadoController@create')->name('estado_resultado_create');
 	/*-----------------------------------------------------------------------------------------------------*/
 
-	/*------------------------------------------- ESTADO-RESULTADO -------------------------------------------*/
+	/*------------------------------------------- CUENTA-PERIODO-------------------------------------------*/
 	Route::post('cuenta_periodo/{id_periodo}/{cuenta_id}', 'CuentaPerioController@store')->name('cuenta_periodo.store');
 	Route::post('cuenta_periodo_p/{id_periodo}/{cuenta_id}', 'CuentaPerioController@storePadre')->name('cuenta_periodo.storePadre');
+	Route::delete('cuenta_periodo/{id_periodo}/{cuenta_id}', 'CuentaPerioController@destroy')->name('cuenta_periodo.destroy');
+	Route::delete('cuenta_periodo_p/{id_periodo}/{cuenta_id}', 'CuentaPerioController@destroyPadre')->name('cuenta_periodo.destroyPadre');
 	/*-----------------------------------------------------------------------------------------------------*/
 });
