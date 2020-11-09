@@ -51,7 +51,7 @@ class CuentaPerioController extends Controller
         //Actualizacion del total de la cuenta padre
         $cuentaPPadre=$this->modificarPadre($cuenta->padre_id, $id_periodo);
         //Regresar a la vista
-        return back()->with('status', 'Valor agregado exitosamente');
+        return redirect()->route('balance_general_create', $id_periodo)->with('status', 'Valor agregado exitosamente');
     }
 
 
@@ -75,7 +75,8 @@ class CuentaPerioController extends Controller
         if(DB::select('select c.nombre from cuenta as c
             inner join cuenta_periodo as cp
             on c.id= cp.cuenta_id
-            where c.padre_id=?',[$id_cuenta])){
+            where c.padre_id=?
+            and cp.periodo_id=?',[$id_cuenta, $id_periodo])){
             return back();
         }
         //Si la cuenta periodo ya existe se actualiza
@@ -89,7 +90,7 @@ class CuentaPerioController extends Controller
         //Actualizacion del total de la cuenta padre        
         $cuentaPPadre=$this->modificarPadre($cuenta->padre_id, $id_periodo);
         //Regresar a la vista
-        return back()->with('status', 'Valor agregado exitosamente');
+        return redirect()->route('balance_general_create', $id_periodo)->with('status', 'Valor agregado exitosamente');
     }
 
 
@@ -179,7 +180,8 @@ class CuentaPerioController extends Controller
         $cuentasPHijos= DB::select('select c.nombre, c.padre_id, cp.total, cp.id as cpid from cuenta as c
         inner join cuenta_periodo as cp
         on c.id= cp.cuenta_id
-        where c.padre_id=?', [$cuentaPeriodoPadre->cuenta_id]);
+        where c.padre_id=?
+        and cp.periodo_id=?', [$cuentaPeriodoPadre->cuenta_id, $cuentaPeriodoPadre->periodo_id]);
         $cuentaPeriodoPadre->total=0;
         foreach ($cuentasPHijos as $cuentaHijo) {
             $cuentaPeriodoPadre->total= $cuentaPeriodoPadre->total+ $cuentaHijo->total;

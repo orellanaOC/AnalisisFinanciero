@@ -31,45 +31,52 @@ class EstadoResultadoController extends Controller
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
         $ventas=DB::select('select c.*, cp.total from (select * from cuenta 
-        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=?)) as c
+        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
+		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
-        on c.id= cp.cuenta_id',[$empresa->id,18, $id_periodo]);
+        on c.id= cp.cuenta_id',[$empresa->id,'Ventas', $id_periodo]);
         $DevolucionVentas=DB::select('select c.*, cp.total from (select * from cuenta 
-        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=?)) as c
+        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
+		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
-        on c.id= cp.cuenta_id',[$empresa->id,22, $id_periodo]);
+        on c.id= cp.cuenta_id',[$empresa->id,'Devolución sobre ventas', $id_periodo]);
         $DescuentoVentas=DB::select('select c.*, cp.total from (select * from cuenta 
-        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=?)) as c
+        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
+		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
-        on c.id= cp.cuenta_id',[$empresa->id,23, $id_periodo]);
+        on c.id= cp.cuenta_id',[$empresa->id,'Descuento sobre ventas', $id_periodo]);
         $costoVentas=DB::select('select c.*, cp.total from (select * from cuenta 
-        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=?)) as c
+        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
+		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
-        on c.id= cp.cuenta_id',[$empresa->id,8, $id_periodo]);
+        on c.id= cp.cuenta_id',[$empresa->id,'Costos de ventas', $id_periodo]);
         $gastosOperacion=DB::select('select c.*, cp.total from (select * from cuenta 
-        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=?)) as c
+        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
+		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
-        on c.id= cp.cuenta_id',[$empresa->id,17, $id_periodo]);
+        on c.id= cp.cuenta_id',[$empresa->id,'Gastos de operación', $id_periodo]);
         /*  $GastosVentas=DB::select('select c.*, cp.total from (select * from cuenta 
         where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=?)) as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
         on c.id= cp.cuenta_id',[$empresa->id,19, $id_periodo]);*/
         $IngresosNoOperativos=DB::select('select c.*, cp.total from (select * from cuenta 
-        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=?)) as c
+        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
+		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
-        on c.id= cp.cuenta_id',[$empresa->id,20, $id_periodo]);
+        on c.id= cp.cuenta_id',[$empresa->id,'Ingresos no operativos', $id_periodo]);
         $GastosNoOperativos=DB::select('select c.*, cp.total from (select * from cuenta 
-        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=?)) as c
+        where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
+		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
-        on c.id= cp.cuenta_id',[$empresa->id,21, $id_periodo]);                
+        on c.id= cp.cuenta_id',[$empresa->id,'Gastos no operativos', $id_periodo]);                
         //dd($activo[0]->id);
         if(!$ventas || !$costoVentas || !$gastosOperacion || !$IngresosNoOperativos || !$GastosNoOperativos
         || !$DevolucionVentas || !$DescuentoVentas){
             //dd('nulos');
             return redirect()->route('cuenta_sistema.index')->withErrors(['msg'=>'No ha vinculado las cuentas necesarias para el Estado de Resultado']);
         }
-        $vinculos= array($ventas, $costoVentas, $gastosOperacion, $GastosVentas, $IngresosNoOperativos, 
-        $GastosNoOperativos, $DevolucionVentas, $DescuentoVentas);
+        $vinculos= array($ventas, $DevolucionVentas, $DescuentoVentas, $costoVentas, $gastosOperacion, $IngresosNoOperativos, 
+        $GastosNoOperativos);
         $EstadoResultado= EstadoResultado::Where('periodo_id',$id_periodo)->first();
         //  dd($vinculos);
         //dd($vinculos[0][0]->nombre);
