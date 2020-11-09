@@ -11,6 +11,20 @@
                         </div>
                     </div>
                 </div>
+                @if (session('status'))
+                <div class="alert alert-success">{{ session('status') }}</div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li class="alerta-error">
+                            {{ $error }}&nbsp;&nbsp;<i class="tim-icons icon-alert-circle-exc"></i>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -21,7 +35,7 @@
                         <div class="col-md-2"></div>
                         <div class="col-md-8">
                             <table class="table tablesorter">
-                                <form id="ERGuardar" action="{{route('estado_resultado.destory', $periodo)}}" method="post">
+                                <form id="ERGuardar" action="{{route('estado_resultado.store', $periodo)}}" method="post">
                                     @csrf
                                     <tr>
                                         <th>{{$vinculos[0][0]->nombre}}</th>

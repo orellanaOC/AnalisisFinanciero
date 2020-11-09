@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Cuenta;
 use App\Empresa;
 use App\EstadoResultado;
+use App\Periodo;
 use Illuminate\Support\Facades\DB;
 
 class EstadoResultadoController extends Controller
@@ -27,9 +28,12 @@ class EstadoResultadoController extends Controller
      */
     public function create($id_periodo)
     {
-        //TODO Validacion del periodo para la empresa
+        //Validacion de periodo
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+        if(!$periodo= Periodo::Where('id',$id_periodo)->Where('empresa_id',$empresa->id)->first()){
+            abort(403);
+        }
         $ventas=DB::select('select c.*, cp.total from (select * from cuenta 
         where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
 		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
@@ -92,7 +96,26 @@ class EstadoResultadoController extends Controller
      */
     public function store(Request $request, $id_periodo)
     {
-        dd(['estoy aca', $id_periodo, $request->request]);
+        //Validacion de periodo
+        $idUsuarioLogeado=auth()->user()->id;
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+        if(!$periodo= Periodo::Where('id',$id_periodo)->Where('empresa_id',$empresa->id)->first()){
+            abort(403);
+        }
+        //Validación de campos
+        if($request->ventas==null || $request->devolucion_venta==null || $request->descuento_venta==null
+        || $request->costos_venta==null || $request->gastos_operacion==null 
+        || $request->otros_ingresos==null || $request->otros_gastos==null || $request->impuestos==null){
+            return back()->withErrors('Todos los campos son obligatorios');
+        }
+        if($EstadoResultado= EstadoResultado::Where('periodo_id',$id_periodo)->first()){
+            $EstadoResultado= $this->calculosER($request, $EstadoResultado, $id_periodo);
+        }else{
+            $EstadoResultado= new EstadoResultado();
+            $EstadoResultado= $this->calculosER($request, $EstadoResultado, $id_periodo);
+        }
+        $EstadoResultado->save();
+        return redirect()->route('estado_resultado_create', $id_periodo)->with('status', 'Cuenta '.$request->nombre.' creada exitosamente');        
     }
 
 
@@ -107,7 +130,21 @@ class EstadoResultadoController extends Controller
         //
     }
 
-    public function calculosER(){
-        
+    public function calculosER($valoresER, $ER, $id_periodo){
+        $ER->ventas_netas=$valoresER->ventas-$valoresER->devolucion_venta-$valoresER->descuento_venta;
+        $ER->utilidad_bruta=$ER->ventas_netas-$valoresER->costos_venta;
+        $ER->utilidad_operativa=$ER->utilidad_bruta-$valoresER->gastos_operacion;
+        $ER->utilidad_antes_de_i=$ER->utilidad_operativa+$valoresER->otros_ingresos-$valoresER->otros_gastos;
+        $ER->impuestos=$valoresER->impuestos;
+        $ER->utilidad_neta=$ER->utilidad_antes_de_i-$ER->impuestos;
+        $ER->ventas=$valoresER->ventas;
+        $ER->devolucion_ventas=$valoresER->devolucion_venta;
+        $ER->descuento_ventas=$valoresER->descuento_venta;
+        $ER->costo_ventas=$valoresER->costos_venta;
+        $ER->gastos_operacion=$valoresER->gastos_operacion;
+        $ER->otros_ingresos=$valoresER->otros_ingresos;
+        $ER->otros_gastos= $valoresER->otros_gastos;
+        $ER->periodo_id=$id_periodo;          
+        return $ER;
     }
 }

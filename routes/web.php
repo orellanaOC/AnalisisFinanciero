@@ -186,7 +186,7 @@ Route::middleware(['auth'])->group(function(){
 	/*------------------------------------------- ESTADO-RESULTADO -------------------------------------------*/
 	Route::get('/estado_resultados_index', 'HomeController@estado_resultado_index')->name('estado_resultado_index');
 	Route::get('/{id_periodo}/estado_resultados_create', 'EstadoResultadoController@create')->name('estado_resultado_create');
-	Route::post('/{id_periodo}/estado_resultados', 'EstadoResultadoController@store')->name('estado_resultado.destory');
+	Route::post('/{id_periodo}/estado_resultados', 'EstadoResultadoController@store')->name('estado_resultado.store');
 	/*-----------------------------------------------------------------------------------------------------*/
 
 	/*------------------------------------------- CUENTA-PERIODO-------------------------------------------*/
