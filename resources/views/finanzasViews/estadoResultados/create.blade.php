@@ -21,58 +21,61 @@
                         <div class="col-md-2"></div>
                         <div class="col-md-8">
                             <table class="table tablesorter">
-                                <tr>
-                                    <th>{{$vinculos[0][0]->nombre}}</th>
-                                    <td><input value="{{$vinculos[10][0]->total ?? '0'}}" name="ventas"  class="form-control form-control-sm" type="number"></td>
-                                </tr>
-                                <tr>
-                                    <th>{{$vinculos[1][0]->nombre}}</th>
-                                    <td><input value="{{$vinculos[1][0]->total ?? '0'}}" name="devolucion_venta"  class="form-control form-control-sm" type="number"></td>
-                                </tr> 
-                                <tr>
-                                    <th>{{$vinculos[2][0]->nombre}}</th>
-                                    <td><input value="{{$vinculos[2][0]->total ?? '0'}}" name="descuento_venta"  class="form-control form-control-sm" type="number"></td>
-                                </tr> 
-                                <tr>
-                                    <th class="text-primary">Ventas netas</th>
-                                    <td><input value="{{$ER->ventas_netas ?? '0'}}" name="ventas_neta"  class="form-control form-control-sm" type="number"></td>
-                                </tr> 
-                                <tr>
-                                    <th>{{$vinculos[3][0]->nombre}}</th>
-                                    <td><input value="{{$vinculos[3][0]->total ?? '0'}}" name="costos_venta"  class="form-control form-control-sm" type="number"></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-primary">Utilidad Bruta</th>
-                                    <td><input value="{{$ER->utilidad_bruta ?? '0'}}" name="utilidad_bruta"  class="form-control form-control-sm" type="number"></td>
-                                </tr>
-                                <tr>
-                                    <th>{{$vinculos[4][0]->nombre}}</th>
-                                    <td><input value="{{$vinculos[4][0]->total ?? '0'}}" name="gastos_operacion"  class="form-control form-control-sm" type="number"></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-primary">Utilidad operativa</th>
-                                    <td><input value="{{$ER->utilidad_operativa ?? '0'}}" name="utilidad_operativa"  class="form-control form-control-sm" type="number"></td>
-                                </tr>
-                                <tr>
-                                    <th>{{$vinculos[5][0]->nombre}}</th>
-                                    <td><input value="{{$vinculos[5][0]->total ?? '0'}}" name="otros_ingresos"  class="form-control form-control-sm" type="number"></td>
-                                </tr>
-                                <tr>
-                                    <th>{{$vinculos[6][0]->nombre}}</th>
-                                    <td><input value="{{$vinculos[6][0]->total ?? '0'}}" name="otros_gastos"  class="form-control form-control-sm" type="number"></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-primary">Utilidad antes de impuestos</th>
-                                    <td><input value="{{$ER->utilidad_antes_de_i ?? '0'}}" name="utilidad_adi"  class="form-control form-control-sm" type="number"></td>
-                                </tr> 
-                                <tr>
-                                    <th>Impuestos sobre la renta</th>
-                                    <td><input value="{{$ER->impuestos ?? '0'}}" name="impuestos"  class="form-control form-control-sm" type="number"></td>
-                                </tr> 
-                                <tr>
-                                    <th class="text-primary">Utilida neta</th>
-                                    <td><input value="{{$ER->utilidad_neta ?? '0'}}" name="utilidad_neta"  class="form-control form-control-sm" type="number"></td>
-                                </tr>                                 
+                                <form id="ERGuardar" action="{{route('estado_resultado.destory', $periodo)}}" method="post">
+                                    @csrf
+                                    <tr>
+                                        <th>{{$vinculos[0][0]->nombre}}</th>
+                                        <td><input value="{{$ER->ventas ?? '0'}}" name="ventas"  class="form-control form-control-sm" type="number"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{$vinculos[1][0]->nombre}}</th>
+                                        <td><input value="{{$ER->devolucion_ventas ?? '0'}}" name="devolucion_venta"  class="form-control form-control-sm" type="number"></td>
+                                    </tr> 
+                                    <tr>
+                                        <th>{{$vinculos[2][0]->nombre}}</th>
+                                        <td><input value="{{$ER->descuento_ventas ?? '0'}}" name="descuento_venta"  class="form-control form-control-sm" type="number"></td>
+                                    </tr> 
+                                    <tr>
+                                        <th class="text-primary">Ventas netas</th>
+                                        <td><input value="{{$ER->ventas_netas ?? '0'}}" name="ventas_neta"  class="form-control form-control-sm" type="number"></td>
+                                    </tr> 
+                                    <tr>
+                                        <th>{{$vinculos[3][0]->nombre}}</th>
+                                        <td><input value="{{$ER->costo_ventas ?? '0'}}" name="costos_venta"  class="form-control form-control-sm" type="number"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-primary">Utilidad Bruta</th>
+                                        <td><input value="{{$ER->utilidad_bruta ?? '0'}}" name="utilidad_bruta"  class="form-control form-control-sm" type="number"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{$vinculos[4][0]->nombre}}</th>
+                                        <td><input value="{{$ER->gastos_operacion ?? '0'}}" name="gastos_operacion"  class="form-control form-control-sm" type="number"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-primary">Utilidad operativa</th>
+                                        <td><input value="{{$ER->utilidad_operativa ?? '0'}}" name="utilidad_operativa"  class="form-control form-control-sm" type="number"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{$vinculos[5][0]->nombre}}</th>
+                                        <td><input value="{{$ER->otros_ingresos ?? '0'}}" name="otros_ingresos"  class="form-control form-control-sm" type="number"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{$vinculos[6][0]->nombre}}</th>
+                                        <td><input value="{{$ER->otros_gastos ?? '0'}}" name="otros_gastos"  class="form-control form-control-sm" type="number"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-primary">Utilidad antes de impuestos</th>
+                                        <td><input value="{{$ER->utilidad_antes_de_i ?? '0'}}" name="utilidad_adi"  class="form-control form-control-sm" type="number"></td>
+                                    </tr> 
+                                    <tr>
+                                        <th>Impuestos sobre la renta</th>
+                                        <td><input value="{{$ER->impuestos ?? '0'}}" name="impuestos"  class="form-control form-control-sm" type="number"></td>
+                                    </tr> 
+                                    <tr>
+                                        <th class="text-primary">Utilida neta</th>
+                                        <td><input value="{{$ER->utilidad_neta ?? '0'}}" name="utilidad_neta"  class="form-control form-control-sm" type="number"></td>
+                                    </tr>
+                                </form>                                
                             </table>                        
                         </div>
                         <div class="col-md-2"></div>
@@ -107,7 +110,7 @@
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-8 text-center">
-                            <button class="btn btn-primary"> Guardar </button>                          
+                            <button type="submit" class="btn btn-primary" form="ERGuardar"> Guardar </button>                          
                         </div>
                         <div class="col-md-2"></div>
                     </div>

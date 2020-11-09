@@ -81,7 +81,7 @@ class EstadoResultadoController extends Controller
         //  dd($vinculos);
         //dd($vinculos[0][0]->nombre);
         //$cuentasEmpresa=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'desc')->get();
-        return view('finanzasViews.estadoResultados.create', ['vinculos'=>$vinculos, 'ER'=>$EstadoResultado]);
+        return view('finanzasViews.estadoResultados.create', ['vinculos'=>$vinculos, 'ER'=>$EstadoResultado, 'periodo'=>$id_periodo]);
     }
 
     /**
@@ -90,9 +90,9 @@ class EstadoResultadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id_periodo)
     {
-        //
+        dd(['estoy aca', $id_periodo]);
     }
 
     /**
