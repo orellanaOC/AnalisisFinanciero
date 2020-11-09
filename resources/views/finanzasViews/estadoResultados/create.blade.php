@@ -23,43 +23,51 @@
                             <table class="table tablesorter">
                                 <tr>
                                     <th>{{$vinculos[0][0]->nombre}}</th>
-                                    <td>00.00</td>
+                                    <td><input value="{{0}}" name="cuenta"  class="form-control form-control-sm" type="number"></td>
                                 </tr>
                                 <tr>
                                     <th>{{$vinculos[6][0]->nombre}}</th>
-                                    <td>00.00</td>
+                                    <td><input value="{{0}}" name="cuenta"  class="form-control form-control-sm" type="number"></td>
                                 </tr> 
                                 <tr>
                                     <th>{{$vinculos[7][0]->nombre}}</th>
-                                    <td>00.00</td>
+                                    <td><input value="{{0}}" name="cuenta"  class="form-control form-control-sm" type="number"></td>
                                 </tr> 
                                 <tr>
                                     <th class="text-primary">Ventas netas</th>
-                                    <td>00.00</td>
+                                    <td><input value="{{0}}" name="cuenta"  class="form-control form-control-sm" type="number"></td>
                                 </tr> 
                                 <tr>
                                     <th>{{$vinculos[1][0]->nombre}}</th>
-                                    <td>00.00</td>
+                                    <td><input value="{{0}}" name="cuenta"  class="form-control form-control-sm" type="number"></td>
                                 </tr>
                                 <tr>
                                     <th class="text-primary">Utilidad Bruta</th>
-                                    <td>00.00</td>
+                                    <td><input value="{{0}}" name="cuenta"  class="form-control form-control-sm" type="number"></td>
                                 </tr>
                                 <tr>
-                                    <th>Activo corriente</th>
-                                    <td>00.00</td>
-                                </tr> 
+                                    <th>Gastos de operacion</th>
+                                    <td><input value="{{0}}" name="cuenta"  class="form-control form-control-sm" type="number"></td>
+                                </tr>
+                                <tr>
+                                    <th>Utilidad operativa</th>
+                                    <td><input value="{{0}}" name="cuenta"  class="form-control form-control-sm" type="number"></td>
+                                </tr>
+                                <tr>
+                                    <th>Otros ingresos</th>
+                                    <td><input value="{{0}}" name="cuenta"  class="form-control form-control-sm" type="number"></td>
+                                </tr>
                                 <tr>
                                     <th class="text-primary">Utilidad antes de impuestos</th>
-                                    <td>00.00</td>
+                                    <td><input value="{{0}}" name="cuenta"  class="form-control form-control-sm" type="number"></td>
                                 </tr> 
                                 <tr>
-                                    <th>Impuestos</th>
-                                    <td>00.00</td>
+                                    <th>Impuestos sobre la renta</th>
+                                    <td><input value="{{0}}" name="cuenta"  class="form-control form-control-sm" type="number"></td>
                                 </tr> 
                                 <tr>
                                     <th class="text-primary">Utilida neta</th>
-                                    <td>00.00</td>
+                                    <td><input value="{{0}}" name="cuenta"  class="form-control form-control-sm" type="number"></td>
                                 </tr>                                 
                             </table>                        
                         </div>
