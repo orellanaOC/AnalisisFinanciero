@@ -141,20 +141,14 @@ class CuentaSistemaSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('cuenta_sistema')->insert([
-            'nombre'=>'Gastos de ventas',
-            'descripcion'=>'Es la cuenta que almacena los gastos de ventas en tu empresa',
-            'uso'=>1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        /*
         DB::table('cuenta_sistema')->insert([
             'nombre'=>'Ingresos no operativos',
             'descripcion'=>'Es la cuenta que almacena los ingresos no operativos en tu empresa',
             'uso'=>1,
             'created_at' => now(),
             'updated_at' => now()
-        ]);
+        ]);*/
         DB::table('cuenta_sistema')->insert([
             'nombre'=>'Gastos no operativos',
             'descripcion'=>'Es la cuenta que almacena los gastos no operativos en tu empresa',
