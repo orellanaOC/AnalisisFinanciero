@@ -172,6 +172,7 @@ Route::middleware(['auth'])->group(function(){
     /*-----------------------------------------------------------------------------------------------------*/
     Route::get('/periodos','PeriodoController@index')->name('periodo.index');
     Route::post('periodo/create','PeriodoController@store')->name('periodo.create');
+    Route::delete('periodo/delete/{id}','PeriodoController@destroy')->name('periodo.delete');
 
 
 
