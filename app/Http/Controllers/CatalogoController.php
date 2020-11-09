@@ -87,9 +87,22 @@ class CatalogoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        //return PHP_OS;
+        $tipoCuenta= TipoCuenta::all();
+
+        $idUsuarioLogeado=auth()->user()->id;
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+        //Cuentas de primer nivel (Que no tienen padre)
+        $cuentas=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'asc')->get();
+        //Si su catalogo ya esta confirmado
+        if($empresa->catalogo_listo){
+            return view('simpleViews.catalogo.show', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas,'empresa'=>$empresa]);
+        }
+        else{
+            return view('simpleViews.catalogo.index', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas,'empresa'=>$empresa]);
+        }
     }
 
     /**
