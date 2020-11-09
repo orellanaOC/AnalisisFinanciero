@@ -29,13 +29,16 @@
                                         @foreach ($cuentasEmpresa as $cuenta2)
                                         @if ($cuenta2->padre_id==$cuenta->id)
                                         <tr>
-                                            <td>{{$cuenta2->codigo}}</td>
-                                            <th>{{$cuenta2->nombre}}</th>
-                                            <td><input class="form-control" type="number"></td>
+                                            <form id="insertar{{$cuenta2->id}}" action="{{route('cuenta_periodo.store', [$periodo, $cuenta2->id])}}" method="POST">
+                                                @csrf                                                
+                                                <td>{{$cuenta2->codigo}}</td>
+                                                <th>{{$cuenta2->nombre}}</th>
+                                                <td><input value="{{$cuenta2->total}}" name="cuenta" class="form-control" type="number"></td>
+                                            </form>
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <!--boton de guardar-->
-                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="insertar{{$cuenta2->id}}" >
                                                             <i class="tim-icons icon-check-2"></i>
                                                         </button>
                                                         
@@ -48,18 +51,21 @@
                                                         @csrf
                                                         @method('delete')         
                                                     </form>
-                                            </td>
+                                            </td>                                  
                                         </tr>                                    
                                         @endif
                                         @endforeach
                                         <tr>
-                                            <td>{{$cuenta->codigo}}</td>
-                                            <th class="text-primary">Total {{$cuenta->nombre}}</th>
-                                            <td><input class="form-control" type="number"></td>
-                                            <td>
+                                            <form id="insertar{{$cuenta->id}}" action="{{route('cuenta_periodo.storePadre', [$periodo, $cuenta->id])}}" method="post">
+                                                @csrf
+                                                <td>{{$cuenta->codigo}}</td>
+                                                <th class="text-primary">Total {{$cuenta->nombre}}</th>
+                                                <td><input value="{{$cuenta->total}}" name="cuenta"  class="form-control" type="number"></td>
+                                                <td>
+                                            </form>                                                
                                                 <div class="btn-group" role="group">
                                                     <!--boton de guardar-->
-                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="insertar{{$cuenta->id}}" >
                                                             <i class="tim-icons icon-check-2"></i>
                                                         </button>
                                                         
@@ -79,24 +85,8 @@
                                     <tr>
                                         <td>{{$cuenta->codigo}}</td>
                                         <th class="text-danger">Total {{$cuenta->nombre}}</th>
-                                        <td><input class="form-control" type="number"></td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <!--boton de guardar-->
-                                                    <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
-                                                        <i class="tim-icons icon-check-2"></i>
-                                                    </button>
-                                                    
-                                                <!--boton de eliminar-->
-                                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
-                                                        <i class="tim-icons icon-simple-remove"></i>
-                                                    </button>
-                                                </div>
-                                                <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
-                                                    @csrf
-                                                    @method('delete')         
-                                                </form>
-                                        </td>
+                                        <td><input value="{{$cuenta->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                                        <td></td>
                                     </tr>
                                     @endif
                                 @endforeach                                                                    
@@ -110,13 +100,16 @@
                                         @foreach ($cuentasEmpresa as $cuenta2)
                                         @if ($cuenta2->padre_id==$cuenta->id)
                                         <tr>
-                                            <td>{{$cuenta2->codigo}}</td>
-                                            <th>{{$cuenta2->nombre}}</th>
-                                            <td><input class="form-control" type="number"></td>
+                                            <form id="insertar{{$cuenta2->id}}" action="{{route('cuenta_periodo.store', [$periodo, $cuenta2->id])}}" method="POST">
+                                                @csrf                                                
+                                                <td>{{$cuenta2->codigo}}</td>
+                                                <th>{{$cuenta2->nombre}}</th>
+                                                <td><input value="{{$cuenta2->total}}" name="cuenta" class="form-control" type="number"></td>
+                                            </form>
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <!--boton de guardar-->
-                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="insertar{{$cuenta2->id}}" >
                                                             <i class="tim-icons icon-check-2"></i>
                                                         </button>
                                                         
@@ -134,13 +127,16 @@
                                         @endif
                                         @endforeach
                                         <tr>
-                                            <td>{{$cuenta->codigo}}</td>
-                                            <th class="text-primary">Total {{$cuenta->nombre}}</th>
-                                            <td><input class="form-control" type="number"></td>
-                                            <td>
+                                            <form id="insertar{{$cuenta->id}}" action="{{route('cuenta_periodo.storePadre', [$periodo, $cuenta->id])}}" method="post">
+                                                @csrf
+                                                <td>{{$cuenta->codigo}}</td>
+                                                <th class="text-primary">Total {{$cuenta->nombre}}</th>
+                                                <td><input value="{{$cuenta->total}}" name="cuenta"  class="form-control" type="number"></td>
+                                                <td>
+                                            </form>                                                
                                                 <div class="btn-group" role="group">
                                                     <!--boton de guardar-->
-                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="insertar{{$cuenta->id}}" >
                                                             <i class="tim-icons icon-check-2"></i>
                                                         </button>
                                                         
@@ -160,24 +156,8 @@
                                     <tr>
                                         <td>{{$cuenta->codigo}}</td>
                                         <th class="text-danger">Total {{$cuenta->nombre}}</th>
-                                        <td><input class="form-control" type="number"></td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <!--boton de guardar-->
-                                                    <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
-                                                        <i class="tim-icons icon-check-2"></i>
-                                                    </button>
-                                                    
-                                                <!--boton de eliminar-->
-                                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
-                                                        <i class="tim-icons icon-simple-remove"></i>
-                                                    </button>
-                                                </div>
-                                                <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
-                                                    @csrf
-                                                    @method('delete')         
-                                                </form>
-                                        </td>
+                                        <td><input value="{{$cuenta->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                                        <td></td>
                                     </tr>
                                     @endif
                                 @endforeach                                                       
@@ -189,13 +169,16 @@
                                         @foreach ($cuentasEmpresa as $cuenta2)
                                         @if ($cuenta2->padre_id==$cuenta->id)
                                         <tr>
-                                            <td>{{$cuenta2->codigo}}</td>
-                                            <th>{{$cuenta2->nombre}}</th>
-                                            <td><input class="form-control" type="number"></td>
+                                            <form id="insertar{{$cuenta2->id}}" action="{{route('cuenta_periodo.store', [$periodo, $cuenta2->id])}}" method="POST">
+                                                @csrf                                                
+                                                <td>{{$cuenta2->codigo}}</td>
+                                                <th>{{$cuenta2->nombre}}</th>
+                                                <td><input value="{{$cuenta2->total}}" name="cuenta" class="form-control" type="number"></td>
+                                            </form>
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <!--boton de guardar-->
-                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="insertar{{$cuenta2->id}}" >
                                                             <i class="tim-icons icon-check-2"></i>
                                                         </button>
                                                         
@@ -213,13 +196,16 @@
                                         @endif
                                         @endforeach
                                         <tr>
-                                            <td>{{$cuenta->codigo}}</td>
-                                            <th class="text-primary">Total {{$cuenta->nombre}}</th>
-                                            <td><input class="form-control" type="number"></td>
-                                            <td>
+                                            <form id="insertar{{$cuenta->id}}" action="{{route('cuenta_periodo.storePadre', [$periodo, $cuenta->id])}}" method="post">
+                                                @csrf
+                                                <td>{{$cuenta->codigo}}</td>
+                                                <th class="text-primary">Total {{$cuenta->nombre}}</th>
+                                                <td><input value="{{$cuenta->total}}" name="cuenta"  class="form-control" type="number"></td>
+                                                <td>
+                                            </form>                                                
                                                 <div class="btn-group" role="group">
                                                     <!--boton de guardar-->
-                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
+                                                        <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="insertar{{$cuenta->id}}" >
                                                             <i class="tim-icons icon-check-2"></i>
                                                         </button>
                                                         
@@ -239,24 +225,8 @@
                                     <tr>
                                         <td>{{$cuenta->codigo}}</td>
                                         <th class="text-danger">Total {{$cuenta->nombre}}</th>
-                                        <td><input class="form-control" type="number"></td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <!--boton de guardar-->
-                                                    <button type="submit" class="btn btn-success btn-sm btn-round btn-icon" form="vinculacion{{$cuenta->id}}" >
-                                                        <i class="tim-icons icon-check-2"></i>
-                                                    </button>
-                                                    
-                                                <!--boton de eliminar-->
-                                                    <button type="button" class="btn btn-warning btn-sm btn-round btn-icon" onclick="confirmar('eliminarVinculacion{{$cuenta->id}}')">
-                                                        <i class="tim-icons icon-simple-remove"></i>
-                                                    </button>
-                                                </div>
-                                                <form id="eliminarVinculacion{{$cuenta->id}}" action="{{route('vinculacion.destroy',$cuenta->id)}}" method="post">
-                                                    @csrf
-                                                    @method('delete')         
-                                                </form>
-                                        </td>
+                                        <td><input value="{{$cuenta->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                                        <td></td>
                                     </tr>
                                     @endif
                                 @endforeach                                                                                           
@@ -269,7 +239,7 @@
                             <br><br><p class="text-center">O puedes subir tu archivo .xlsx y cargar de una tu estado de resultados</p><br>
                         </div>
                     </div>
-                    <!-- input de archivos normalito feo-->
+                    <!-- input de archivos normalito feo- name="cuenta"->
                     <div class="row">
                         <div class="col-md-12">
                             <input class="form-control-file" type="file">                        

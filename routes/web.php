@@ -172,9 +172,6 @@ Route::middleware(['auth'])->group(function(){
     /*-----------------------------------------------------------------------------------------------------*/
     Route::get('/periodos','PeriodoController@index')->name('periodo.index');
     Route::post('periodo/create','PeriodoController@store')->name('periodo.create');
-
-
-
 	/*-----------------------------------------------------------------------------------------------------*/
 	
 	/*------------------------------------------- BALANCE-GENERAL -------------------------------------------*/
@@ -184,6 +181,11 @@ Route::middleware(['auth'])->group(function(){
 
 	/*------------------------------------------- ESTADO-RESULTADO -------------------------------------------*/
 	Route::get('/estado_resultados_index', 'HomeController@estado_resultado_index')->name('estado_resultado_index');
-	Route::get('{id_periodo}/estado_resultados_create', 'EstadoResultadoController@create')->name('estado_resultado_create');
+	Route::get('/{id_periodo}/estado_resultados_create', 'EstadoResultadoController@create')->name('estado_resultado_create');
+	/*-----------------------------------------------------------------------------------------------------*/
+
+	/*------------------------------------------- ESTADO-RESULTADO -------------------------------------------*/
+	Route::post('cuenta_periodo/{id_periodo}/{cuenta_id}', 'CuentaPerioController@store')->name('cuenta_periodo.store');
+	Route::post('cuenta_periodo_p/{id_periodo}/{cuenta_id}', 'CuentaPerioController@storePadre')->name('cuenta_periodo.storePadre');
 	/*-----------------------------------------------------------------------------------------------------*/
 });

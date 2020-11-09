@@ -7,6 +7,7 @@ use App\Cuenta;
 use App\Empresa;
 use App\CuentaSistema;
 use App\VinculacionCuenta;
+use App\Periodo;
 use Illuminate\Support\Facades\DB;
 
 class BalanceGeneralController extends Controller
@@ -28,7 +29,12 @@ class BalanceGeneralController extends Controller
      */
     public function create($id_periodo)
     {   
-        //TODO Validacion del periodo para la empresa
+        // Validacion del periodo para la empresa
+        $idUsuarioLogeado=auth()->user()->id;
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+        if(!$periodo= Periodo::Where('id',$id_periodo)->Where('empresa_id',$empresa->id)->first()){
+            abort(403);
+        }
         /*
         select c.id, c.codigo, c.nombre, c.padre_id, cp.total from
         cuenta as c
@@ -36,9 +42,7 @@ class BalanceGeneralController extends Controller
         on c.id = cp.cuenta_id
         where c.empresa_id=1
         order by c.codigo asc
-         */
-        $idUsuarioLogeado=auth()->user()->id;
-        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+         */        
         //Traer las cuentas (Activo, Pasivo y Patrimonio) del catalogo de usuario, vinculadas a nuestras cuentas
         $activo=DB::select('select * from cuenta 
         where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? and id_cuenta_sistema=?)',[$empresa->id,1]);
@@ -51,9 +55,15 @@ class BalanceGeneralController extends Controller
             //dd('nulos');
             return redirect()->route('cuenta_sistema.index')->withErrors(['msg'=>'No ha vinculado las cuentas de Activo, Pasivo o Patrimonio']);
         }
-        $cuentasEmpresa=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'desc')->get();
-        //dd([$activo, $pasivo, $capital, $cuentasEmpresa]);     
-        return view('finanzasViews.balanceGeneral.create',['activo'=>$activo, 'pasivo'=>$pasivo, 'capital'=>$capital, 'cuentasEmpresa'=>$cuentasEmpresa]);
+        //$cuentasEmpresa=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'desc')->get();
+        $cuentasEmpresa=DB::select('select c.*, cp.total from
+        cuenta as c
+        left join (select * from cuenta_periodo where periodo_id=?) as cp
+        on c.id = cp.cuenta_id
+        where c.empresa_id=?
+        order by c.codigo desc',[$id_periodo, $empresa->id]);
+        //dd($cuentasEmpresa);     
+        return view('finanzasViews.balanceGeneral.create',['activo'=>$activo, 'pasivo'=>$pasivo, 'capital'=>$capital, 'cuentasEmpresa'=>$cuentasEmpresa, 'periodo'=>$id_periodo]);
     }
 
     /**
@@ -67,40 +77,7 @@ class BalanceGeneralController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      *
