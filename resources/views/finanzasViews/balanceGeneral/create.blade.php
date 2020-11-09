@@ -228,6 +228,12 @@
                                         <td><input value="{{$cuenta->total}}" name="cuenta" class="form-control" type="number" disabled></td>
                                         <td></td>
                                     </tr>
+                                    <tr>
+                                        <td></td>
+                                        <th class="text-danger">Total Pasivo + Capital</th>
+                                        <td><input value="{{$cuenta->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                                        <td></td>
+                                    </tr>
                                     @endif
                                 @endforeach                                                                                           
                                 </table>

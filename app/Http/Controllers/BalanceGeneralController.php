@@ -54,7 +54,7 @@ class BalanceGeneralController extends Controller
         if(!$activo || !$pasivo || !$capital){
             //dd('nulos');
             return redirect()->route('cuenta_sistema.index')->withErrors(['msg'=>'No ha vinculado las cuentas de Activo, Pasivo o Patrimonio']);
-        }
+        }        
         //$cuentasEmpresa=Cuenta::with('tipo')->where('empresa_id',$empresa->id)->orderBy('codigo', 'desc')->get();
         $cuentasEmpresa=DB::select('select c.*, cp.total from
         cuenta as c
