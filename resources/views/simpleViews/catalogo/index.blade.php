@@ -178,7 +178,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($cuentas as $cuenta)
-                                <tr>
+                                <tr id="{{$cuenta->id}}" onMouseOver="ResaltarFila({{$cuenta->id}});" onMouseOut="RestablecerFila({{$cuenta->id}}, '')">
                                     <td>{{$cuenta->codigo}}</td>                                    
                                     @if ($cuenta->padre_id==null)
                                         <td><p class="text-danger">{{$cuenta->nombre}}</p></td>
