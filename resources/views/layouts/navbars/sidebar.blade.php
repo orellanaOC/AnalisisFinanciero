@@ -43,18 +43,19 @@
                     </ul>
                 </div>
             </li-->
+            <li @if ($pageSlug == 'vincular_cuenta') class="active " @endif>
+                <a href="{{ route('cuenta_sistema.index') }}">
+                    <i class="tim-icons icon-refresh-02"></i>
+                    <p>{{ __('Vinculación') }}</p>
+                </a>
+            </li>
             <li @if ($pageSlug == 'periodo') class="active " @endif>
                 <a href="{{ route('periodo.index') }}">
                     <i class="tim-icons icon-coins"></i>
                     <p>{{ __('Periodos') }}</p>
                 </a>
             </li>
-            <!--li @if ($pageSlug == 'resultados') class="active " @endif>
-                <a href="{{ route('estado_resultado_index') }}">
-                    <i class="tim-icons icon-money-coins"></i>
-                    <p>{{ __('Estado de resultados') }}</p>
-                </a>
-            </li-->
+            
             <li @if ($pageSlug == 'empresa') class="active " @endif>
                 <a href="{{ route('analisis_empresa') }}">
                     <i class="tim-icons icon-bank"></i>
