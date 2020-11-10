@@ -74,13 +74,13 @@ class EstadoResultadoController extends Controller
         left join (select * from cuenta_periodo where periodo_id=?) as cp
         on c.id= cp.cuenta_id',[$empresa->id,'Gastos no operativos', $id_periodo]);                
         //dd($activo[0]->id);
-        if(!$ventas || !$costoVentas || !$gastosOperacion || !$IngresosNoOperativos || !$GastosNoOperativos
-        || !$DevolucionVentas || !$DescuentoVentas){
-            //dd('nulos');
+        if(!$ventas || !$costoVentas || !$gastosOperacion || !$GastosNoOperativos){
+            //dd('nulos');            
             return redirect()->route('cuenta_sistema.index')->withErrors(['msg'=>'No ha vinculado las cuentas necesarias para el Estado de Resultado']);
         }
         $vinculos= array($ventas, $DevolucionVentas, $DescuentoVentas, $costoVentas, $gastosOperacion, $IngresosNoOperativos, 
         $GastosNoOperativos);
+        //dd($vinculos);
         $EstadoResultado= EstadoResultado::Where('periodo_id',$id_periodo)->first();
         //  dd($vinculos);
         //dd($vinculos[0][0]->nombre);
