@@ -262,9 +262,9 @@ class CatalogoController extends Controller
                             $cuenta->tipo_id= 2;
                         }
                         $busqueda_padre2=Cuenta::where('codigo', $data[$i]["C"])->where('empresa_id',$cuenta->empresa_id)->first();
-                        $cuenta->padre_id=$busqueda_padre2->id;
-                        $cuenta->created_at=now();
-                        $cuenta->updated_at=now();
+                        if($busqueda_padre2){
+                            $cuenta->padre_id=$busqueda_padre2->id;
+                        }
                         $cuenta->save();
                     }
                     //Si no existe el codigo no se crea
