@@ -74,7 +74,7 @@ class EstadoResultadoController extends Controller
         left join (select * from cuenta_periodo where periodo_id=?) as cp
         on c.id= cp.cuenta_id',[$empresa->id,'Gastos no operativos', $id_periodo]);                
         //dd($activo[0]->id);
-        if(!$ventas || !$costoVentas || !$gastosOperacion || !$GastosNoOperativos){
+        if(!$ventas || !$costoVentas || !$gastosOperacion){
             //dd('nulos');            
             return redirect()->route('cuenta_sistema.index')->withErrors(['msg'=>'No ha vinculado las cuentas necesarias para el Estado de Resultado']);
         }

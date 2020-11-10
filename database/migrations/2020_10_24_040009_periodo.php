@@ -16,6 +16,7 @@ class Periodo extends Migration
         Schema::create('periodo', function (Blueprint $table) {
             $table->id();
             $table->integer('year');
+            $table->integer('acciones');
             $table->integer('empresa_id');
             $table->foreign('empresa_id')->references('id')->on('empresa')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
