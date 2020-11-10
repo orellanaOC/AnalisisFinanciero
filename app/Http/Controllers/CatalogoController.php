@@ -21,6 +21,7 @@ class CatalogoController extends Controller
     public function index()
     {
         //return PHP_OS;
+        ini_set('max_execution_time', 100);
         $tipoCuenta= TipoCuenta::all();
 
         $idUsuarioLogeado=auth()->user()->id;
@@ -263,7 +264,7 @@ class CatalogoController extends Controller
                         }
                         $busqueda_padre2=Cuenta::where('codigo', $data[$i]["C"])->where('empresa_id',$empresa->id)->first();
                         if($busqueda_padre2 != null){
-                            $cuenta->padre_id=$busqueda_padre2->id;                           
+                            $cuenta->padre_id=$busqueda_padre2->id;
                         }
                         $cuenta->save();
                     }
