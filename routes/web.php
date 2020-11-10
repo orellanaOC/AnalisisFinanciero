@@ -150,6 +150,8 @@ Route::middleware(['auth'])->group(function(){
 	/*------------------------------------------- CATALOGO0 ---------------------------------------------*/
 	Route::get('/catalogo', 'CatalogoController@index')->name('catalogo_prueba');
 
+	
+
     Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');
     Route::get('download/excel','CatalogoController@dowloadExcel')->name('catalogo.download');
     Route::post('upload/excel','CatalogoController@uploadExcel')->name('catalogo.upload');
@@ -159,11 +161,12 @@ Route::middleware(['auth'])->group(function(){
     Route::post('catalogo/confirmarVinculacion','CuentaSistemaController@confirmarVinculacion')->name('cuenta.vinculacion');
     Route::get('/catalogo/show', 'CatalogoController@show')->name('catalogo_show');
 
-
 	//Guardar cuentas de forma manual
 	Route::post('/catalogo', 'CatalogoController@store')->name('cuenta_store');
 	Route::put('/catalogo','CatalogoController@update')->name('cuenta_update');
     Route::delete('/catalogo/{id}', 'CatalogoController@destroy')->name('cuenta.destroy');
+
+	
 
 
 
