@@ -123,17 +123,19 @@ class CatalogoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //dd($request->request);
         //Validación de campos
         request()->validate([
+            'id_cuenta' => 'required',
             'codigo'=> 'required',
             'nombre'=> 'required',
             'tipoCuenta'=> 'required',
             //'padre'=> 'required',
         ],
         [
+            'id_cuenta.required' => "Falta campo de ID de la cuenta",
             'codigo.required' => "El campo 'codigo' es obligatorio.",
             'nombre.required' => "El campo 'nombre' es obligatorio.",
             'tipoCuenta.required' => "Seleccione un tipo de cuenta.",
@@ -141,7 +143,7 @@ class CatalogoController extends Controller
         //La empresa sera tomada directamente de la empresa del usuario logeado
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
-        $request->idCuenta=$id;
+        $request->idCuenta=$request('id_cuenta');
         //Llamada a la funcion para guardar cuentas
         $respuesta= $this->guardarCuenta($request, $empresa, FALSE);
         if($respuesta===TRUE){

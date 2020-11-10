@@ -207,9 +207,22 @@
                                             <!--input hidden name="id_cuenta" value=""/-->
                                             <div class="btn-group" role="group">
                                                 <!--boton de editar-->
-                                                <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#editar_cuenta{{$cuenta->id}}">
+                                                @if ($cuenta->padre_id==null)
+                                                <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#editar_cuenta" 
+                                                onclick="editarCuenta('{{$cuenta->id}}','{{$cuenta->codigo}}','{{$cuenta->nombre}}','{{$cuenta->tipo->id}}','')">
                                                     <i class="tim-icons icon-pencil"></i>
                                                 </button>
+                                                @else
+                                                    @foreach ($cuentas as $cuenta2)
+                                                        @if ($cuenta->padre_id==$cuenta2->id)
+                                                        <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#editar_cuenta" 
+                                                onclick="editarCuenta('{{$cuenta->id}}','{{$cuenta->codigo}}','{{$cuenta->nombre}}','{{$cuenta->tipo->id}}','{{$cuenta2->codigo}}')">
+                                                            <i class="tim-icons icon-pencil"></i>
+                                                        </button>
+                                                        @endif
+                                                    @endforeach
+                                                
+                                                @endif
                                                 <!--boton de eliminar-->
                                                 <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('formulario{{$cuenta->id}}')">
                                                     <i class="tim-icons icon-simple-remove"></i>
@@ -218,77 +231,6 @@
 
                                         </td>
                                     </form>
-                                    <!--Modal de editar cuenta-->
-                                    <div class="modal fade" id="editar_cuenta{{$cuenta->id}}" tabindex="-1" role="dialog" aria-labelledby="editar_label" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg" role="document">
-                                            <div class="modal-content">
-                                            <form id="actualizar{{$cuenta->id}}" action="{{route('cuenta_update', $cuenta->id)}}" method="post" >
-                                                    @csrf
-                                                    @method('put')
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="editar_label">Editar cuenta</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="ml-auto col-md-5">
-                                                                <input value="{{$cuenta->codigo}}" id="codigoCatalogo{{$cuenta->id}}" class="form-control" placeholder="Código" name="codigo" onclick="ejecutarBuscador({{$cuentas}},'codigo', 'codigoCatalogo{{$cuenta->id}}')">
-                                                            </div>
-                                                            <div class="col-md-5 mr-auto">
-                                                                <input value="{{$cuenta->nombre}}" class="form-control" placeholder="Nombre de la cuenta" name="nombre">
-                                                            </div>
-                                                        </div>
-                                                        <p><br></p>
-                                                        <div class="row">
-                                                            <!--Seleccionador de tipo de cuenta-->
-                                                            <div class="ml-auto col-md-5">
-                                                                <select class="form-control" name="tipoCuenta">
-                                                                    <option value="-1" class="selectorCorreccion">--Seleccionar un tipo--</option>
-                                                                    @foreach ($tipoCuenta as $tipo)
-                                                                        @if ($tipo->id==$cuenta->tipo_id)
-                                                                            <option selected value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
-                                                                        @else
-                                                                            <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
-                                                                        @endif
-
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                            @if ($cuenta->padre_id==null)
-                                                            <div class="mr-auto col-md-5">
-                                                                <!--buscador con autocompletado-->
-                                                                    <form autocomplete="off" action="" name="padre">
-                                                                        <div>
-                                                                        <input id="buscadorCuenta{{$cuenta->id}}" class="form-control" type="text" name="cuenta_padre" placeholder="Codigo de cuenta padre" onclick="ejecutarBuscador({{$cuentas}},'codigo', 'buscadorCuenta{{$cuenta->id}}')">
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            @else
-                                                                @foreach ($cuentas as $cuenta2)
-                                                                @if ($cuenta->padre_id==$cuenta2->id)
-                                                                    <div class="mr-auto col-md-5">
-                                                                        <!--buscador con autocompletado-->
-                                                                        <form autocomplete="off" action="" name="padre">
-                                                                            <div>
-                                                                                <input value="{{$cuenta2->codigo}}" id="buscadorEditarCuenta" class="form-control" type="text" name="cuenta_padre" placeholder="Codigo de cuenta padre" onclick="ejecutarBuscador({{$cuentas}},'codigo', 'buscadorEditarCuenta')">
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                @endif
-                                                                @endforeach
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                        <button type="submit" class="btn btn-primary" form="actualizar{{$cuenta->id}}">Actualizar</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -300,6 +242,58 @@
             </div>
         </div>
     </div>
+<!--Modal de editar cuenta-->
+<div class="modal fade" id="editar_cuenta" tabindex="-1" role="dialog" aria-labelledby="editar_label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form id="actualizar" action="{{route('cuenta_update')}}" method="post" >
+            @csrf
+            @method('put')
+                <div class="modal-header">
+                   <h5 class="modal-title" id="editar_label">Editar cuenta</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="ml-auto col-md-5">
+                            <input id="idCatalogoEditar" name="id_cuenta" hidden>
+                            <input id="codigoCatalogoEditar" class="form-control" placeholder="Código" name="codigo" onclick="ejecutarBuscador({{$cuentas}},'codigo', 'codigoCatalogoEditar')">
+                        </div>
+                        <div class="col-md-5 mr-auto">
+                            <input id="nombreCatalogoEditar" class="form-control" placeholder="Nombre de la cuenta" name="nombre">
+                        </div>
+                    </div>
+                    <p><br></p>
+                    <div class="row">
+                        <!--Seleccionador de tipo de cuenta-->
+                        <div class="ml-auto col-md-5">
+                            <select id="tipoCuentaEditar" class="form-control" name="tipoCuenta">
+                                <option value="-1" class="selectorCorreccion">--Seleccionar un tipo--</option>
+                                @foreach ($tipoCuenta as $tipo)
+                                        <option value="{{$tipo->id}}" class="selectorCorreccion">{{$tipo->nombre}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mr-auto col-md-5">
+                            <!--buscador con autocompletado-->
+                            <form autocomplete="off" action="" name="padre">
+                                <input id="buscadorCuentaPadreEditar" class="form-control" type="text" name="cuenta_padre" placeholder="Codigo de cuenta padre" onclick="ejecutarBuscador({{$cuentas}},'codigo', 'buscadorCuentaPadreEditar')">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" form="actualizar">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 
 

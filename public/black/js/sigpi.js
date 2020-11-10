@@ -26,12 +26,21 @@ function editarIndicador(id_indicador, descripcion){
     detalle.text(descripcion);
     id.val(id_indicador);
 }
-//editar alcance vista OAI
-function editarAlcance(id_alcance, descripcion){
-    var detalle=$('#editarDetalleAlcance');
-    var id=$('#editarIdAlcance');    
-    detalle.text(descripcion);
-    id.val(id_alcance);
+//editar catalogo
+function editarCuenta(id_cuenta , cod,  nom, tipo, cpadre){
+    let id=$('#idCatalogoEditar');
+    let codigo=$('#codigoCatalogoEditar');
+    let nombre=$('#nombreCatalogoEditar');
+    let tipoCuenta=$('#tipoCuentaEditar');
+    let padre=$('#buscadorCuentaPadreEditar');
+    id.val(id_cuenta);
+    codigo.val(cod);
+    nombre.val(nom);
+    tipoCuenta.val(tipo);
+    padre.val(cpadre);
+    console.log("si se ejecuta esta mierda")
+    //detalle.text(descripcion);
+
 }
 //editar objetivo vista OAI
 function editarObjetivo(id_objetivo, descripcion){
