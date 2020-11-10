@@ -52,11 +52,11 @@
                                             <!--buscador con autocompletado--> 
                                             @if ($cuenta->vinculada)
                                                 <div class="mr-auto col-md-12">
-                                                    <input value="{{$cuenta->cuentaCatalogo}}" id="buscador{{$cuenta->id}}" class="form-control" name="cuenta" placeholder="Cuenta de la empresa" onclick="ejecutarBuscador({{$cuentasEmpresa}},'nombre' ,'buscador{{$cuenta->id}}')">
+                                                    <input autocomplete="off" value="{{$cuenta->cuentaCatalogo}}" id="buscador{{$cuenta->id}}" class="form-control" name="cuenta" placeholder="Cuenta de la empresa" onclick="ejecutarBuscador({{$cuentasEmpresa}},'nombre' ,'buscador{{$cuenta->id}}')">
                                                 </div>
                                             @else
                                                 <div class="mr-auto col-md-12">
-                                                    <input id="buscador{{$cuenta->id}}" class="form-control" name="cuenta" placeholder="Cuenta de la empresa" onclick="ejecutarBuscador({{$cuentasEmpresa}},'nombre' ,'buscador{{$cuenta->id}}')">
+                                                    <input autocomplete="off" id="buscador{{$cuenta->id}}" class="form-control" name="cuenta" placeholder="Cuenta de la empresa" onclick="ejecutarBuscador({{$cuentasEmpresa}},'nombre' ,'buscador{{$cuenta->id}}')">
                                                 </div>
                                             @endif  
                                         </form>                                                                                

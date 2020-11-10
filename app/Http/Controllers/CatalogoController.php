@@ -253,17 +253,17 @@ class CatalogoController extends Controller
                         $cuenta->nombre= $data[$i]["B"];
                         //La empresa sera tomada directamente de la empresa del usuario logeado
                         $idUsuarioLogeado=auth()->user()->id;
-                        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->get();
-                        $cuenta->empresa_id= $empresa[0]->id;
+                        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+                        $cuenta->empresa_id = $empresa->id;
                         if(strtoupper($data[$i]["D"])=="A"){
                             $cuenta->tipo_id= 1;
                         }
                         else{
                             $cuenta->tipo_id= 2;
                         }
-                        $busqueda_padre2=Cuenta::where('codigo', $data[$i]["C"])->where('empresa_id',$cuenta->empresa_id)->first();
-                        if($busqueda_padre2){
-                            $cuenta->padre_id=$busqueda_padre2->id;
+                        $busqueda_padre2=Cuenta::where('codigo', $data[$i]["C"])->where('empresa_id',$empresa->id)->first();
+                        if($busqueda_padre2 != null){
+                            $cuenta->padre_id=$busqueda_padre2->id; 
                         }
                         $cuenta->save();
                     }

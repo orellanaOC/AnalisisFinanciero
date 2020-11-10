@@ -91,7 +91,6 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
                                 </div>
 
                                 </div>
@@ -325,7 +324,7 @@
       </div>
     </div>
   </div>
-  <!--script src="https://code.jquery.com/jquery-3.5.1.js"></!--script-->
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
     $("#archivo").change(function(){
        

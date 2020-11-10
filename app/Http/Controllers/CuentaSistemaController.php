@@ -13,7 +13,7 @@ class CuentaSistemaController extends Controller
 {
     public function index()
     {
-        $cuentas= CuentaSistema::Where('uso',1)->get();
+        $cuentas= CuentaSistema::all();
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
         //Join para traer el nombre de la cuenta vinculada
@@ -52,7 +52,7 @@ class CuentaSistemaController extends Controller
             return back()->withErrors(['msg'=>"La cuenta que introdujo no existe en su catalogo"]);
         }
         //Vinculacion para Balance general y Estado de resultado
-        if(!$cuentaSistema=CuentaSistema::Where('uso',1)->Where('id',$id)->first()){
+        if(!$cuentaSistema=CuentaSistema::Where('id',$id)->first()){
             //Regresar con error, esta cuenta del sistema no existe
             return back()->withErrors(['msg'=>"Esta cuenta del sistema no existe"]);
         }        

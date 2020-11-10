@@ -170,56 +170,5 @@ class CuentaSistemaSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        
-        //Cuentas que no estan en catalogos
-        DB::table('cuenta_sistema')->insert([
-            'nombre'=>'Ventas netas',
-            'descripcion'=>'Es la cuenta que almacena las ventas netas en tu empresa',
-            'uso'=>3,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('cuenta_sistema')->insert([
-            'nombre'=>'Utilidad bruta',
-            'descripcion'=>'Es la cuenta que almacena la utilidad bruta en tu empresa',
-            'uso'=>3,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('cuenta_sistema')->insert([
-            'nombre'=>'Utilidad operativa',
-            'descripcion'=>'Es la cuenta que almacena la utilidad operativa en tu empresa',
-            'uso'=>3,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('cuenta_sistema')->insert([
-            'nombre'=>'Utilidad antes de impuestos',
-            'descripcion'=>'Es la cuenta que almacena la utilidad antes de impuestos en tu empresa',
-            'uso'=>3,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('cuenta_sistema')->insert([
-            'nombre'=>'Utilidad neta',
-            'descripcion'=>'Es la cuenta que almacena la utilidad neta en tu empresa',
-            'uso'=>3,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('cuenta_sistema')->insert([
-            'nombre'=>'Impuestos',
-            'descripcion'=>'Es la cuenta que almacena los impuestos en tu empresa',
-            'uso'=>3,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('cuenta_sistema')->insert([
-            'nombre'=>'Numero de acciones',
-            'descripcion'=>'Es la cuenta que almacena el numero de acciones en tu empresa',
-            'uso'=>3,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
     }
 }
