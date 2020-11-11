@@ -61,6 +61,7 @@ class AnalisisVerticalController extends Controller
         if(!$periodo= Periodo::Where('id',$id_periodo)->Where('empresa_id',$empresa->id)->first()){
             abort(403);
         }
+        $periodos=Periodo::Where('empresa_id',$empresa->id)->get();
         //Traer las vincuncalicones de Activo, pasivo y capital
         $activo=DB::select('select c.*, cp.total from (select * from cuenta 
         where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
@@ -105,7 +106,8 @@ class AnalisisVerticalController extends Controller
         order by c.codigo asc', [$id_periodo, $empresa->id, $capital[0]->codigo.'%']);
                 
         return view('finanzasViews.analisisSector.analisis_vertical_hijo', ['cuentasActivo'=>$cuentasActivo, 
-        'cuentasPasivo'=>$cuentasPasivo, 'cuentasCapital'=>$cuentasCapital, 'vinculaciones'=>$cuentasVinculadas]);
+        'cuentasPasivo'=>$cuentasPasivo, 'cuentasCapital'=>$cuentasCapital, 'vinculaciones'=>$cuentasVinculadas
+        , 'periodos'=>$periodos]);
     }
 
 }
