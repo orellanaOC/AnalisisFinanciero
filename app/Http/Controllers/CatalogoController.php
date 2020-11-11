@@ -144,7 +144,7 @@ class CatalogoController extends Controller
         //La empresa sera tomada directamente de la empresa del usuario logeado
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
-        $request->idCuenta=$request->id_cuenta;        
+        $request->idCuenta=$request('id_cuenta');
         //Llamada a la funcion para guardar cuentas
         $respuesta= $this->guardarCuenta($request, $empresa, FALSE);
         if($respuesta===TRUE){

@@ -51,7 +51,6 @@ Route::get('/formulas', 'HomeController@formulas')->name('formulas');
 Route::get('/analisis_de_sector', 'HomeController@analisis_sector')->name('analisis');
 Route::get('/analisis_individual', 'HomeController@empresa_individual')->name('analisis_empresa');
 Route::get('/analisis_horizontal', 'HomeController@analisis_horizontal')->name('analisis_horizontal');
-Route::get('/analisis_vertical', 'HomeController@analisis_vertical')->name('analisis_vertical');
 Route::get('/ratios', 'HomeController@ratios')->name('ratios');
 
 
@@ -150,8 +149,6 @@ Route::middleware(['auth'])->group(function(){
 	/*------------------------------------------- CATALOGO0 ---------------------------------------------*/
 	Route::get('/catalogo', 'CatalogoController@index')->name('catalogo_prueba');
 
-	
-
     Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');
     Route::get('download/excel','CatalogoController@dowloadExcel')->name('catalogo.download');
     Route::post('upload/excel','CatalogoController@uploadExcel')->name('catalogo.upload');
@@ -161,12 +158,11 @@ Route::middleware(['auth'])->group(function(){
     Route::post('catalogo/confirmarVinculacion','CuentaSistemaController@confirmarVinculacion')->name('cuenta.vinculacion');
     Route::get('/catalogo/show', 'CatalogoController@show')->name('catalogo_show');
 
+
 	//Guardar cuentas de forma manual
 	Route::post('/catalogo', 'CatalogoController@store')->name('cuenta_store');
 	Route::put('/catalogo','CatalogoController@update')->name('cuenta_update');
     Route::delete('/catalogo/{id}', 'CatalogoController@destroy')->name('cuenta.destroy');
-
-	
 
 
 
@@ -201,4 +197,18 @@ Route::middleware(['auth'])->group(function(){
 	Route::delete('cuenta_periodo/{id_periodo}/{cuenta_id}', 'CuentaPerioController@destroy')->name('cuenta_periodo.destroy');
 	Route::delete('cuenta_periodo_p/{id_periodo}/{cuenta_id}', 'CuentaPerioController@destroyPadre')->name('cuenta_periodo.destroyPadre');
 	/*-----------------------------------------------------------------------------------------------------*/
+
+	/*------------------------------------------- ANALISIS-VERTICAL-------------------------------------------*/
+	//padre
+	Route::get('/analisis_vertical', 'AnalisisVerticalController@index')->name('analisis_vertical.index');
+	//hijo
+	Route::get('/{id_periodo}/analisis_vertical', 'AnalisisVerticalController@show')->name('analisis_vertical.show');
+	/*--------------------------------------------------------------------------------------------------------*/
+
+		/*------------------------------------------- ANALISIS-HORIZONTAL-------------------------------------------*/
+	//padre
+	Route::get('/analisis_horizontal', 'AnalisisHorizontalController@index')->name('analisis_horizontal.index');	
+	//hijo
+	Route::get('/{id_periodo1}/{id_periodo2}/analisis_horizontal', 'AnalisisHorizontalController@show')->name('analisis_horizontal.show');	
+	/*--------------------------------------------------------------------------------------------------------*/
 });

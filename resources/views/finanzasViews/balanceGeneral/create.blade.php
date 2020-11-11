@@ -115,16 +115,14 @@
                                                 </form>
                                             </td>
                                         </tr> 
-                                    @endif
-                                    @if ($cuenta->id==$activo[0]->id)
-                                    <tr>
-                                        <td>{{$cuenta->codigo}}</td>
-                                        <th class="text-danger">Total {{$cuenta->nombre}}</th>
-                                        <td><input value="{{$cuenta->total}}" name="cuenta" class="form-control" type="number" disabled></td>
-                                        <td></td>
-                                    </tr>
-                                    @endif
-                                @endforeach                                                                    
+                                    @endif                                    
+                                @endforeach                                
+                                <tr>
+                                    <td>{{$activo[0]->codigo}}</td>
+                                    <th class="text-danger">Total {{$activo[0]->nombre}}</th>
+                                    <td><input value="{{$activo[0]->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                                    <td></td>
+                                </tr>                                
                             </table> 
                         </div>
                             <div class="col-md-6">
@@ -216,16 +214,14 @@
                                                 </form>
                                             </td>
                                         </tr> 
-                                    @endif
-                                    @if ($cuenta->id==$pasivo[0]->id)
+                                    @endif                                    
+                                    @endforeach
                                     <tr>
-                                        <td>{{$cuenta->codigo}}</td>
-                                        <th class="text-danger">Total {{$cuenta->nombre}}</th>
-                                        <td><input value="{{$cuenta->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                                        <td>{{$pasivo[0]->codigo}}</td>
+                                        <th class="text-danger">Total {{$pasivo[0]->nombre}}</th>
+                                        <td><input value="{{$pasivo[0]->total}}" name="cuenta" class="form-control" type="number" disabled></td>
                                         <td></td>
-                                    </tr>
-                                    @endif
-                                @endforeach                                                       
+                                    </tr>                                                        
                                 </table>
                                 <!--Tabla para capital-->
                                 <table class="table tablesorter tablaCustom">
@@ -315,22 +311,20 @@
                                                 </form>
                                             </td>
                                         </tr> 
-                                    @endif
-                                    @if ($cuenta->id==$capital[0]->id)
+                                    @endif                                    
+                                    @endforeach
                                     <tr>
-                                        <td>{{$cuenta->codigo}}</td>
-                                        <th class="text-danger">Total {{$cuenta->nombre}}</th>
-                                        <td><input value="{{$cuenta->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                                        <td>{{$capital[0]->codigo}}</td>
+                                        <th class="text-danger">Total {{$capital[0]->nombre}}</th>
+                                        <td><input value="{{$capital[0]->total}}" name="cuenta" class="form-control" type="number" disabled></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <th class="text-danger">Total Pasivo + Capital</th>
-                                        <td><input value="{{$cuenta->total+$pasivo[0]->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                                        <td><input value="{{$capital[0]->total+$pasivo[0]->total}}" name="cuenta" class="form-control" type="number" disabled></td>
                                         <td></td>
-                                    </tr>
-                                    @endif
-                                @endforeach                                                                                           
+                                    </tr> 
                                 </table>
                             </div>
                                                 

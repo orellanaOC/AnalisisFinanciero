@@ -28,12 +28,11 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
-
                                                 <div class="mr-auto ml-auto col-md-6">
-
-                                                        <input id="año" type="number"  class="form-control" placeholder="Año" name="anio">
-
-
+                                                    <input required min="2000" id="año" type="number" class="form-control" placeholder="Año" name="anio">
+                                                </div>
+                                                <div class="mr-auto ml-auto col-md-6">
+                                                    <input required min="1" id="acciones" type="number" class="form-control" placeholder="Cantidad de acciones" name="acciones">
                                                 </div>
                                             </div>
                                         </div>
@@ -76,6 +75,7 @@
                                             <!--Todo agregar id del periodo-->
                                                 <a class="btn btn-info btn-sm" href="{{ route('balance_general_create',$periodo->id) }}">+ Balance general</a>
                                                 <a class="btn btn-info btn-sm" href="{{ route('estado_resultado_create',$periodo->id) }}">+ Estado de resultados</a>
+                                                <a class="btn btn-info btn-sm" href="{{ route('analisis_vertical.show', $periodo->id) }}">+ Analisis vertical</a>
                                                 <button class="btn btn-danger btn-sm" type="submit">- Eliminar</button>
                                             </form>
                                         </div>

@@ -39,55 +39,55 @@
                                     @csrf
                                     <tr>
                                         <th>+&nbsp; &nbsp; &nbsp;{{$vinculos[0][0]->nombre ?? 'Ventas'}}</th>
-                                        <td><input value="{{$ER->ventas ?? '0'}}" name="ventas"  class="form-control form-control-sm" type="number"></td>
+                                        <td><input step="0.01" value="{{$ER->ventas ?? '0'}}" name="ventas"  class="form-control form-control-sm" type="number"></td>
                                     </tr>
                                     <tr>
                                         <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[1][0]->nombre ?? 'Devolucion sobre ventas'}}</th>
-                                        <td><input value="{{$ER->devolucion_ventas ?? '0'}}" name="devolucion_venta"  class="form-control form-control-sm" type="number"></td>
+                                        <td><input step="0.01" value="{{$ER->devolucion_ventas ?? '0'}}" name="devolucion_venta"  class="form-control form-control-sm" type="number"></td>
                                     </tr> 
                                     <tr>
                                         <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[2][0]->nombre ?? 'Descuento sobre ventas'}}</th>
-                                        <td><input value="{{$ER->descuento_ventas ?? '0'}}" name="descuento_venta"  class="form-control form-control-sm" type="number"></td>
+                                        <td><input step="0.01" value="{{$ER->descuento_ventas ?? '0'}}" name="descuento_venta"  class="form-control form-control-sm" type="number"></td>
                                     </tr> 
                                     <tr>
                                         <th class="text-primary">=&nbsp; &nbsp; &nbsp;Ventas netas</th>
-                                        <td><input value="{{$ER->ventas_netas ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
+                                        <td><input step="0.01" value="{{$ER->ventas_netas ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr> 
                                     <tr>
                                         <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[3][0]->nombre ?? 'Costo de ventas'}}</th>
-                                        <td><input value="{{$ER->costo_ventas ?? '0'}}" name="costos_venta"  class="form-control form-control-sm" type="number"></td>
+                                        <td><input step="0.01" value="{{$ER->costo_ventas ?? '0'}}" name="costos_venta"  class="form-control form-control-sm" type="number"></td>
                                     </tr>
                                     <tr>
                                         <th class="text-primary">=&nbsp; &nbsp; &nbsp;Utilidad Bruta</th>
-                                        <td><input value="{{$ER->utilidad_bruta ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
+                                        <td><input step="0.01" value="{{$ER->utilidad_bruta ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[4][0]->nombre ?? 'Gastos de operación'}}</th>
-                                        <td><input value="{{$ER->gastos_operacion ?? '0'}}" name="gastos_operacion"  class="form-control form-control-sm" type="number"></td>
+                                        <td><input step="0.01" value="{{$ER->gastos_operacion ?? '0'}}" name="gastos_operacion"  class="form-control form-control-sm" type="number"></td>
                                     </tr>
                                     <tr>
                                         <th class="text-primary">=&nbsp; &nbsp; &nbsp;Utilidad operativa</th>
-                                        <td><input value="{{$ER->utilidad_operativa ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
+                                        <td><input step="0.01" value="{{$ER->utilidad_operativa ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>+&nbsp; &nbsp; &nbsp;{{$vinculos[5][0]->nombre ?? 'Otros ingresos'}}</th>
-                                        <td><input value="{{$ER->otros_ingresos ?? '0'}}" name="otros_ingresos"  class="form-control form-control-sm" type="number"></td>
+                                        <td><input step="0.01" value="{{$ER->otros_ingresos ?? '0'}}" name="otros_ingresos"  class="form-control form-control-sm" type="number"></td>
                                     </tr>
                                     <tr>
                                         <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[6][0]->nombre ?? 'Otros gastos'}}</th>
-                                        <td><input value="{{$ER->otros_gastos ?? '0'}}" name="otros_gastos"  class="form-control form-control-sm" type="number"></td>
+                                        <td><input step="0.01" value="{{$ER->otros_gastos ?? '0'}}" name="otros_gastos"  class="form-control form-control-sm" type="number"></td>
                                     </tr>
                                     <tr>
                                         <th class="text-primary">=&nbsp; &nbsp; &nbsp;Utilidad antes de impuestos</th>
-                                        <td><input value="{{$ER->utilidad_antes_de_i ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
+                                        <td><input step="0.01" value="{{$ER->utilidad_antes_de_i ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr> 
                                     <tr>
                                         <th>-&nbsp; &nbsp; &nbsp;Impuestos sobre la renta</th>
-                                        <td><input value="{{$ER->impuestos ?? '0'}}" name="impuestos"  class="form-control form-control-sm" type="number"></td>
+                                        <td><input step="0.01" value="{{$ER->impuestos ?? '0'}}" name="impuestos"  class="form-control form-control-sm" type="number"></td>
                                     </tr> 
                                     <tr>
                                         <th class="text-primary">=&nbsp; &nbsp; &nbsp;Utilida neta</th>
-                                        <td><input value="{{$ER->utilidad_neta ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
+                                        <td><input step="0.01" value="{{$ER->utilidad_neta ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr>
                                 </form>                                
                             </table>                        
@@ -99,19 +99,19 @@
                             <br><br><p class="text-center">O puedes subir tu archivo .xlsx y cargar de una tu estado de resultados</p><br>
                         </div>
                     </div>
-                    <!-- input de archivos normalito feo-->
+                    <!-- input step="0.01" de archivos normalito feo-->
                     <div class="row">
                         <div class="col-md-12">
-                            <input class="form-control-file" type="file">                        
+                            <input step="0.01" class="form-control-file" type="file">                        
                         </div>
                     </div>
 
-                    <!--input de archivos con estilo>
+                    <!--input step="0.01" de archivos con estilo>
                     <div-- class="form-group form-file-upload form-file-multiple">
-                        <input type="file" multiple="" class="inputFileHidden">
-                        <div class="input-group">
-                            <input type="text" class="form-control inputFileVisible" placeholder="Seleccionar archivo">
-                            <span class="input-group-btn">
+                        <input step="0.01" type="file" multiple="" class="input step="0.01"FileHidden">
+                        <div class="input step="0.01"-group">
+                            <input step="0.01" type="text" class="form-control input step="0.01"FileVisible" placeholder="Seleccionar archivo">
+                            <span class="input step="0.01"-group-btn">
                                 <button type="button" class="btn btn-fab btn-round btn-primary">
                                     <i class="tim-icons icon-attach-87"></i>
                                 </button>

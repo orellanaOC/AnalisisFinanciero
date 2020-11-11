@@ -6,7 +6,19 @@
     <h2 class="card-title">ratios</h2>
     </div>
     <div class="card-body">
-        fsdfgfgfd
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="ml-auto col-md-4 mr-auto">
+                        <select class="form-control">
+                            <option value=-1>--Seleccionar un período--</option>
+                            <option>fdfdsf</option>
+                        </select>
+                    </div>
+                    @yield('cuerpo_analisis')
+                </div>
+            </div>
+        </div>
     </div>
     <div class="card-footer"></div>
 </div>

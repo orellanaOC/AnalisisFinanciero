@@ -258,7 +258,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="ml-auto col-md-5">
-                            <input id="idCatalogoEditar" name="id_cuenta" type="number" hidden>
+                            <input id="idCatalogoEditar" name="id_cuenta" hidden>
                             <input id="codigoCatalogoEditar" class="form-control" placeholder="Código" name="codigo" onclick="ejecutarBuscador({{$cuentas}},'codigo', 'codigoCatalogoEditar')">
                         </div>
                         <div class="col-md-5 mr-auto">
