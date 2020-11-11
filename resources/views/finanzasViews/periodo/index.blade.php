@@ -75,6 +75,7 @@
                                             <!--Todo agregar id del periodo-->
                                                 <a class="btn btn-info btn-sm" href="{{ route('balance_general_create',$periodo->id) }}">+ Balance general</a>
                                                 <a class="btn btn-info btn-sm" href="{{ route('estado_resultado_create',$periodo->id) }}">+ Estado de resultados</a>
+                                                <a class="btn btn-info btn-sm" href="{{ route('analisis_vertical.show', $periodo->id) }}">+ Analisis vertical</a>
                                                 <button class="btn btn-danger btn-sm" type="submit">- Eliminar</button>
                                             </form>
                                         </div>

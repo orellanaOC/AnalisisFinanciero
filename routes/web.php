@@ -51,7 +51,6 @@ Route::get('/formulas', 'HomeController@formulas')->name('formulas');
 Route::get('/analisis_de_sector', 'HomeController@analisis_sector')->name('analisis');
 Route::get('/analisis_individual', 'HomeController@empresa_individual')->name('analisis_empresa');
 Route::get('/analisis_horizontal', 'HomeController@analisis_horizontal')->name('analisis_horizontal');
-Route::get('/analisis_vertical', 'HomeController@analisis_vertical')->name('analisis_vertical');
 Route::get('/ratios', 'HomeController@ratios')->name('ratios');
 
 
@@ -198,4 +197,11 @@ Route::middleware(['auth'])->group(function(){
 	Route::delete('cuenta_periodo/{id_periodo}/{cuenta_id}', 'CuentaPerioController@destroy')->name('cuenta_periodo.destroy');
 	Route::delete('cuenta_periodo_p/{id_periodo}/{cuenta_id}', 'CuentaPerioController@destroyPadre')->name('cuenta_periodo.destroyPadre');
 	/*-----------------------------------------------------------------------------------------------------*/
+
+	/*------------------------------------------- CUENTA-PERIODO-------------------------------------------*/
+	//padre
+	Route::get('/analisis_vertical', 'AnalisisVerticalController@index')->name('analisis_vertical.index');
+	//hijo
+	Route::get('/{id_periodo}/analisis_vertical', 'AnalisisVerticalController@show')->name('analisis_vertical.show');
+	/*------------------------------------------- CUENTA-PERIODO-------------------------------------------*/
 });

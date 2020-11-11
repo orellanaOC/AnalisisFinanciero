@@ -54,9 +54,7 @@ class HomeController extends Controller
     public function analisis_horizontal(){
         return view('finanzasViews.analisisSector.analisis_horizontal');
     }
-    public function analisis_vertical(){
-        return view('finanzasViews.analisisSector.analisis_vertical');
-    }
+    
     public function ratios(){
         return view('finanzasViews.analisisSector.ratios');
     }
