@@ -44,17 +44,21 @@ class BalanceGeneralController extends Controller
         order by c.codigo asc
          */        
         //Traer las cuentas (Activo, Pasivo y Patrimonio) del catalogo de usuario, vinculadas a nuestras cuentas
-        $activo=DB::select('select * from cuenta 
+        $activo=DB::select('select c.*, cp.total from (select * from cuenta 
         where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
-        and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))',[$empresa->id, 'Activos']);
+		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
+        left join (select * from cuenta_periodo where periodo_id=?) as cp
+        on c.id= cp.cuenta_id',[$empresa->id, 'Activos', $id_periodo]);
         $pasivo=DB::select('select c.*, cp.total from (select * from cuenta 
         where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
 		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
         on c.id= cp.cuenta_id',[$empresa->id, 'Pasivos', $id_periodo]);
-        $capital=DB::select('select * from cuenta 
+        $capital=DB::select('select c.*, cp.total from (select * from cuenta 
         where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
-        and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))',[$empresa->id, 'Patrimonio']);
+		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
+        left join (select * from cuenta_periodo where periodo_id=?) as cp
+        on c.id= cp.cuenta_id',[$empresa->id, 'Patrimonio', $id_periodo]);
         if(!$activo || !$pasivo || !$capital){
             //dd('nulos');
             return redirect()->route('cuenta_sistema.index')->withErrors(['msg'=>'No ha vinculado las cuentas de Activo, Pasivo o Patrimonio']);
@@ -65,7 +69,7 @@ class BalanceGeneralController extends Controller
         left join (select * from cuenta_periodo where periodo_id=?) as cp
         on c.id = cp.cuenta_id
         where c.empresa_id=?
-        order by c.codigo desc',[$id_periodo, $empresa->id]);
+        order by c.codigo asc',[$id_periodo, $empresa->id]);
         //dd($cuentasEmpresa);     
         return view('finanzasViews.balanceGeneral.create',['activo'=>$activo, 'pasivo'=>$pasivo, 'capital'=>$capital, 'cuentasEmpresa'=>$cuentasEmpresa, 'periodo'=>$id_periodo]);
     }
