@@ -19,7 +19,11 @@ class AnalisisVerticalController extends Controller
      */
     public function index()
     {
-        return view('finanzasViews.analisisSector.analisis_vertical');
+        // Validacion del periodo para la empresa
+        $idUsuarioLogeado=auth()->user()->id;
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();        
+        $periodos=Periodo::Where('empresa_id',$empresa->id)->get();
+        return view('finanzasViews.analisisSector.analisis_vertical',['periodos'=>$periodos]);
     }
 
     /**
@@ -100,7 +104,7 @@ class AnalisisVerticalController extends Controller
 		and c.codigo like ?
         order by c.codigo asc', [$id_periodo, $empresa->id, $capital[0]->codigo.'%']);
                 
-        return view('finanzasViews.analisisSector.analisis_vertical_copy', ['cuentasActivo'=>$cuentasActivo, 
+        return view('finanzasViews.analisisSector.analisis_vertical_hijo', ['cuentasActivo'=>$cuentasActivo, 
         'cuentasPasivo'=>$cuentasPasivo, 'cuentasCapital'=>$cuentasCapital, 'vinculaciones'=>$cuentasVinculadas]);
     }
 

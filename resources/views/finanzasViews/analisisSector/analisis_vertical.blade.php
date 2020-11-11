@@ -10,15 +10,17 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="ml-auto col-md-4 mr-auto">
-                        <select class="form-control">
+                        <select id="AverticalPeriodo" class="form-control">
                             <option value=-1>--Seleccionar un período--</option>
-                            <option>fdfdsf</option>
-                        </select>
-                    </div>
-                    @yield('cuerpo_analisis')
+                            @foreach ($periodos as $periodo)                            
+                            <option value="{{$periodo->id}}">{{$periodo->year}}</option>                            
+                            @endforeach
+                        </select>                        
+                    </div>                    
                 </div>
-            </div>
+            </div>            
         </div>
+        @yield('cuerpo_analisis')
     </div>
     <div class="card-footer">
 
