@@ -158,3 +158,8 @@ input[type=text] {
   border: #ccc 1px solid;
   border-radius: 15px;
 }
+
+.navbarCustom{
+  background-color: #e14eca;
+  color: white;
+}
