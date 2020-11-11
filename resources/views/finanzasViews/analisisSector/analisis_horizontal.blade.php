@@ -12,19 +12,23 @@
                     <div class="col-md-6">
                         <select class="form-control">
                             <option value=-1>--Seleccionar un período 1--</option>
-                            <option>fdfdsf</option>
+                            @foreach ($periodos as $periodo)                            
+                            <option value="{{$periodo->id}}">{{$periodo->year}}</option>                            
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-6">
                         <select class="form-control">
                             <option value=-1>--Seleccionar un período 2--</option>
-                            <option>fdfdsf</option>
+                            @foreach ($periodos as $periodo)                            
+                            <option value="{{$periodo->id}}">{{$periodo->year}}</option>                            
+                            @endforeach
                         </select>
-                    </div>
-                    @yield('cuerpo_analisis')
+                    </div>                    
                 </div>
             </div>
-        </div>
+        </div>        
+        @yield('cuerpo_analisis')
     </div>
     <div class="card-footer">
         

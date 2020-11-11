@@ -57,7 +57,7 @@
             </li>
             
             <li @if ($pageSlug == 'empresa') class="active " @endif>
-                <a href="{{ route('analisis_horizontal') }}">
+                <a href="{{ route('analisis_horizontal.index') }}">
                     <i class="tim-icons icon-bank"></i>
                     <p>{{ __('Empresa individual') }}</p>
                 </a>

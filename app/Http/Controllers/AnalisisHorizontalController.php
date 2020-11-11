@@ -10,7 +10,7 @@ use App\VinculacionCuenta;
 use App\Periodo;
 use Illuminate\Support\Facades\DB;
 
-class AnalisisVerticalController extends Controller
+class AnalisisHorizontalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,24 +18,13 @@ class AnalisisVerticalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        // Validacion del periodo para la empresa
+    { 
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();        
-        $periodos=Periodo::Where('empresa_id',$empresa->id)->get();
-        return view('finanzasViews.analisisSector.analisis_vertical',['periodos'=>$periodos]);
+        $periodos=Periodo::Where('empresa_id',$empresa->id)->get();        
+        return view('finanzasViews.analisisSector.analisis_horizontal',['periodos'=>$periodos]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -44,7 +33,7 @@ class AnalisisVerticalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //        
     }
 
     /**
@@ -53,12 +42,16 @@ class AnalisisVerticalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id_periodo)
+    public function show($id_periodo1, $id_periodo2)
     {
+        //dd([$id_periodo1, $id_periodo2]);
         // Validacion del periodo para la empresa
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
-        if(!$periodo= Periodo::Where('id',$id_periodo)->Where('empresa_id',$empresa->id)->first()){
+        if(!$periodo1= Periodo::Where('id',$id_periodo1)->Where('empresa_id',$empresa->id)->first()){
+            abort(403);
+        }
+        if(!$periodo2= Periodo::Where('id',$id_periodo2)->Where('empresa_id',$empresa->id)->first()){
             abort(403);
         }
         $periodos=Periodo::Where('empresa_id',$empresa->id)->get();
@@ -67,47 +60,38 @@ class AnalisisVerticalController extends Controller
         where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
 		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
-        on c.id= cp.cuenta_id',[$empresa->id, 'Activos', $id_periodo]);
+        on c.id= cp.cuenta_id',[$empresa->id, 'Activos', $id_periodo1]);
         $pasivo=DB::select('select c.*, cp.total from (select * from cuenta 
         where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
 		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
-        on c.id= cp.cuenta_id',[$empresa->id, 'Pasivos', $id_periodo]);
+        on c.id= cp.cuenta_id',[$empresa->id, 'Pasivos', $id_periodo1]);
         $capital=DB::select('select c.*, cp.total from (select * from cuenta 
         where id=(select id_cuenta from vinculacion_cuenta where id_empresa=? 
 		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
-        on c.id= cp.cuenta_id',[$empresa->id, 'Patrimonio', $id_periodo]);
-        
+        on c.id= cp.cuenta_id',[$empresa->id, 'Patrimonio', $id_periodo1]);
         $cuentasVinculadas= array($activo, $pasivo, $capital);
-        //Traer las cuentas del catalogo y su total
-        $cuentasActivo=DB::select('select c.*, cp.total from
+        //Traer las cuentas del catalogo y el total de los 2 periodos
+        $cuentasEmpresa=DB::select('select c.*, cp.total as total1, cp2.total as total2 from
         cuenta as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
         on c.id = cp.cuenta_id
-        where c.empresa_id=?
-		and c.codigo like ?
-        order by c.codigo asc', [$id_periodo, $empresa->id, $activo[0]->codigo.'%']);
-        
-        $cuentasPasivo=DB::select('select c.*, cp.total from
-        cuenta as c
-        left join (select * from cuenta_periodo where periodo_id=?) as cp
-        on c.id = cp.cuenta_id
-        where c.empresa_id=?
-		and c.codigo like ?
-        order by c.codigo asc', [$id_periodo, $empresa->id, $pasivo[0]->codigo.'%']);
-        
-        $cuentasCapital=DB::select('select c.*, cp.total from
-        cuenta as c
-        left join (select * from cuenta_periodo where periodo_id=?) as cp
-        on c.id = cp.cuenta_id
-        where c.empresa_id=?
-		and c.codigo like ?
-        order by c.codigo asc', [$id_periodo, $empresa->id, $capital[0]->codigo.'%']);
-                
-        return view('finanzasViews.analisisSector.analisis_vertical_hijo', ['cuentasActivo'=>$cuentasActivo, 
-        'cuentasPasivo'=>$cuentasPasivo, 'cuentasCapital'=>$cuentasCapital, 'vinculaciones'=>$cuentasVinculadas
-        , 'periodos'=>$periodos]);
+		left join (select * from cuenta_periodo where periodo_id=?) as cp2
+		on c.id = cp2.cuenta_id
+        where c.empresa_id=?		
+        order by c.codigo asc', [$id_periodo1, $id_periodo2, $empresa->id]);
+        foreach ($cuentasEmpresa as $cuenta) {
+            $cuenta->resta= $cuenta->total2-$cuenta->total1;
+            if($cuenta->total1!=null && $cuenta->total1!=0){
+                $cuenta->porcentaje= ($cuenta->resta/$cuenta->total1);
+            }
+            else{
+                $cuenta->porcentaje= 0;
+            }
+        }        
+        return view('finanzasViews.analisisSector.analisis_horizontal_hijo',['periodos'=>$periodos, 'cuentas'=>$cuentasEmpresa,
+        'vinculos'=>$cuentasVinculadas]);
     }
 
 }

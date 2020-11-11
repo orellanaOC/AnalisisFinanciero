@@ -19,7 +19,7 @@
                         <tr>
                             <td>{{$cuentaHijo2->codigo}}</td>
                             <th>{{$cuentaHijo2->nombre}}</th>
-                            <td><input value="{{$cuentaHijo2->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                            <td>{{$cuentaHijo2->total ?? '0.00'}}</td>
                             <td class=" text-center">xx%</td>
                         </tr>                            
                         @endif
@@ -27,7 +27,7 @@
                     <tr>
                         <td>{{$cuenta->codigo}}</td>
                         <th>{{$cuenta->nombre}}</th>
-                        <td><input value="{{$cuenta->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                        <td>{{$cuenta->total ?? '0.00'}}</td>
                         <td class=" text-center">xx%</td>
                     </tr>
                     @endif
@@ -35,7 +35,7 @@
                 <tr>
                     <td>{{$vinculaciones[0][0]->codigo}}</td>
                     <th>{{$vinculaciones[0][0]->nombre}}</th>
-                    <td><input value="{{$vinculaciones[0][0]->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                    <td>{{$vinculaciones[0][0]->total ?? '0.00'}}</td>
                     <td class=" text-center">xx%</td>
                 </tr>
                 <!--foreach para Pasivos -->
@@ -46,7 +46,7 @@
                         <tr>
                             <td>{{$cuentaHijo2->codigo}}</td>
                             <th>{{$cuentaHijo2->nombre}}</th>
-                            <td><input value="{{$cuentaHijo2->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                            <td>{{$cuentaHijo2->total ?? '0.00'}}</td>
                             <td class=" text-center">xx%</td>
                         </tr>                            
                         @endif
@@ -54,7 +54,7 @@
                     <tr>
                         <td>{{$cuenta->codigo}}</td>
                         <th>{{$cuenta->nombre}}</th>
-                        <td><input value="{{$cuenta->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                        <td>{{$cuenta->total ?? '0.00'}}</td>
                         <td class=" text-center">xx%</td>
                     </tr>
                     @endif
@@ -62,7 +62,7 @@
                 <tr>
                     <td>{{$vinculaciones[1][0]->codigo}}</td>
                     <th>{{$vinculaciones[1][0]->nombre}}</th>
-                    <td><input value="{{$vinculaciones[1][0]->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                    <td>{{$vinculaciones[1][0]->total ?? '0.00'}}</td>
                     <td class=" text-center">xx%</td>
                 </tr>
                 <!--foreach para Capital -->
@@ -73,7 +73,7 @@
                         <tr>
                             <td>{{$cuentaHijo2->codigo}}</td>
                             <th>{{$cuentaHijo2->nombre}}</th>
-                            <td><input value="{{$cuentaHijo2->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                            <td>{{$cuentaHijo2->total ?? '0.00'}}</td>
                             <td class=" text-center">xx%</td>
                         </tr>                            
                         @endif
@@ -81,7 +81,7 @@
                     <tr>
                         <td>{{$cuenta->codigo}}</td>
                         <th>{{$cuenta->nombre}}</th>
-                        <td><input value="{{$cuenta->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                        <td>{{$cuenta->total ?? '0.00'}}</td>
                         <td class=" text-center">xx%</td>
                     </tr>
                     @endif
@@ -89,7 +89,7 @@
                 <tr>
                     <td>{{$vinculaciones[2][0]->codigo}}</td>
                     <th>{{$vinculaciones[2][0]->nombre}}</th>
-                    <td><input value="{{$vinculaciones[2][0]->total}}" name="cuenta" class="form-control" type="number" disabled></td>
+                    <td>{{$vinculaciones[2][0]->total ?? '0.00'}}</td>
                     <td class=" text-center">xx%</td>
                 </tr>                
             </table>
