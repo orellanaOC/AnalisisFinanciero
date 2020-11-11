@@ -30,6 +30,7 @@ class PeriodoController extends Controller
                 //$empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
                 $periodo->year=$request->anio;
                 $periodo->empresa_id=$empresa->id;
+                $periodo->acciones =$request->acciones;
                 $periodo->save();
                 return redirect()->route('periodo.index');
 
@@ -51,6 +52,7 @@ class PeriodoController extends Controller
                             //$empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
                             $periodo->year=$request->anio;
                             $periodo->empresa_id=$empresa->id;
+                            $periodo->acciones =$request->acciones;
                             $periodo->save();
                             return redirect()->route('periodo.index');
                         }
@@ -58,24 +60,16 @@ class PeriodoController extends Controller
                             return redirect()->route('periodo.index')->with('error','No puede ingresar un periodo con 2 o mas años de diferencia');
 
                         }
-
                     }
-
                 }
-
             }
-
-
-
-
         }
         else{
 
             return redirect()->route('periodo.index')->with('error','Debe de tener un formato valido YYYY');
         }
-
-
     }
+
     public function destroy(Request $request,$id)
     {
         $periodo=Periodo::find($id);

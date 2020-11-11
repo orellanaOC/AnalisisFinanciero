@@ -3,12 +3,14 @@
 @section('contenido_navbar')
 <div class="card">
     <div class="card-header">
-    <h2 class="card-title">analisis horizontal</h2>
+        <h2 class="card-title">Análisis Horizontal</h2>
     </div>
     <div class="card-body">
         fsdfgfgfd
     </div>
-    <div class="card-footer"></div>
+    <div class="card-footer">
+        
+    </div>
 </div>			  		
 
 @endsection
