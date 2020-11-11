@@ -38,15 +38,15 @@
                                 <form id="ERGuardar" action="{{route('estado_resultado.store', $periodo)}}" method="post">
                                     @csrf
                                     <tr>
-                                        <th>+&nbsp; &nbsp; &nbsp;{{$vinculos[0][0]->nombre}}</th>
+                                        <th>+&nbsp; &nbsp; &nbsp;{{$vinculos[0][0]->nombre ?? 'Ventas'}}</th>
                                         <td><input value="{{$ER->ventas ?? '0'}}" name="ventas"  class="form-control form-control-sm" type="number"></td>
                                     </tr>
                                     <tr>
-                                        <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[1][0]->nombre}}</th>
+                                        <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[1][0]->nombre ?? 'Devolucion sobre ventas'}}</th>
                                         <td><input value="{{$ER->devolucion_ventas ?? '0'}}" name="devolucion_venta"  class="form-control form-control-sm" type="number"></td>
                                     </tr> 
                                     <tr>
-                                        <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[2][0]->nombre}}</th>
+                                        <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[2][0]->nombre ?? 'Descuento sobre ventas'}}</th>
                                         <td><input value="{{$ER->descuento_ventas ?? '0'}}" name="descuento_venta"  class="form-control form-control-sm" type="number"></td>
                                     </tr> 
                                     <tr>
@@ -54,7 +54,7 @@
                                         <td><input value="{{$ER->ventas_netas ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr> 
                                     <tr>
-                                        <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[3][0]->nombre}}</th>
+                                        <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[3][0]->nombre ?? 'Costo de ventas'}}</th>
                                         <td><input value="{{$ER->costo_ventas ?? '0'}}" name="costos_venta"  class="form-control form-control-sm" type="number"></td>
                                     </tr>
                                     <tr>
@@ -62,7 +62,7 @@
                                         <td><input value="{{$ER->utilidad_bruta ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr>
                                     <tr>
-                                        <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[4][0]->nombre}}</th>
+                                        <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[4][0]->nombre ?? 'Gastos de operación'}}</th>
                                         <td><input value="{{$ER->gastos_operacion ?? '0'}}" name="gastos_operacion"  class="form-control form-control-sm" type="number"></td>
                                     </tr>
                                     <tr>
@@ -70,11 +70,11 @@
                                         <td><input value="{{$ER->utilidad_operativa ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr>
                                     <tr>
-                                        <th>+&nbsp; &nbsp; &nbsp;{{$vinculos[5][0]->nombre}}</th>
+                                        <th>+&nbsp; &nbsp; &nbsp;{{$vinculos[5][0]->nombre ?? 'Otros ingresos'}}</th>
                                         <td><input value="{{$ER->otros_ingresos ?? '0'}}" name="otros_ingresos"  class="form-control form-control-sm" type="number"></td>
                                     </tr>
                                     <tr>
-                                        <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[6][0]->nombre}}</th>
+                                        <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[6][0]->nombre ?? 'Otros gastos'}}</th>
                                         <td><input value="{{$ER->otros_gastos ?? '0'}}" name="otros_gastos"  class="form-control form-control-sm" type="number"></td>
                                     </tr>
                                     <tr>

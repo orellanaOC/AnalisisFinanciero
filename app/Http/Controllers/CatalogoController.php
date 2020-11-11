@@ -124,17 +124,19 @@ class CatalogoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //dd($request->request);
         //Validación de campos
         request()->validate([
+            'id_cuenta' => 'required',
             'codigo'=> 'required',
             'nombre'=> 'required',
             'tipoCuenta'=> 'required',
             //'padre'=> 'required',
         ],
         [
+            'id_cuenta.required' => "Falta campo de ID de la cuenta",
             'codigo.required' => "El campo 'codigo' es obligatorio.",
             'nombre.required' => "El campo 'nombre' es obligatorio.",
             'tipoCuenta.required' => "Seleccione un tipo de cuenta.",
@@ -142,7 +144,7 @@ class CatalogoController extends Controller
         //La empresa sera tomada directamente de la empresa del usuario logeado
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
-        $request->idCuenta=$id;
+        $request->idCuenta=$request->id_cuenta;        
         //Llamada a la funcion para guardar cuentas
         $respuesta= $this->guardarCuenta($request, $empresa, FALSE);
         if($respuesta===TRUE){
@@ -264,7 +266,11 @@ class CatalogoController extends Controller
                         }
                         $busqueda_padre2=Cuenta::where('codigo', $data[$i]["C"])->where('empresa_id',$empresa->id)->first();
                         if($busqueda_padre2 != null){
+<<<<<<< HEAD
                             $cuenta->padre_id=$busqueda_padre2->id;
+=======
+                            $cuenta->padre_id=$busqueda_padre2->id; 
+>>>>>>> 11d4608ccdc39b0e5cca2d3e8d5317d7367252e7
                         }
                         $cuenta->save();
                     }

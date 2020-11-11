@@ -50,4 +50,14 @@ class HomeController extends Controller
     public function balance_general_create(){
         return view('finanzasViews.balanceGeneral.create');
     }
+
+    public function analisis_horizontal(){
+        return view('finanzasViews.analisisSector.analisis_horizontal');
+    }
+    public function analisis_vertical(){
+        return view('finanzasViews.analisisSector.analisis_vertical');
+    }
+    public function ratios(){
+        return view('finanzasViews.analisisSector.ratios');
+    }
 }
