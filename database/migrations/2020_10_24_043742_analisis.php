@@ -15,9 +15,10 @@ class Analisis extends Migration
     {
         Schema::create('analisis', function (Blueprint $table) {
             $table->id();
-            $table->string('individual');
-            $table->string('favorecido');
-            $table->string('no_favorecido');
+            $table->string('individual', 4096);
+            $table->string('mayor', 4096);
+            $table->string('entre', 4096);
+            $table->string('menor', 4096);
             $table->integer('parametro_id');
             $table->foreign('parametro_id')->references('id')->on('parametro')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

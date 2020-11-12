@@ -20,5 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call([TipoCuentaSeeder::class]);
         $this->call(EmpresaTableSeeder::class);
         $this->call(CuentaSistemaSeeder::class);
+        $this->call(TipoParametroTableSeeder::class);
+        $this->call(ParametroTableSeeder::class);
+        $this->call(AnalisisTableSeeder::class);
     }
 }
