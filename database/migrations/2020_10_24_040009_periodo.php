@@ -17,6 +17,8 @@ class Periodo extends Migration
             $table->id();
             $table->integer('year');
             $table->integer('acciones');
+            $table->decimal('gastos_financieros')->nullable();
+            $table->decimal('inversion_inicial')->nullable();
             $table->integer('empresa_id');
             $table->foreign('empresa_id')->references('id')->on('empresa')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
