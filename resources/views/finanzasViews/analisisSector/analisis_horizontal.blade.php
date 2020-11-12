@@ -8,7 +8,7 @@
                 <h2 class="card-title">Análisis Horizontal</h2>
             </div>
             <div class="col-md-3">
-                <select class="form-control">
+                <select class="form-control" id="selector1" onchange="activarSelector()">
                     <option value=-1>Seleccionar el período A...</option>
                     @foreach ($periodos as $periodo)                            
                         <option value="{{$periodo->id}}">{{$periodo->year}}</option>                            
@@ -16,7 +16,7 @@
                 </select>
             </div>
             <div class="col-md-3">
-                <select class="form-control">
+                <select class="form-control" id="selector2" style="display:none" onchange="analisisHorizontal()">
                     <option value=-1>Seleccionar el período B...</option>
                     @foreach ($periodos as $periodo)                            
                         <option value="{{$periodo->id}}">{{$periodo->year}}</option>                            

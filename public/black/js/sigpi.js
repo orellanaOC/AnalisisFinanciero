@@ -38,10 +38,12 @@ function editarCuenta(id_cuenta , cod,  nom, tipo, cpadre){
     nombre.val(nom);
     tipoCuenta.val(tipo);
     padre.val(cpadre);
-    console.log("si se ejecuta esta mierda")
+    //console.log("si se ejecuta esta mierda")
     //detalle.text(descripcion);
 
 }
+
+
 //editar objetivo vista OAI
 function editarObjetivo(id_objetivo, descripcion){
     var detalle=$('#editarDetalleObjetivo');
@@ -84,6 +86,21 @@ function displayRadioValue() {
             $('#resultado').val(ele[i].value);
     } 
 } 
+/*****************Analisis horizontal************************************************/
+function activarSelector(){
+    let selector2 = $("#selector2");
+    selector2.show();
+}
+
+function analisisHorizontal(){
+    let selector1 = $("#selector1");
+    let selector2 = $("#selector2");
+    //selector2.show();
+    if(selector1!=-1 && selector2!=-1){
+        window.location= "/" + selector1.val() + "/" + selector2.val() + "/analisis_horizontal";
+    }
+}
+/****************Fin Analisis horizontal********************************************/
 
 //Dentro de aquí se pueden cargar funciones que necesitan que el html se carguen primero
 $(document).ready(function(){//lo que este dentro de aquí se cargara hasta que la pagina este totalmente cargada
