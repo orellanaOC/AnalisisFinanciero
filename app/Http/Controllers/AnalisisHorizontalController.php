@@ -81,17 +81,21 @@ class AnalisisHorizontalController extends Controller
 		on c.id = cp2.cuenta_id
         where c.empresa_id=?		
         order by c.codigo asc', [$id_periodo1, $id_periodo2, $empresa->id]);
+
         foreach ($cuentasEmpresa as $cuenta) {
             $cuenta->resta= $cuenta->total2-$cuenta->total1;
             if($cuenta->total1!=null && $cuenta->total1!=0){
-                $cuenta->porcentaje= ($cuenta->resta/$cuenta->total1);
+                $cuenta->porcentaje= number_format(($cuenta->resta/$cuenta->total1)*100, 2);
             }
             else{
                 $cuenta->porcentaje= 0;
             }
         }        
-        return view('finanzasViews.analisisSector.analisis_horizontal_hijo',['periodos'=>$periodos, 'cuentas'=>$cuentasEmpresa,
-        'vinculos'=>$cuentasVinculadas]);
+        return view('finanzasViews.analisisSector.analisis_horizontal_hijo',[
+            'periodos'=>$periodos, 
+            'cuentas'=>$cuentasEmpresa,
+            'vinculos'=>$cuentasVinculadas
+        ]);
     }
 
 }

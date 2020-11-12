@@ -31,6 +31,8 @@ class PeriodoController extends Controller
                 $periodo->year=$request->anio;
                 $periodo->empresa_id=$empresa->id;
                 $periodo->acciones =$request->acciones;
+                $periodo->inversion_inicial = $request->inversion;
+                $periodo->gastos_financieros = $request->gastos_financieros;
                 $periodo->save();
                 return redirect()->route('periodo.index');
 
@@ -53,6 +55,8 @@ class PeriodoController extends Controller
                             $periodo->year=$request->anio;
                             $periodo->empresa_id=$empresa->id;
                             $periodo->acciones =$request->acciones;
+                            $periodo->inversion_inicial = $request->inversion;
+                            $periodo->gastos_financieros = $request->gastos_financieros;
                             $periodo->save();
                             return redirect()->route('periodo.index');
                         }

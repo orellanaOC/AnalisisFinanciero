@@ -35,6 +35,15 @@
                                                     <input required min="1" id="acciones" type="number" class="form-control" placeholder="Cantidad de acciones" name="acciones">
                                                 </div>
                                             </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="mr-auto ml-auto col-md-6">
+                                                    <input step="0.01" required id="gastos_financieros" type="number" class="form-control" placeholder="Gastos financieros" name="gastos_financieros">
+                                                </div>
+                                                <div class="mr-auto ml-auto col-md-6">
+                                                    <input step="0.01" required id="inversion" type="number" class="form-control" placeholder="Inversión inicial" name="inversion">
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
