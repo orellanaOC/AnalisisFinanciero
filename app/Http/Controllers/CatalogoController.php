@@ -279,7 +279,7 @@ class CatalogoController extends Controller
 
             }
 
-            $message=['success'=>'La importacion de preguntas se efectuo exitosamente.'];
+            $message=['success'=>'La importacion de cuentas se efectuo exitosamente.'];
         }
 
         //Eliminar el archivo subido, solo se utiliza para la importacion y luego de desecha

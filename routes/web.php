@@ -179,10 +179,11 @@ Route::middleware(['auth'])->group(function(){
 	Route::delete('periodo/delete/{id}','PeriodoController@destroy')->name('periodo.delete');
 
 	/*-----------------------------------------------------------------------------------------------------*/
-	
+
 	/*------------------------------------------- BALANCE-GENERAL -------------------------------------------*/
 	Route::get('/balance_general_index', 'HomeController@balance_general_index')->name('balance_general_index');
-	Route::get('/{id_periodo}/balance_general_create', 'BalanceGeneralController@create')->name('balance_general_create');
+    Route::get('/{id_periodo}/balance_general_create', 'BalanceGeneralController@create')->name('balance_general_create');
+
 	/*-----------------------------------------------------------------------------------------------------*/
 
 	/*------------------------------------------- ESTADO-RESULTADO -------------------------------------------*/
@@ -195,7 +196,10 @@ Route::middleware(['auth'])->group(function(){
 	Route::post('cuenta_periodo/{id_periodo}/{cuenta_id}', 'CuentaPerioController@store')->name('cuenta_periodo.store');
 	Route::post('cuenta_periodo_p/{id_periodo}/{cuenta_id}', 'CuentaPerioController@storePadre')->name('cuenta_periodo.storePadre');
 	Route::delete('cuenta_periodo/{id_periodo}/{cuenta_id}', 'CuentaPerioController@destroy')->name('cuenta_periodo.destroy');
-	Route::delete('cuenta_periodo_p/{id_periodo}/{cuenta_id}', 'CuentaPerioController@destroyPadre')->name('cuenta_periodo.destroyPadre');
+    Route::delete('cuenta_periodo_p/{id_periodo}/{cuenta_id}', 'CuentaPerioController@destroyPadre')->name('cuenta_periodo.destroyPadre');
+    Route::post('cuenta_periodo/upload/excel/{id_periodo}/{anio}','CuentaPerioController@uploadExcel')->name('cuenta_periodo.upload');
+
+
 	/*-----------------------------------------------------------------------------------------------------*/
 
 	/*------------------------------------------- ANALISIS-VERTICAL-------------------------------------------*/
@@ -207,8 +211,8 @@ Route::middleware(['auth'])->group(function(){
 
 		/*------------------------------------------- ANALISIS-HORIZONTAL-------------------------------------------*/
 	//padre
-	Route::get('/analisis_horizontal', 'AnalisisHorizontalController@index')->name('analisis_horizontal.index');	
+	Route::get('/analisis_horizontal', 'AnalisisHorizontalController@index')->name('analisis_horizontal.index');
 	//hijo
-	Route::get('/{id_periodo1}/{id_periodo2}/analisis_horizontal', 'AnalisisHorizontalController@show')->name('analisis_horizontal.show');	
+	Route::get('/{id_periodo1}/{id_periodo2}/analisis_horizontal', 'AnalisisHorizontalController@show')->name('analisis_horizontal.show');
 	/*--------------------------------------------------------------------------------------------------------*/
 });
