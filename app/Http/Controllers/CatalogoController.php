@@ -266,11 +266,7 @@ class CatalogoController extends Controller
                         }
                         $busqueda_padre2=Cuenta::where('codigo', $data[$i]["C"])->where('empresa_id',$empresa->id)->first();
                         if($busqueda_padre2 != null){
-<<<<<<< HEAD
                             $cuenta->padre_id=$busqueda_padre2->id;
-=======
-                            $cuenta->padre_id=$busqueda_padre2->id; 
->>>>>>> 11d4608ccdc39b0e5cca2d3e8d5317d7367252e7
                         }
                         $cuenta->save();
                     }
