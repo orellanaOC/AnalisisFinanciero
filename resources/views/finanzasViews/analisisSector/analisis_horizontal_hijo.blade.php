@@ -2,15 +2,17 @@
 
 @section('cuerpo_analisis')
 <div class="table-responsive">
-    <table>
+    <table class="table">
         <!--Foreach principal-->
         <tr>
-            <th class="text-center">Codigo</th>
-            <th class=" text-center">Cuenta</th>
-            <th class="text-center">Periodo A</th>
-            <th class="text-center">Periodo B</th>
-            <th class="text-center">Resta</th>
-            <th class="text-center">Porcentaje</th>
+            <th>Cuenta</th>
+            <th class="text-right text-white"></th>
+            <th class="text-right">Periodo A</th>
+            <th class="text-right text-white"></th>
+            <th class="text-right">Periodo B</th>
+            <th class="text-right text-white"></th>
+            <th class="text-right">Resta</th>
+            <th class="text-right">Porcentaje</th>
         </tr>
         <!--Foreach para cuentas principales (ACtivo, pasivo, Capital)-->
         @foreach ($cuentas as $cuenta)
@@ -25,42 +27,50 @@
                     @foreach ($cuentas as $cuentaHijo4)
                     @if ($cuentaHijo4->padre_id==$cuentaHijo3->id)
                     <tr>
-                        <td>{{$cuentaHijo4->codigo ?? 'codigo'}}</td>
-                        <th>{{$cuentaHijo4->nombre ?? 'nombre de cuenta largoOOOOOOOOOO'}}</th>
-                        <td>{{$cuentaHijo4->total1 ?? '0.00'}}</td>
-                        <td>{{$cuentaHijo4->total2 ?? '0.00'}}</td>
-                        <td>{{$cuentaHijo4->resta ?? '0.00'}}</td>
-                        <td>value="{{$cuentaHijo4->porcentaje ?? '0%'}}%</td>                       
+                        <td>{{$cuentaHijo4->nombre}}</td>
+                        <td class="text-right">$</td>
+                        <td class="text-right">{{$cuentaHijo4->total1 ?? '0.00'}}</td>
+                        <td class="text-right">$</td>
+                        <td class="text-right">{{$cuentaHijo4->total2 ?? '0.00'}}</td>
+                        <td class="text-right">$</td>
+                        <td class="text-right">{{$cuentaHijo4->resta ?? '0.00'}}</td>
+                        <td class="text-right">{{$cuentaHijo4->porcentaje ?? '0.00'}} %</td>                       
                     </tr> 
                     @endif
                     @endforeach
                 <tr>
-                    <td>{{$cuentaHijo3->codigo ?? 'codigo'}}</td>
-                    <th>{{$cuentaHijo3->nombre ?? 'nombre de cuenta largoOOOOOOOOOO'}}</th>
-                    <td>{{$cuentaHijo3->total1 ?? '0.00'}}</td>
-                    <td>{{$cuentaHijo3->total2 ?? '0.00'}}</td>
-                    <td>{{$cuentaHijo3->resta ?? '0.00'}}</td>
-                    <td>value="{{$cuentaHijo3->porcentaje ?? '0%'}}%</td>                       
+                    <th>{{$cuentaHijo3->nombre}}</th>
+                    <td class="text-right">$</td>
+                    <td class="text-right">{{$cuentaHijo3->total1 ?? '0.00'}}</td>
+                    <td class="text-right">$</td>
+                    <td class="text-right">{{$cuentaHijo3->total2 ?? '0.00'}}</td>
+                    <td class="text-right">$</td>
+                    <td class="text-right">{{$cuentaHijo3->resta ?? '0.00'}}</td>
+                    <td class="text-right">{{$cuentaHijo3->porcentaje ?? '0.00'}} %</td>                       
                 </tr> 
                 @endif
                 @endforeach
-            <tr>
-                <td>{{$cuentaHijo2->codigo ?? 'codigo'}}</td>
-                <th>{{$cuentaHijo2->nombre ?? 'nombre de cuenta largoOOOOOOOOOO'}}</th>
-                <td>{{$cuentaHijo2->total1 ?? '0.00'}}</td>
-                <td>{{$cuentaHijo2->total2 ?? '0.00'}}</td>
-                <td>{{$cuentaHijo2->resta ?? '0.00'}}</td>
-                <td>value="{{$cuentaHijo2->porcentaje ?? '0%'}}%</td>                       
+            <tr bgcolor="#F5F2F2">
+                <th>{{$cuentaHijo2->nombre}}</th>
+                <td class="text-right">$</td>
+                <td class="text-right">{{$cuentaHijo2->total1 ?? '0.00'}}</td>
+                <td class="text-right">$</td>
+                <td class="text-right">{{$cuentaHijo2->total2 ?? '0.00'}}</td>
+                <td class="text-right">$</td>
+                <td class="text-right">{{$cuentaHijo2->resta ?? '0.00'}}</td>
+                <td class="text-right">{{$cuentaHijo2->porcentaje ?? '0.00'}} %</td>                       
             </tr> 
             @endif
             @endforeach
-        <tr>
-            <td>{{$cuenta->codigo ?? 'codigo'}}</td>
-            <th>{{$cuenta->nombre ?? 'nombre de cuenta largoOOOOOOOOOO'}}</th>
-            <td>{{$cuenta->total1 ?? '0.00'}}</td>
-            <td>{{$cuenta->total2 ?? '0.00'}}</td>
-            <td>{{$cuenta->resta ?? '0.00'}}</td>
-            <td>value="{{$cuenta->porcentaje ?? '0%'}}%</td>                       
+        <tr bgcolor="#8D8D8D">
+            <th class="text-white">{{$cuenta->nombre}}</th>
+            <th class="text-right text-white">$</th>
+            <th class="text-right text-white">{{$cuenta->total1 ?? '0.00'}}</th>
+            <th class="text-right text-white">$</th>
+            <th class="text-right text-white">{{$cuenta->total2 ?? '0.00'}}</th>
+            <th class="text-right text-white">$</th>
+            <th class="text-right text-white">{{$cuenta->resta ?? '0.00'}}</th>
+            <th class="text-right text-white">{{$cuenta->porcentaje ?? '0.00'}} %</th>                       
         </tr>                
         @endif
         @endforeach                                     

@@ -78,7 +78,15 @@ class AnalisisVerticalController extends Controller
 		and id_cuenta_sistema=(select id from cuenta_sistema where nombre=?))) as c
         left join (select * from cuenta_periodo where periodo_id=?) as cp
         on c.id= cp.cuenta_id',[$empresa->id, 'Patrimonio', $id_periodo]);
-        
+
+        $total = $activo[0]->total + $pasivo[0]->total + $capital[0]->total;
+
+        if($total != 0){
+            $activo[0]->porcentaje = number_format(($activo[0]->total/$total)*100, 2);
+            $pasivo[0]->porcentaje = number_format(($pasivo[0]->total/$total)*100, 2);
+            $capital[0]->porcentaje = number_format(($capital[0]->total/$total)*100, 2);
+        }
+
         $cuentasVinculadas= array($activo, $pasivo, $capital);
         //Traer las cuentas del catalogo y su total
         $cuentasActivo=DB::select('select c.*, cp.total from
@@ -88,6 +96,12 @@ class AnalisisVerticalController extends Controller
         where c.empresa_id=?
 		and c.codigo like ?
         order by c.codigo asc', [$id_periodo, $empresa->id, $activo[0]->codigo.'%']);
+
+        foreach($cuentasActivo as $ca){
+            if($total != 0){
+                $ca->porcentaje = number_format(($ca->total/$total)*100, 2);
+            } 
+        }
         
         $cuentasPasivo=DB::select('select c.*, cp.total from
         cuenta as c
@@ -96,6 +110,12 @@ class AnalisisVerticalController extends Controller
         where c.empresa_id=?
 		and c.codigo like ?
         order by c.codigo asc', [$id_periodo, $empresa->id, $pasivo[0]->codigo.'%']);
+
+        foreach($cuentasPasivo as $cp){
+            if($total != 0){
+                $cp->porcentaje = number_format(($cp->total/$total)*100, 2);
+            } 
+        }
         
         $cuentasCapital=DB::select('select c.*, cp.total from
         cuenta as c
@@ -104,10 +124,20 @@ class AnalisisVerticalController extends Controller
         where c.empresa_id=?
 		and c.codigo like ?
         order by c.codigo asc', [$id_periodo, $empresa->id, $capital[0]->codigo.'%']);
+
+        foreach($cuentasCapital as $cc){
+            if($total != 0){
+                $cc->porcentaje = number_format(($cc->total/$total)*100, 2);
+            } 
+        }
                 
-        return view('finanzasViews.analisisSector.analisis_vertical_hijo', ['cuentasActivo'=>$cuentasActivo, 
-        'cuentasPasivo'=>$cuentasPasivo, 'cuentasCapital'=>$cuentasCapital, 'vinculaciones'=>$cuentasVinculadas
-        , 'periodos'=>$periodos]);
+        return view('finanzasViews.analisisSector.analisis_vertical_hijo', [
+            'cuentasActivo'=>$cuentasActivo, 
+            'cuentasPasivo'=>$cuentasPasivo, 
+            'cuentasCapital'=>$cuentasCapital, 
+            'vinculaciones'=>$cuentasVinculadas,   
+            'periodos'=>$periodos
+        ]);
     }
 
 }
