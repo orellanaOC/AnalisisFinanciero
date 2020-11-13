@@ -59,19 +59,19 @@
             <li @if ($pageSlug == 'empresa') class="active " @endif>
                 <a href="{{ route('analisis_horizontal.index') }}">
                     <i class="tim-icons icon-bank"></i>
-                    <p>{{ __('Empresa individual') }}</p>
+                    <p>{{ __('Análisis & Ratios') }}</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'analisis') class="active " @endif>
+            <!--li @if ($pageSlug == 'analisis') class="active " @endif>
                 <a href="{{ route('analisis') }}">
                     <i class="tim-icons icon-chart-bar-32"></i>
                     <p>{{ __('Análisis del sector') }}</p>
                 </a>
-            </li>
+            </li-->
             <li @if ($pageSlug == 'formulas') class="active " @endif>
                 <a href="{{ route('formulas') }}">
                     <i class="tim-icons icon-bulb-63"></i>
-                    <p>{{ __('Fórmulas de ratios') }}</p>
+                    <p>{{ __('Asistencia') }}</p>
                 </a>
             </li>
             @canany(['users.index', 'roles.index', 'permission_user.index'])
