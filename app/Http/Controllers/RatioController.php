@@ -110,7 +110,7 @@ class RatioController extends Controller
         $analisis = DB::select("SELECT * FROM analisis WHERE parametro_id = 20")[0]->individual;
         $analisis = str_replace("<nombre de la empresa>", $empresa->nombre, $analisis);
         $analisis = str_replace("<nombre del sector>", $sector, $analisis);
-        $analisis = str_replace("<año del periodo>", $periodo->year, $analisis);
+        $analisis = str_replace("<año del período>", $periodo->year, $analisis);
         $analisis = str_replace("<resultado>", $rpa, $analisis);
 
         return [$rpa, $analisis];

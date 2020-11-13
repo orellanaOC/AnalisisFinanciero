@@ -223,4 +223,12 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('/ratio/individual/{id_periodo}', 'RatioController@individual')->name('ratio.individual');
 
 	/*--------------------------------------------------------------------------------------------------------*/
+
+	/*------------------------------------ RATIOS POR SECTOR -------------------------------------------------*/
+
+	Route::post('/ratio/sector/calcular', 'RatioSectorController@calcular_ratios')->name('ratio_sector.calcular');
+	Route::get('/ratio/sector', 'RatioSectorController@sector_padre')->name('ratio_sector.padre');
+	Route::get('/ratio/sector/{id_periodo}', 'RatioSectorController@sector')->name('ratio.sector');
+
+	/*--------------------------------------------------------------------------------------------------------*/
 });
