@@ -42,13 +42,6 @@ class CuentaSistemaSeeder extends Seeder
             'updated_at' => now()
         ]);
         DB::table('cuenta_sistema')->insert([
-            'nombre'=>'Inventarios',
-            'descripcion'=>'Es la cuenta que almacena los inventarios totales en tu empresa',
-            'uso'=>2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('cuenta_sistema')->insert([
             'nombre'=>'Valores a corto plazo',
             'descripcion'=>'Representa la cuenta que puede ser convertida a efectivo en poco tiempo en tu empresa',
             'uso'=>2,
