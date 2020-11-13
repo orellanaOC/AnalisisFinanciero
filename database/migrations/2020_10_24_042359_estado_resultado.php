@@ -14,7 +14,7 @@ class EstadoResultado extends Migration
     public function up()
     {
         Schema::create('estado_resultado', function (Blueprint $table) {
-            $table->id();            
+            $table->id();
             $table->double('ventas_netas');
             $table->double('utilidad_bruta');
             $table->double('utilidad_operativa');

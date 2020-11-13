@@ -44,15 +44,15 @@
                                     <tr>
                                         <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[1][0]->nombre ?? 'Devolucion sobre ventas'}}</th>
                                         <td><input step="0.01" value="{{$ER->devolucion_ventas ?? '0'}}" name="devolucion_venta"  class="form-control form-control-sm" type="number"></td>
-                                    </tr> 
+                                    </tr>
                                     <tr>
                                         <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[2][0]->nombre ?? 'Descuento sobre ventas'}}</th>
                                         <td><input step="0.01" value="{{$ER->descuento_ventas ?? '0'}}" name="descuento_venta"  class="form-control form-control-sm" type="number"></td>
-                                    </tr> 
+                                    </tr>
                                     <tr>
                                         <th class="text-primary">=&nbsp; &nbsp; &nbsp;Ventas netas</th>
                                         <td><input step="0.01" value="{{$ER->ventas_netas ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
-                                    </tr> 
+                                    </tr>
                                     <tr>
                                         <th>-&nbsp; &nbsp; &nbsp;{{$vinculos[3][0]->nombre ?? 'Costo de ventas'}}</th>
                                         <td><input step="0.01" value="{{$ER->costo_ventas ?? '0'}}" name="costos_venta"  class="form-control form-control-sm" type="number"></td>
@@ -80,31 +80,66 @@
                                     <tr>
                                         <th class="text-primary">=&nbsp; &nbsp; &nbsp;Utilidad antes de impuestos</th>
                                         <td><input step="0.01" value="{{$ER->utilidad_antes_de_i ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
-                                    </tr> 
+                                    </tr>
                                     <tr>
                                         <th>-&nbsp; &nbsp; &nbsp;Impuestos sobre la renta</th>
                                         <td><input step="0.01" value="{{$ER->impuestos ?? '0'}}" name="impuestos"  class="form-control form-control-sm" type="number"></td>
-                                    </tr> 
+                                    </tr>
                                     <tr>
                                         <th class="text-primary">=&nbsp; &nbsp; &nbsp;Utilida neta</th>
                                         <td><input step="0.01" value="{{$ER->utilidad_neta ?? '0'}}" class="form-control form-control-sm" type="number" readonly></td>
                                     </tr>
-                                </form>                                
-                            </table>                        
+                                </form>
+                            </table>
                         </div>
                         <div class="col-md-1"></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            <br><br><p class="text-center">O puedes subir tu archivo .xlsx y cargar de una tu estado de resultados</p><br>
+                        <div class="col-md-12 text-center">
+                            <br><br>
+                            <p >O puedes subir tu archivo .xlsx y cargar de una tu estado de resultados</p>
+                        <br>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_auto">+ Subir</i></button>
                         </div>
                     </div>
-                    <!-- input step="0.01" de archivos normalito feo-->
+                     <!-- Modal de ingreso automatica -->
+                     <div class="modal fade" id="aniadir_auto" tabindex="-1" role="dialog" aria-labelledby="auto_label" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="auto_label">Ingresar el el estado de resultado </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+
+                            <p>Formato admitido: xlsx</p>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form action="{{route('estado_resultado.upload',['id_periodo'=>$periodo])}}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <input class="form-control-file" id="archivo" type="file" name="archivo" accept=".xlsx" required>
+                                        <button disabled type="submit" class="btn btn-primary" id="botonarchivo" data-toggle="modal" data-target="#exampleModal">Guardar</button>
+                                    </form>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- input step="0.01" de archivos normalito feo
                     <div class="row">
                         <div class="col-md-12">
-                            <input step="0.01" class="form-control-file" type="file">                        
+                            <input step="0.01" class="form-control-file" type="file">
                         </div>
-                    </div>
+                    </div>-->
 
                     <!--input step="0.01" de archivos con estilo>
                     <div-- class="form-group form-file-upload form-file-multiple">
@@ -124,7 +159,7 @@
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-8 text-center">
-                            <button type="submit" class="btn btn-primary" form="ERGuardar"> Guardar </button>                          
+                            <button type="submit" class="btn btn-primary" form="ERGuardar"> Guardar </button>
                         </div>
                         <div class="col-md-2"></div>
                     </div>
@@ -132,4 +167,35 @@
             </div>
         </div>
     </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+
+        </div>
+        <div class="modal-body">
+            <h6 class="text-center">Cargando...</h6>
+            <div class="loader">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+    $("#archivo").change(function(){
+
+        $("#botonarchivo").prop("disabled", this.files.length == 0);
+    });
+</script>
 @endsection
