@@ -31,12 +31,14 @@ class RatioController extends Controller
         $rri = $this->calcular_rri($periodo, $empresa, $sector);
         $rdi = $this->calcular_rdi($periodo, $empresa, $sector);
         $rrcc = $this->calcular_rrcc($periodo, $empresa, $sector);
+        $rpa = $this->calcular_rpa($periodo, $empresa, $sector);
 
         return view('finanzasViews.ratios.individual', [
             'periodos' => $periodos,
             'rri' => [$rri[0], $rri[1]],
             'rdi' => [$rdi[0], $rdi[1]],
-            'rrcc' => [$rrcc[0], $rrcc[1]],
+            'rpa' => [$rpa[0], $rpa[1]],
+            //'rrcc' => [$rrcc[0], $rrcc[1]],
         ]);
     }
     
@@ -95,6 +97,24 @@ class RatioController extends Controller
         return [$rrcc, $analisis];
     }
 
+
+/*-------------------------------------------------------------------------------------------------------------*/
+
+/*-------------------------------------- FUNCIÓN PARA CALCULAR EL RPA -----------------------------------------*/
+
+    public function calcular_rpa($periodo, $empresa, $sector){
+        $utilidad_neta = $this->select_from_er("utilidad_neta", $periodo);
+        $numero_acciones = $periodo->acciones;
+        $rpa = number_format($utilidad_neta/$numero_acciones, 2);
+
+        $analisis = DB::select("SELECT * FROM analisis WHERE parametro_id = 20")[0]->individual;
+        $analisis = str_replace("<nombre de la empresa>", $empresa->nombre, $analisis);
+        $analisis = str_replace("<nombre del sector>", $sector, $analisis);
+        $analisis = str_replace("<año del periodo>", $periodo->year, $analisis);
+        $analisis = str_replace("<resultado>", $rpa, $analisis);
+
+        return [$rpa, $analisis];
+    }
 
 /*-------------------------------------------------------------------------------------------------------------*/
 

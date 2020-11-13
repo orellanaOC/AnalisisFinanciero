@@ -71,7 +71,7 @@
                                             <i class="tim-icons icon-bank"></i>
                                         </div>
                                     </div>
-                                    <input required name="empresa" class="form-control" placeholder="{{ __('Nombre de la empresa') }}">
+                                    <input required name="nombre" class="form-control" placeholder="{{ __('Nombre de la empresa') }}">
                                     @include('alerts.feedback', ['field' => 'empresa'])
                                 </div>
                                 <div class="input-group {{ $errors->has('sector') ? ' has-danger' : '' }}">

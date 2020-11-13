@@ -112,20 +112,20 @@ class AnalisisTableSeeder extends Seeder
         ]);
         DB::table('analisis')->insert([
             'individual'    => '',
-            'mayor'         => '<nombre de la empresa> presenta un grado de endeudamiento del <resultado>,  en el período de <año del periodo>, lo que puede indicar que la empresa se encuentra soportando un excesivo volumen de deuda.',
-            'entre'         => '<nombre de la empresa> presenta un grado de endeudamiento del <resultado>,  en el período de <año del periodo>, que indica que se posee un volumen de deuda moderado.',
-            'menor'         => '<nombre de la empresa> presenta un grado de endeudamiento del <resultado>, en el período de <año del periodo>,  lo que puede indicar que la empresa está incurriendo en un exceso de capitales ociosos y una consiguiente pérdida de rentabilidad de sus recursos.',
+            'mayor'         => '<nombre de la empresa> presenta un grado de endeudamiento del <resultado>,  en el período de <año del período>, lo que puede indicar que la empresa se encuentra soportando un excesivo volumen de deuda.',
+            'entre'         => '<nombre de la empresa> presenta un grado de endeudamiento del <resultado>,  en el período de <año del período>, que indica que se posee un volumen de deuda moderado.',
+            'menor'         => '<nombre de la empresa> presenta un grado de endeudamiento del <resultado>, en el período de <año del período>,  lo que puede indicar que la empresa está incurriendo en un exceso de capitales ociosos y una consiguiente pérdida de rentabilidad de sus recursos.',
             'parametro_id'  => 15,
         ]);
         DB::table('analisis')->insert([
-            'individual'    => '<nombre de la empresa> financió sus actividades , en el período de <año del periodo>, mediante el uso del <resultado>% de recursos propios.',
+            'individual'    => '<nombre de la empresa> financió sus actividades , en el período de <año del período>, mediante el uso del <resultado>% de recursos propios.',
             'mayor'         => '',
             'entre'         => '',
             'menor'         => '',
             'parametro_id'  => 16,
         ]);
         DB::table('analisis')->insert([
-            'individual'    => '<nombre de la empresa> en el período de <año del periodo> presentó una razón de endeudamiento patrimonial de <resultado> lo que índica que por cada dólar de patrimonio, la empresa posee una deuda de $<resultado>.',
+            'individual'    => '<nombre de la empresa> en el período de <año del período> presentó una razón de endeudamiento patrimonial de <resultado> lo que índica que por cada dólar de patrimonio, la empresa posee una deuda de $<resultado>.',
             'mayor'         => '',
             'entre'         => '',
             'menor'         => '',
@@ -133,34 +133,34 @@ class AnalisisTableSeeder extends Seeder
         ]);
         DB::table('analisis')->insert([
             'individual'    => '',
-            'mayor'         => 'Los gastos financieros de <nombre de la empresa> durante el período de <año del periodo>, se ven cubiertos por sus utilidades a una razón de <resultado> a 1. Lo que indica que se tiene una buena capacidad de los pagos de intereses e impuestos.',
+            'mayor'         => 'Los gastos financieros de <nombre de la empresa> durante el período de <año del período>, se ven cubiertos por sus utilidades a una razón de <resultado> a 1. Lo que indica que se tiene una buena capacidad de los pagos de intereses e impuestos.',
             'entre'         => '',
-            'menor'         => 'Los gastos financieros de <nombre de la empresa> durante el período de <año del periodo>, se ven cubiertos por sus utilidades a una razón de <resultado> a 1. Lo que indica una deficiencia en la capacidad de pagar intereses e impuestos.',
+            'menor'         => 'Los gastos financieros de <nombre de la empresa> durante el período de <año del período>, se ven cubiertos por sus utilidades a una razón de <resultado> a 1. Lo que indica una deficiencia en la capacidad de pagar intereses e impuestos.',
             'parametro_id'  => 18,
         ]);
         DB::table('analisis')->insert([
-            'individual'    => 'La capacidad de generar beneficio de <nombre de la empresa> en el año <año del periodo> fue de <resultado>',
+            'individual'    => 'La capacidad de generar beneficio de <nombre de la empresa> en el año <año del período> fue de <resultado>',
             'mayor'         => '',
             'entre'         => '',
             'menor'         => '',
             'parametro_id'  => 19,
         ]);
         DB::table('analisis')->insert([
-            'individual'    => 'La rentabilidad por acción de <nombre de la empresa> en el año <año del periodo> fue de <resultado>',
+            'individual'    => 'La rentabilidad por acción de la empresa <nombre de la empresa> perteneciente al sector <nombre del sector>, en el año <año del período> fue de <resultado>',
             'mayor'         => '',
             'entre'         => '',
             'menor'         => '',
             'parametro_id'  => 20,
         ]);
         DB::table('analisis')->insert([
-            'individual'    => 'La la capacidad que tienen los activos para generar beneficios de <nombre de empresa> en el año <año del periodo> fue de <resultado>',
+            'individual'    => 'La la capacidad que tienen los activos para generar beneficios de <nombre de empresa> en el año <año del período> fue de <resultado>',
             'mayor'         => '',
             'entre'         => '',
             'menor'         => '',
             'parametro_id'  => 21,
         ]);
         DB::table('analisis')->insert([
-            'individual'    => 'La rentabilidad que obtiene <nombre de la empresa> por sus ventas en el período de <año del periodo> fue de <resultado>',
+            'individual'    => 'La rentabilidad que obtiene <nombre de la empresa> por sus ventas en el período de <año del período> fue de <resultado>',
             'mayor'         => '',
             'entre'         => '',
             'menor'         => '',
@@ -174,14 +174,14 @@ class AnalisisTableSeeder extends Seeder
             'parametro_id'  => 23,
         ]);
         DB::table('analisis')->insert([
-            'individual'    => 'El análisis vertical realizado para <nombre de la empresa> , en el periodo de <año del periodo>, evidencia que el <activo no corriente/activo corriente> supone el <tanto%> del total de activo, superior al <activo no corriente/activo corriente>. La cuenta de Banco o Caja  supone el <tanto%> por lo que parece <no> tener problemas de liquidez. Los clientes representan un <tanto%> del activo corriente. Respecto al pasivo se puede destacar que la cuenta de <nombre_cuenta> tiene el mayor peso y que el <cuentra principal de pasico> representa el <tanto %> del pasivo.',
+            'individual'    => 'El análisis vertical realizado para <nombre de la empresa> , en el periodo de <año del período>, evidencia que el <activo no corriente/activo corriente> supone el <tanto%> del total de activo, superior al <activo no corriente/activo corriente>. La cuenta de Banco o Caja  supone el <tanto%> por lo que parece <no> tener problemas de liquidez. Los clientes representan un <tanto%> del activo corriente. Respecto al pasivo se puede destacar que la cuenta de <nombre_cuenta> tiene el mayor peso y que el <cuentra principal de pasico> representa el <tanto %> del pasivo.',
             'mayor'         => '',
             'entre'         => '',
             'menor'         => '',
             'parametro_id'  => 24,
         ]);
         DB::table('analisis')->insert([
-            'individual'    => 'El análisis horizontal realizado para <nombre de la empresa> , en los periodos de <año del periodo1 > y <año periodo 2>, evidencia que los ingresos han <aumentado/disminuido> en $<valor absouto> con respecto al año anterior. El resultado financiero <mejoró/empeoró> al <aumentar/disminuir> el ingreso y <aumentar/reducir> el gasto. El resultado general <aumentó/disminuyó> en un <tanto%>.',
+            'individual'    => 'El análisis horizontal realizado para <nombre de la empresa> , en los periodos de <año del período1 > y <año periodo 2>, evidencia que los ingresos han <aumentado/disminuido> en $<valor absouto> con respecto al año anterior. El resultado financiero <mejoró/empeoró> al <aumentar/disminuir> el ingreso y <aumentar/reducir> el gasto. El resultado general <aumentó/disminuyó> en un <tanto%>.',
             'mayor'         => '',
             'entre'         => '',
             'menor'         => '',

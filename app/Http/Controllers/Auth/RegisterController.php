@@ -56,9 +56,9 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'empresa' => ['required', 'string', 'max:255'],
-            'nit' => ['required', 'max:14'],
-            'nrc' => ['required',  'max:14'],
+            'nombre' => ['required', 'string', 'max:255', 'unique:empresa'],
+            'nit' => ['required', 'max:14', 'unique:empresa'],
+            'nrc' => ['required',  'max:14', 'unique:empresa'],
         ],
         [
             'name.required' => "El nombre de usuario es requerido.",
@@ -107,10 +107,10 @@ class RegisterController extends Controller
         }
 
         $empresa = new Empresa();
-        $empresa->nombre = $data['empresa'];
+        $empresa->nombre = $data['nombre'];
         $empresa->nit = $data['nit'];
         $empresa->nrc = $data['nrc'];
-        $empresa->sector = $data['sector'];
+        $empresa->sector_id = $data['sector'];
         $empresa->user_id = $user->id;
         $empresa->save();
 
