@@ -82,9 +82,9 @@ class AnalisisVerticalController extends Controller
         $total = $activo[0]->total + $pasivo[0]->total + $capital[0]->total;
 
         if($total != 0){
-            $activo[0]->porcentaje = number_format(($activo[0]->total/$total)*100, 2);
-            $pasivo[0]->porcentaje = number_format(($pasivo[0]->total/$total)*100, 2);
-            $capital[0]->porcentaje = number_format(($capital[0]->total/$total)*100, 2);
+            $activo[0]->porcentaje = number_format(100);
+            $pasivo[0]->porcentaje = number_format(100);
+            $capital[0]->porcentaje = number_format(100);
         }
 
         $cuentasVinculadas= array($activo, $pasivo, $capital);
@@ -99,7 +99,7 @@ class AnalisisVerticalController extends Controller
 
         foreach($cuentasActivo as $ca){
             if($total != 0){
-                $ca->porcentaje = number_format(($ca->total/$total)*100, 2);
+                $ca->porcentaje = number_format(($ca->total/$activo[0]->total)*100, 2);
             } 
         }
         
@@ -113,7 +113,7 @@ class AnalisisVerticalController extends Controller
 
         foreach($cuentasPasivo as $cp){
             if($total != 0){
-                $cp->porcentaje = number_format(($cp->total/$total)*100, 2);
+                $cp->porcentaje = number_format(($cp->total/$pasivo[0]->total)*100, 2);
             } 
         }
         
@@ -127,7 +127,7 @@ class AnalisisVerticalController extends Controller
 
         foreach($cuentasCapital as $cc){
             if($total != 0){
-                $cc->porcentaje = number_format(($cc->total/$total)*100, 2);
+                $cc->porcentaje = number_format(($cc->total/$capital[0]->total)*100, 2);
             } 
         }
                 

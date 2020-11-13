@@ -34,3 +34,18 @@
 </div>			  		
 
 @endsection
+
+<script>
+    function activarSelector(){
+        let selector2 = $("#selector2");
+        selector2.show();
+    }
+    function analisisHorizontal(){
+        let selector1 = $("#selector1");
+        let selector2 = $("#selector2");
+        //selector2.show();
+        if(selector1!=-1 && selector2!=-1){
+            window.location= "/" + selector1.val() + "/" + selector2.val() + "/analisis_horizontal";
+        }
+    }
+</script>
