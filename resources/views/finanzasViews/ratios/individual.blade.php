@@ -1,27 +1,29 @@
-@extends('finanzasViews.analisisSector.layout_analisis', ['pageSlug' => 'ratios'])
+@extends('finanzasViews.ratios.individual_padre', ['pageSlug' => 'ratios'])
 
-@section('contenido_navbar')
-<div class="card">
-    <div class="card-header">
-    <h2 class="card-title">Ratios</h2>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="ml-auto col-md-4 mr-auto">
-                        <select class="form-control">
-                            <option value=-1 hidden disabled selected>Seleccione un período...</option>
-                            @foreach ($periodos as $periodo)
-                                <option>{{ $periodo->year }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    @yield('cuerpo_analisis')
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card-footer"></div>
+@section('ratios')
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th width = "25%">Razón</th>
+            <th width = "25%">Resultado</th>
+            <th width = "50%">Análisis</th>
+        </tr>
+        <tr>
+            <td>Razon de Rotacion de Inventario</td>
+            <td>{{$rri[0]}}</td>
+            <td class="text-justify">{{$rri[1]}}</td>
+        </tr>
+        <tr>
+            <td>Razon de Días de Inventario</td>
+            <td>{{$rdi[0]}}</td>
+            <td class="text-justify">{{$rdi[1]}}</td>
+        </tr>
+        <tr>
+            <td>Razon de Rotacion de Cuentas por Pagar</td>
+            <td>{{$rrcc[0]}}</td>
+            <td class="text-justify">{{$rrcc[1]}}</td>
+        </tr>
+    </table>
 </div>
+
 @endsection

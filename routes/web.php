@@ -210,10 +210,17 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('/{id_periodo}/analisis_vertical', 'AnalisisVerticalController@show')->name('analisis_vertical.show');
 	/*--------------------------------------------------------------------------------------------------------*/
 
-		/*------------------------------------------- ANALISIS-HORIZONTAL-------------------------------------------*/
+	/*------------------------------------------- ANALISIS-HORIZONTAL-------------------------------------------*/
 	//padre
 	Route::get('/analisis_horizontal', 'AnalisisHorizontalController@index')->name('analisis_horizontal.index');
 	//hijo
 	Route::get('/{id_periodo1}/{id_periodo2}/analisis_horizontal', 'AnalisisHorizontalController@show')->name('analisis_horizontal.show');
+	/*--------------------------------------------------------------------------------------------------------*/
+
+	/*------------------------------------------- RATIOS --------------------------------------------------------*/
+
+	Route::get('/ratio/individual', 'RatioController@individual_padre')->name('ratio.individual_padre');
+	Route::get('/ratio/individual/{id_periodo}', 'RatioController@individual')->name('ratio.individual');
+
 	/*--------------------------------------------------------------------------------------------------------*/
 });
