@@ -79,7 +79,7 @@ class RatioController extends Controller
 
 /*-------------------------------------------------------------------------------------------------------------*/
 
-/*-------------------------------------- FUNCIÓN PARA CALCULAR EL rrcc -----------------------------------------*/
+/*-------------------------------------- FUNCIÓN PARA CALCULAR EL RRCC -----------------------------------------*/
 
     public function calcular_rrcc($periodo, $empresa, $sector){
         $promedio_cuentas_cobrar = $this->get_promedio($periodo, $empresa, 9);

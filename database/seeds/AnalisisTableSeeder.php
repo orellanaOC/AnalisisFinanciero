@@ -55,31 +55,31 @@ class AnalisisTableSeeder extends Seeder
             'parametro_id'  => 6,
         ]);
         DB::table('analisis')->insert([
-            'individual'    => 'Las cuentas por pagar de <nombre de la empresa>, perteneciente al sector <nombre del sector>, en el período de <año del período>, rotaron <resultado> veces.',
-            'mayor'         => '',
-            'entre'         => '',
-            'menor'         => '',
-            'parametro_id'  => 7,
-        ]);
-        DB::table('analisis')->insert([
-            'individual'    => '<nombre de la empresa>, perteneciente al sector <nombre del sector>, en el período de <año del período>, realizó sus pagos en plazos de <resultado> días.',
-            'mayor'         => '',
-            'entre'         => '',
-            'menor'         => '',
-            'parametro_id'  => 8,
-        ]);
-        DB::table('analisis')->insert([
             'individual'    => '',
             'mayor'         => 'Las cuentas por cobrar de <nombre de la empresa>, perteneciente al sector <nombre del sector>, en el período de <año del período>, rotaron <resultado> veces. Dado que la rotación de las cuentas por cobrar es mayor a la de las cuentas por pagar, indica que la empresa posee una mala política de cobros.',
             'entre'         => '',
             'menor'         => 'Las cuentas por cobrar de <nombre de la empresa>, perteneciente al sector <nombre del sector>, en el período de <año del período>, rotaron <resultado> veces. Dado que la rotación de las cuentas por cobrar es inferior a la de las cuentas por pagar, indica que la empresa posee una buena política de cobros.',
-            'parametro_id'  => 9,
+            'parametro_id'  => 7,
         ]);
         DB::table('analisis')->insert([
             'individual'    => '',
             'mayor'         => '<nombre de la empresa>, perteneciente al sector <nombre del sector>, en el período de <año del período>, realizó sus cobros con plazos de <resultado> días. Dado que el período medio de cobranza es mayor al período medio de pago, indica que la empresa posee una mala política de cobros.',
             'entre'         => '',
             'menor'         => '<nombre de la empresa>, perteneciente al sector <nombre del sector>, en el período de <año del período>, realizó sus cobros con plazos de <resultado> días. Dado que el período medio de cobranza es inferior al período medio de pago, indica que la empresa posee una buena política de cobros.',
+            'parametro_id'  => 8,
+        ]);
+        DB::table('analisis')->insert([
+            'individual'    => 'Las cuentas por pagar de <nombre de la empresa>, perteneciente al sector <nombre del sector>, en el período de <año del período>, rotaron <resultado> veces.',
+            'mayor'         => '',
+            'entre'         => '',
+            'menor'         => '',
+            'parametro_id'  => 9,
+        ]);
+        DB::table('analisis')->insert([
+            'individual'    => '<nombre de la empresa>, perteneciente al sector <nombre del sector>, en el período de <año del período>, realizó sus pagos en plazos de <resultado> días.',
+            'mayor'         => '',
+            'entre'         => '',
+            'menor'         => '',
             'parametro_id'  => 10,
         ]);
         DB::table('analisis')->insert([
