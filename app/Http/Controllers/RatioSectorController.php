@@ -43,8 +43,110 @@ class RatioSectorController extends Controller
         $rsv = $instancia->calcular_rsv($periodo, $empresa, $sector); 
         $rsi = $instancia->calcular_rsi($periodo, $empresa, $sector); 
 
-        dd($rdc, $pa, $rct, $rde, $rrcc, $rpmc, $rrcp, $rpmp, $irat, $iraf, $imb, $imo, $ge, $gp, $rep, $rcgf, $roe, $roa, $rsv, $rsi);
+        $ratios = Razon::where('periodo_id', $periodo_id)->get();
+        if(count($ratios)==0){
 
+            DB::table('razon')->insert([
+                'double'         => $rdc,
+                'parametro_id'  => 1,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $pa,
+                'parametro_id'  => 2,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $rct,
+                'parametro_id'  => 3,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $rde,
+                'parametro_id'  => 4,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $rrcc,
+                'parametro_id'  => 7,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $rpmc,
+                'parametro_id'  => 8,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $rrcp,
+                'parametro_id'  => 9,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $rpmp,
+                'parametro_id'  => 10,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $irat,
+                'parametro_id'  => 11,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $iraf,
+                'parametro_id'  => 12,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $imb,
+                'parametro_id'  => 13,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $imo,
+                'parametro_id'  => 14,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $ge,
+                'parametro_id'  => 15,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $gp,
+                'parametro_id'  => 16,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $rep,
+                'parametro_id'  => 17,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $rcgf,
+                'parametro_id'  => 18,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $roe,
+                'parametro_id'  => 19,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $roa,
+                'parametro_id'  => 21,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $rsv,
+                'parametro_id'  => 22,
+                'periodo_id'    => $periodo_id,
+            ]);
+            DB::table('razon')->insert([
+                'double'         => $rsi,
+                'parametro_id'  => 23,
+                'periodo_id'    => $periodo_id,
+            ]);
+        }
         return redirect()->back();
     }
 
@@ -65,7 +167,11 @@ class RatioSectorController extends Controller
 /*------------------------------ FUNCIÓN QUE DEVUELVE LOS RATIOS POR SECTOR -----------------------------------*/
 
     public function sector($periodo_id){
-        $ratios = Razon::where('periodo_id', $periodo_id)->get();
+        $ratios = DB::select(
+            "SELECT * FROM razon R
+            JOIN parametro P ON R.parametro_id = P.id
+            WHERE periodo_id = ?", [$periodo_id]
+        );
         $empresa = Empresa::where('user_id', Auth::user()->id)->first();
         $periodos = Periodo::where('empresa_id', $empresa->id)->get();
 
@@ -77,6 +183,7 @@ class RatioSectorController extends Controller
             'periodos' => $periodos,
             'calculados' => $calculados,
             'periodo_id' => $periodo_id,
+            'ratios' => $ratios
         ]);
     }
     

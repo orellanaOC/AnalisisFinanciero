@@ -52,7 +52,7 @@ public function calcular_rct($periodo, $empresa, $sector){
     $pasivos_corrientes = $this->get_total($periodo->id, 4);
     $activos = $this->get_total($periodo->id, 1);
 
-    $rct = "No se puede calcular ya que, el denominador es igual a cero";
+    $rct = null;
     if($activos != 0){
         $rct = ($activos_corrientes-$pasivos_corrientes)/$activos;
     }
@@ -69,7 +69,7 @@ public function calcular_rde($periodo, $empresa, $sector){
     $pasivos_corrientes = $this->get_total($periodo->id, 4);
     $valores_corto_plazo = $this->get_total($periodo->id, 6);
 
-    $rde = "No se puede calcular ya que, el denominador es igual a cero";
+    $rde = null;
     if($pasivos_corrientes != 0){
         $rde = ($efectivo + $valores_corto_plazo)/$pasivos_corrientes;
     }
@@ -86,7 +86,7 @@ public function calcular_rri($periodo, $empresa, $sector){
 
     $costo_ventas = $this->select_from_er("costo_ventas", $periodo);
 
-    $razon_rotacion_inventario = "No se puede calcular ya que, el denominador es igual a cero";
+    $razon_rotacion_inventario = null;
     if($inventario_promedio != 0){
         $razon_rotacion_inventario = number_format($costo_ventas/$inventario_promedio, 2);
     }
@@ -108,7 +108,7 @@ public function calcular_rdi($periodo, $empresa, $sector){
     $inventario_promedio = $this->get_promedio($periodo, $empresa, 5);
     $costo_ventas = $this->select_from_er("costo_ventas", $periodo);
 
-    $razon_dias_inventario = "No se puede calcular ya que, el denominador es igual a cero";
+    $razon_dias_inventario = null;
     if($costo_ventas != 0){
         $razon_dias_inventario = number_format($inventario_promedio/($costo_ventas/365));
     }
@@ -130,7 +130,7 @@ public function calcular_rrcc($periodo, $empresa, $sector){
     $promedio_cuentas_cobrar = $this->get_promedio($periodo, $empresa, 9);
     $ventas_netas = $this->select_from_er("ventas_netas", $periodo);
 
-    $rrcc = "No se puede calcular ya que, el denominador es igual a cero";
+    $rrcc = null;
     if($ventas_netas != 0){
         $rrcc = ($promedio_cuentas_cobrar * 365)/$ventas_netas;
     }
@@ -146,7 +146,7 @@ public function calcular_rpmc($periodo, $empresa, $sector){
     $promedio_cuentas_cobrar = $this->get_promedio($periodo, $empresa, 9);
     $ventas_netas = $this->select_from_er("ventas_netas", $periodo);
 
-    $rpmc = "No se puede calcular ya que, el denominador es igual a cero";
+    $rpmc = null;
     if($promedio_cuentas_cobrar != 0){
         $rpmc = $ventas_netas/$promedio_cuentas_cobrar;
     }
@@ -162,7 +162,7 @@ public function calcular_rrcp($periodo, $empresa, $sector){
     $promedio_cuentas_pagar = $this->get_promedio($periodo, $empresa, 11);
     $compras = $this->get_promedio($periodo, $empresa, 10);
 
-    $rrcp = "No se puede calcular ya que, el denominador es igual a cero";
+    $rrcp = null;
     if($promedio_cuentas_pagar != 0){
         $rrcp = $compras/$promedio_cuentas_pagar;
     }
@@ -178,7 +178,7 @@ public function calcular_rpmp($periodo, $empresa, $sector){
     $promedio_cuentas_pagar = $this->get_promedio($periodo, $empresa, 11);
     $compras = $this->get_promedio($periodo, $empresa, 10);
 
-    $rpmp = "No se puede calcular ya que, el denominador es igual a cero";
+    $rpmp = null;
     if($compras != 0){
         $rpmp = ($promedio_cuentas_pagar*365)/$compras;
     }
@@ -194,7 +194,7 @@ public function calcular_irat($periodo, $empresa, $sector){
     $promedio_activo_total = $this->get_promedio($periodo, $empresa, 1);
     $ventas_netas = $this->select_from_er("ventas_netas", $periodo);
 
-    $irat = "No se puede calcular ya que, el denominador es igual a cero";
+    $irat = null;
     if($promedio_activo_total != 0){
         $irat = $ventas_netas/$promedio_activo_total;
     }
@@ -210,7 +210,7 @@ public function calcular_iraf($periodo, $empresa, $sector){
     $promedio_activo_fijo = $this->get_promedio($periodo, $empresa, 15);
     $ventas_netas = $this->select_from_er("ventas_netas", $periodo);
 
-    $iraf = "No se puede calcular ya que, el denominador es igual a cero";
+    $iraf = null;
     if($promedio_activo_fijo != 0){
         $iraf = $ventas_netas/$promedio_activo_fijo;
     }
@@ -226,7 +226,7 @@ public function calcular_imb($periodo, $empresa, $sector){
     $ventas = $this->select_from_er("ventas", $periodo);
     $utilidad_bruta = $this->select_from_er("utilidad_bruta", $periodo);
 
-    $imb = "No se puede calcular ya que, el denominador es igual a cero";
+    $imb = null;
     if($ventas != 0){
         $imb = $utilidad_bruta/$ventas;
     }
@@ -242,7 +242,7 @@ public function calcular_imo($periodo, $empresa, $sector){
     $ventas = $this->select_from_er("ventas", $periodo);
     $utilidad_operativa = $this->select_from_er("utilidad_operativa", $periodo);
 
-    $imo = "No se puede calcular ya que, el denominador es igual a cero";
+    $imo = null;
     if($ventas != 0){
         $imo = $utilidad_operativa/$ventas;
     }
@@ -258,7 +258,7 @@ public function calcular_ge($periodo, $empresa, $sector){
     $pasivo = $this->get_total($periodo->id, 2);
     $activo = $this->get_total($periodo->id, 1);
 
-    $ge = "No se puede calcular ya que, el denominador es igual a cero";
+    $ge = null;
     if($activo != 0){
         $ge = $pasivo/$activo;
     }
@@ -274,7 +274,7 @@ public function calcular_gp($periodo, $empresa, $sector){
     $patrimonio = $this->get_total($periodo->id, 12);
     $activo = $this->get_total($periodo->id, 1);
 
-    $gp = "No se puede calcular ya que, el denominador es igual a cero";
+    $gp = null;
     if($activo != 0){
         $gp = $patrimonio/$activo;
     }
@@ -290,7 +290,7 @@ public function calcular_rep($periodo, $empresa, $sector){
     $pasivo = $this->get_total($periodo->id, 2);
     $patrimonio = $this->get_total($periodo->id, 12);
 
-    $rep = "No se puede calcular ya que, el denominador es igual a cero";
+    $rep = null;
     if($patrimonio != 0){
         $rep = $pasivo/$patrimonio;
     }
@@ -306,7 +306,7 @@ public function calcular_rcgf($periodo, $empresa, $sector){
     $utilidad_antes_de_i = $this->select_from_er("utilidad_antes_de_i", $periodo);
     $gastos_financieros = $periodo->gastos_financieros;
 
-    $rcgf = "No se puede calcular ya que, el denominador es igual a cero";
+    $rcgf = null;
     if($gastos_financieros != 0){
         $rcgf = $utilidad_antes_de_i/$gastos_financieros;
     }
@@ -322,7 +322,7 @@ public function calcular_roe($periodo, $empresa, $sector){
     $utilidad_neta = $this->select_from_er("utilidad_neta", $periodo);
     $patrimonio_promedio = $this->get_promedio($periodo, $empresa, 12);
 
-    $roe = "No se puede calcular ya que, el denominador es igual a cero";
+    $roe = null;
     if($patrimonio_promedio != 0){
         $roe = $utilidad_neta/$patrimonio_promedio;
     }
@@ -338,7 +338,7 @@ public function calcular_rpa($periodo, $empresa, $sector){
     $utilidad_neta = $this->select_from_er("utilidad_neta", $periodo);
     $numero_acciones = $periodo->acciones;
     
-    $rpa = "No se puede calcular ya que, el denominador es igual a cero";
+    $rpa = null;
     if($numero_acciones != 0){
         $rpa = number_format($utilidad_neta/$numero_acciones, 2);
     }
@@ -360,7 +360,7 @@ public function calcular_roa($periodo, $empresa, $sector){
     $utilidad_neta = $this->select_from_er("utilidad_neta", $periodo);
     $activo = $this->get_total($periodo->id, 1);
 
-    $roa = "No se puede calcular ya que, el denominador es igual a cero";
+    $roa = null;
     if($activo != 0){
         $roa = $utilidad_neta/$activo;
     }
@@ -376,7 +376,7 @@ public function calcular_rsv($periodo, $empresa, $sector){
     $utilidad_neta = $this->select_from_er("utilidad_neta", $periodo);
     $ventas = $this->select_from_er("ventas", $periodo);
 
-    $rsv = "No se puede calcular ya que, el denominador es igual a cero";
+    $rsv = null;
     if($ventas != 0){
         $rsv = $utilidad_neta/$ventas;
     }
@@ -392,7 +392,7 @@ public function calcular_rsi($periodo, $empresa, $sector){
     $ingresos = $this->select_from_er("ventas", $periodo);
     $inversion = $periodo->inversion_inicial;
 
-    $rsi = "No se puede calcular ya que, el denominador es igual a cero";
+    $rsi = null;
     if($inversion != 0){
         $rsi = ($ingresos-$inversion)/$inversion;
     }
