@@ -226,7 +226,7 @@ Route::middleware(['auth'])->group(function(){
 
 	/*------------------------------------ RATIOS POR SECTOR -------------------------------------------------*/
 
-	Route::post('/ratio/sector/calcular', 'RatioSectorController@calcular_ratios')->name('ratio_sector.calcular');
+	Route::get('/ratio/sector_calcular/{id_periodo}', 'RatioSectorController@calcular_ratios')->name('ratio_sector.calcular');
 	Route::get('/ratio/sector', 'RatioSectorController@sector_padre')->name('ratio_sector.padre');
 	Route::get('/ratio/sector/{id_periodo}', 'RatioSectorController@sector')->name('ratio.sector');
 
