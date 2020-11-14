@@ -153,7 +153,7 @@ class AnalisisTableSeeder extends Seeder
             'parametro_id'  => 20,
         ]);
         DB::table('analisis')->insert([
-            'individual'    => 'La la capacidad que tienen los activos para generar beneficios de <nombre de empresa> en el año <año del período> fue de <resultado>',
+            'individual'    => 'La la capacidad que tienen los activos para generar beneficios de <nombre de la empresa> en el año <año del período> fue de <resultado>',
             'mayor'         => '',
             'entre'         => '',
             'menor'         => '',
@@ -167,7 +167,7 @@ class AnalisisTableSeeder extends Seeder
             'parametro_id'  => 22,
         ]);
         DB::table('analisis')->insert([
-            'individual'    => 'La utilidad de <nombre de la empresa> que se obtuvo por cada dólar invertido en el período de <año de periodo> fue de $<resultado>',
+            'individual'    => 'La utilidad de <nombre de la empresa> que se obtuvo por cada dólar invertido en el período de <año del período> fue de $<resultado>',
             'mayor'         => '',
             'entre'         => '',
             'menor'         => '',

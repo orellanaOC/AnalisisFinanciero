@@ -84,8 +84,8 @@ class ParametroTableSeeder extends Seeder
         DB::table('parametro')->insert([
             'parametro'=>'Grado de endeudamiento',
             'tipo_id'=> 3,
-            'min'=> 40,
-            'max'=> 60,
+            'min'=> 0.4,
+            'max'=> 0.6,
         ]);
         DB::table('parametro')->insert([
             'parametro'=>'Grado de propiedad',

@@ -131,8 +131,8 @@ public function calcular_rrcc($periodo, $empresa, $sector){
     $ventas_netas = $this->select_from_er("ventas_netas", $periodo);
 
     $rrcc = null;
-    if($ventas_netas != 0){
-        $rrcc = ($promedio_cuentas_cobrar * 365)/$ventas_netas;
+    if($promedio_cuentas_cobrar != 0){
+        $rrcc = $ventas_netas/$promedio_cuentas_cobrar;
     }
 
     return $rrcc;
@@ -147,8 +147,8 @@ public function calcular_rpmc($periodo, $empresa, $sector){
     $ventas_netas = $this->select_from_er("ventas_netas", $periodo);
 
     $rpmc = null;
-    if($promedio_cuentas_cobrar != 0){
-        $rpmc = $ventas_netas/$promedio_cuentas_cobrar;
+    if($ventas_netas != 0){
+        $rpmc = ($promedio_cuentas_cobrar * 365)/$ventas_netas;
     }
 
     return $rpmc;

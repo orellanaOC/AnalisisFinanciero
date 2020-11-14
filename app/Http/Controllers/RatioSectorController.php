@@ -167,11 +167,25 @@ class RatioSectorController extends Controller
 /*------------------------------ FUNCIÓN QUE DEVUELVE LOS RATIOS POR SECTOR -----------------------------------*/
 
     public function sector($periodo_id){
+        $periodo = Periodo::findOrFail($periodo_id);
+        $empresa = Empresa::findOrFail($periodo->empresa_id);
+        $sector = Sector::findOrFail($empresa->sector_id);
+
         $ratios = DB::select(
-            "SELECT * FROM razon R
+            "SELECT R.parametro_id, R.id, P.parametro, R.double FROM razon R
             JOIN parametro P ON R.parametro_id = P.id
-            WHERE periodo_id = ?", [$periodo_id]
+            WHERE periodo_id = ? ORDER BY P.id", [$periodo_id]
         );
+        $promedios = DB::select(
+            "SELECT AVG(R.double) FROM razon R
+            JOIN periodo P ON R.periodo_id = P.id
+            WHERE P.year = ? GROUP BY parametro_id ORDER BY parametro_id",
+            [$periodo->year]
+        );
+
+        $instancia = new MetodosAnalisisController();
+        $analisis = $instancia->get_analisis($ratios, $empresa->nombre, $sector->nombre, $periodo->year);
+
         $empresa = Empresa::where('user_id', Auth::user()->id)->first();
         $periodos = Periodo::where('empresa_id', $empresa->id)->get();
 
@@ -180,10 +194,12 @@ class RatioSectorController extends Controller
             $calculados = true;
         }
         return view('finanzasViews.ratios.sector', [
-            'periodos' => $periodos,
-            'calculados' => $calculados,
-            'periodo_id' => $periodo_id,
-            'ratios' => $ratios
+            'periodos'      => $periodos,
+            'calculados'    => $calculados,
+            'periodo_id'    => $periodo_id,
+            'ratios'        => $ratios,
+            'promedios'     => $promedios,
+            'analisis'      => $analisis
         ]);
     }
     
