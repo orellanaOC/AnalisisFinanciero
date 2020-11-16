@@ -11,6 +11,7 @@
                 <b>{{ __('SIAF') }}</b></a>
         </div>
         <ul class="nav">
+            @can('cuenta.index')
             <li @if ($pageSlug == 'catalogo') class="active " @endif>
                 <!--a href="{{ route('home') }}"-->
                 <a href="{{ route('catalogo_show') }}">
@@ -49,19 +50,23 @@
                     <p>{{ __('Vinculación') }}</p>
                 </a>
             </li>
+            @endcan
+            @can('periodo.index')
             <li @if ($pageSlug == 'periodo') class="active " @endif>
                 <a href="{{ route('periodo.index') }}">
                     <i class="tim-icons icon-calendar-60"></i>
                     <p>{{ __('Períodos') }}</p>
                 </a>
             </li>
-            
+            @endcan
+            @can('analisis.index')
             <li @if ($pageSlug == 'empresa') class="active " @endif>
                 <a href="{{ route('analisis_horizontal.index') }}">
                     <i class="tim-icons icon-bulb-63"></i>
                     <p>{{ __('Análisis & Ratios') }}</p>
                 </a>
             </li>
+            @endcan
             <!--li @if ($pageSlug == 'analisis') class="active " @endif>
                 <a href="{{ route('analisis') }}">
                     <i class="tim-icons icon-chart-bar-32"></i>
@@ -74,6 +79,7 @@
                     <p>{{ __('Asistencia') }}</p>
                 </a>
             </li>
+            
             @canany(['users.index', 'roles.index', 'permission_user.index'])
             <li>
                 <a data-toggle="collapse" href="#seguridad" aria-expanded="false">

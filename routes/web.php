@@ -156,7 +156,8 @@ Route::middleware(['auth'])->group(function(){
     Route::post('catalogo/deleteall','CatalogoController@BorrarCuentas')->name('cuenta.deleteall');
     Route::post('catalogo/confirmar','CatalogoController@ConfirmarCatalogo')->name('catalogo.confirmar');
     Route::post('catalogo/confirmarVinculacion','CuentaSistemaController@confirmarVinculacion')->name('cuenta.vinculacion');
-    Route::get('/catalogo/show', 'CatalogoController@show')->name('catalogo_show');
+	Route::get('/catalogo/show', 'CatalogoController@show')->name('catalogo_show')
+	->middleware('has.permission:cuenta.show');
 
 
 	//Guardar cuentas de forma manual
