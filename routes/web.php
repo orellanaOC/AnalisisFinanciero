@@ -155,7 +155,8 @@ Route::middleware(['auth'])->group(function(){
 
 
 	//Guardar cuentas de forma manual
-	Route::post('/catalogo', 'CatalogoController@store')->name('cuenta_store');
+	Route::post('/catalogo', 'CatalogoController@store')->name('cuenta_store')
+	->middleware('has.permission:cuenta.createshowshow');
 	Route::put('/catalogo','CatalogoController@update')->name('cuenta_update');
     Route::delete('/catalogo/{id}', 'CatalogoController@destroy')->name('cuenta.destroy');
 
@@ -179,7 +180,8 @@ Route::middleware(['auth'])->group(function(){
 	/*-----------------------------------------------------------------------------------------------------*/
 
 	/*------------------------------------------- BALANCE-GENERAL -------------------------------------------*/
-	Route::get('/balance_general_index', 'HomeController@balance_general_index')->name('balance_general_index');
+	Route::get('/balance_general_index', 'HomeController@balance_general_index')->name('balance_general_index')
+	->middleware('has.permission:balance_general.index');
     Route::get('/{id_periodo}/balance_general_create', 'BalanceGeneralController@create')->name('balance_general_create');
     Route::get('balance_general/download/excel','BalanceGeneralController@dowloadExcel')->name('balance_general.download');
 
