@@ -10,8 +10,9 @@ class PeriodoController extends Controller
 {
     //
     public function index(){
-        $periodos= Periodo::orderBy('id','desc')->get();
-
+        $idUsuarioLogeado=auth()->user()->id;
+        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+        $periodos= Periodo::where('empresa_id',$empresa->id)->orderBy('id','desc')->get();
         return view('finanzasViews.periodo.index',['periodos'=>$periodos]);
     }
     public function store(Request $request){
