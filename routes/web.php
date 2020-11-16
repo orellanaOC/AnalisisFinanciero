@@ -48,12 +48,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 /* Vistas de prueba (usualmente estaticas)*/
 Route::get('/formulas', 'HomeController@formulas')->name('formulas');
-Route::get('/analisis_de_sector', 'HomeController@analisis_sector')->name('analisis');
-Route::get('/analisis_individual', 'HomeController@empresa_individual')->name('analisis_empresa');
-Route::get('/analisis_horizontal', 'HomeController@analisis_horizontal')->name('analisis_horizontal');
-Route::get('/ratios', 'HomeController@ratios')->name('ratios');
-
-
 
 
 Route::middleware(['auth'])->group(function(){

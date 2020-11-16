@@ -67,12 +67,6 @@
                 </a>
             </li>
             @endcan
-            <!--li @if ($pageSlug == 'analisis') class="active " @endif>
-                <a href="{{ route('analisis') }}">
-                    <i class="tim-icons icon-chart-bar-32"></i>
-                    <p>{{ __('Análisis del sector') }}</p>
-                </a>
-            </li-->
             <li @if ($pageSlug == 'formulas') class="active " @endif>
                 <a href="{{ route('formulas') }}">
                     <i class="tim-icons icon-chat-33"></i>
