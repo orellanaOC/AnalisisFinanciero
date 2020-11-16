@@ -105,18 +105,6 @@
                 </div>
             </li>
             @endcanany
-            <!--li @if ($pageSlug == 'rtl') class="active " @endif>
-                <a href="{{ route('pages.rtl') }}">
-                    <i class="tim-icons icon-world"></i>
-                    <p>{{ __('RTL Support') }}</p>
-                </a>
-            </li>
-            <li class=" {{ $pageSlug == 'upgrade' ? 'active' : '' }} bg-info">
-                <a href="#">
-                    <i class="tim-icons icon-spaceship"></i>
-                    <p>{{ __('Upgrade to PRO') }}</p>
-                </a>
-            </li-->
         </ul>
     </div>
 </div>

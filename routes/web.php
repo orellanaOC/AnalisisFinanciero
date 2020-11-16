@@ -169,9 +169,12 @@ Route::middleware(['auth'])->group(function(){
 	Route::post('/cuenta_sistema/{id_cuenta_sistema}', 'CuentaSistemaController@vinculacion')->name('cuenta_sistema.vinculacion');
 	Route::delete('/cuenta_sistema_d/{id_cuenta_sistema}', 'CuentaSistemaController@destroy')->name('vinculacion.destroy');
     /*-----------------------------------------------------------------------------------------------------*/
-    Route::get('/periodos','PeriodoController@index')->name('periodo.index');
-	Route::post('periodo/create','PeriodoController@store')->name('periodo.create');
-	Route::delete('periodo/delete/{id}','PeriodoController@destroy')->name('periodo.delete');
+	Route::get('/periodos','PeriodoController@index')->name('periodo.index')
+	->middleware('has.permission:periodo.index');
+	Route::post('periodo/create','PeriodoController@store')->name('periodo.create')
+	->middleware('has.permission:periodo.create');
+	Route::delete('periodo/delete/{id}','PeriodoController@destroy')->name('periodo.delete')
+	->middleware('has.permission:periodo.destroy');
 
 	/*-----------------------------------------------------------------------------------------------------*/
 
@@ -205,7 +208,8 @@ Route::middleware(['auth'])->group(function(){
 	//padre
 	Route::get('/analisis_vertical', 'AnalisisVerticalController@index')->name('analisis_vertical.index');
 	//hijo
-	Route::get('/{id_periodo}/analisis_vertical', 'AnalisisVerticalController@show')->name('analisis_vertical.show');
+	Route::get('/{id_periodo}/analisis_vertical', 'AnalisisVerticalController@show')->name('analisis_vertical.show')
+	->middleware('has.permission:analisis.show');
 	/*--------------------------------------------------------------------------------------------------------*/
 
 	/*------------------------------------------- ANALISIS-HORIZONTAL-------------------------------------------*/

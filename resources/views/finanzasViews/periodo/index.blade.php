@@ -10,14 +10,17 @@
                             <h2 class="card-title">Períodos</h2>
                         </div>
                         <div class="col-md-2">
+                        @can('periodo.create')
                           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aniadir_periodo">+ Período</i></button>
+                          @endcan
                         </div>
                     </div>
                     <!-- Modal de registro de nuevo periodo -->
+                    @can('periodo.create')
                     <div class="modal fade" id="aniadir_periodo" tabindex="-1" role="dialog" aria-labelledby="manual_label" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                <!--cambiar el route -->
+                                    <!--cambiar el route -->
                                     <form action="{{route('periodo.create')}}" method="post" id="formPeriodo">
                                         @csrf
                                         <div class="modal-header">
@@ -54,6 +57,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endcan
 
 
                 </div>
@@ -82,10 +86,18 @@
                                             @csrf
                                             @method('delete')
                                             <!--Todo agregar id del periodo-->
+                                            @can('balance_general.create')
                                                 <a class="btn btn-info btn-sm" href="{{ route('balance_general_create',$periodo->id) }}">+ Balance general</a>
+                                            @endcan
+                                            @can('estado_resultado.create')
                                                 <a class="btn btn-info btn-sm" href="{{ route('estado_resultado_create',$periodo->id) }}">+ Estado de resultados</a>
+                                            @endcan
+                                            @can('analisis.index')
                                                 <a class="btn btn-info btn-sm" href="{{ route('analisis_vertical.show', $periodo->id) }}">+ Analisis vertical</a>
+                                            @endcan
+                                            @can('periodo.destroy')
                                                 <button class="btn btn-danger btn-sm" type="submit">- Eliminar</button>
+                                            @endcan
                                             </form>
                                         </div>
                                     </td>
