@@ -7,6 +7,9 @@
             @if (session('status'))
                 <div class="alert alert-success">{{ session('status') }}</div>
             @endif
+            @if (session('errores'))
+                <div class="alert alert-danger">{{ session('errores') }}</div>
+            @endif
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -178,11 +181,11 @@
                             <tbody>
                                 @foreach ($cuentas as $cuenta)
                                 <tr id="{{$cuenta->id}}" onMouseOver="ResaltarFila({{$cuenta->id}});" onMouseOut="RestablecerFila({{$cuenta->id}}, '')">
-                                    <td>{{$cuenta->codigo}}</td>                                    
+                                    <td>{{$cuenta->codigo}}</td>
                                     @if ($cuenta->padre_id==null)
                                         <td><p class="text-danger">{{$cuenta->nombre}}</p></td>
                                     @else
-                                        <td>{{$cuenta->nombre}}</td> 
+                                        <td>{{$cuenta->nombre}}</td>
                                     @endif
                                     <td>{{$cuenta->tipo->nombre}}</td>
                                     <td>
@@ -208,20 +211,20 @@
                                             <div class="btn-group" role="group">
                                                 <!--boton de editar-->
                                                 @if ($cuenta->padre_id==null)
-                                                <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#editar_cuenta" 
+                                                <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#editar_cuenta"
                                                 onclick="editarCuenta('{{$cuenta->id}}','{{$cuenta->codigo}}','{{$cuenta->nombre}}','{{$cuenta->tipo->id}}','')">
                                                     <i class="tim-icons icon-pencil"></i>
                                                 </button>
                                                 @else
                                                     @foreach ($cuentas as $cuenta2)
                                                         @if ($cuenta->padre_id==$cuenta2->id)
-                                                        <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#editar_cuenta" 
+                                                        <button type="button" class="btn btn-success btn-sm btn-round btn-icon" data-toggle="modal" data-target="#editar_cuenta"
                                                 onclick="editarCuenta('{{$cuenta->id}}','{{$cuenta->codigo}}','{{$cuenta->nombre}}','{{$cuenta->tipo->id}}','{{$cuenta2->codigo}}')">
                                                             <i class="tim-icons icon-pencil"></i>
                                                         </button>
                                                         @endif
                                                     @endforeach
-                                                
+
                                                 @endif
                                                 <!--boton de eliminar-->
                                                 <button type="button" class="btn btn-sm btn-warning btn-round btn-icon" onclick="confirmar('formulario{{$cuenta->id}}')">
@@ -321,7 +324,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
     $("#archivo").change(function(){
-       
+
         $("#botonarchivo").prop("disabled", this.files.length == 0);
     });
 </script>

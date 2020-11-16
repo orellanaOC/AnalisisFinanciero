@@ -9,6 +9,7 @@ use App\CuentaSistema;
 use App\VinculacionCuenta;
 use App\Periodo;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class BalanceGeneralController extends Controller
 {
@@ -96,5 +97,12 @@ class BalanceGeneralController extends Controller
     public function destroy($id)
     {
         //
+    }
+    //Para descargar el excel
+    public function dowloadExcel(Request $request){
+        $idUsuarioLogeado=auth()->user()->id;
+        $nombre_descarga=$idUsuarioLogeado."-"."Plantilla-Balance-General.xlsx";
+        $ruta='plantillasExcel/Plantilla-Balance-General.xlsx';
+        return Storage::download($ruta,$nombre_descarga);
     }
 }

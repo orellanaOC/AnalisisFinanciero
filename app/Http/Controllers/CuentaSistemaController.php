@@ -14,12 +14,12 @@ class CuentaSistemaController extends Controller
     public function index()
     {
         //$cuentas= CuentaSistema::all();
-        $cuentas=CuentaSistema::where('uso',1)->get();
+        $cuentas=CuentaSistema::all();
         $idUsuarioLogeado=auth()->user()->id;
         $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
         //Join para traer el nombre de la cuenta vinculada
-        $vinculaciones=DB::select('select ca.nombre, v.id_cuenta_sistema
-        from cuenta as ca
+        $vinculaciones=DB::select('select ca.nombre, v.id_cuenta_sistema 
+        from cuenta as ca 
         inner join  vinculacion_cuenta as v
         on ca.id=v.id_cuenta
         where v.id_empresa=?', [$empresa->id]);

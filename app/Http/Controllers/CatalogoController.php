@@ -206,86 +206,103 @@ class CatalogoController extends Controller
         }catch(Exception $e){
            return response()->json($message.$e);
         }
+        //Validacion de la plantilla
+        if($spreadsheet->getActiveSheet()->getCell('E2')==""){
+            Storage::delete($ruta);
+            return redirect()->route('catalogo_prueba')->with('errores', 'En la celda "E2" debera ingresar el codigo CC');
+        }
+        else{
+            if($spreadsheet->getActiveSheet()->getCell('E2')!="CC"){
+                Storage::delete($ruta);
+                return redirect()->route('catalogo_prueba')->with('errores', 'En la celda "E2" debera ingresar el codigo CC');
+            }
+            else{
+                for ($i=2; $i < count($data); $i++) {
+                    if($data[$i]["A"]!=null)
+                    {
+                        //En caso de ser nula es una cuenta padre
+                        if($data[$i]["C"]==null){
+                            //Creando la nueva cuenta y asignando sus valores
+                            $idUsuarioLogeado=auth()->user()->id;
+                            $empresa= Empresa::where('user_id', $idUsuarioLogeado)->get();
+                            $busqueda_existe=Cuenta::where('codigo', $data[$i]["C"])->where('empresa_id',$empresa[0]->id)->first();
+                            //si no existe una cuenta con ese codigo si la crea
+                            if($busqueda_existe==null){
+                                $cuenta= new Cuenta();
+                                $cuenta->codigo= $data[$i]["A"];
+                                $cuenta->nombre= $data[$i]["B"];
+                                //La empresa sera tomada directamente de la empresa del usuario logeado
+                                $idUsuarioLogeado=auth()->user()->id;
+                                $empresa= Empresa::where('user_id', $idUsuarioLogeado)->get();
+                                $cuenta->empresa_id= $empresa[0]->id;
+                                if(strtoupper($data[$i]["D"])=="A"){
+                                    $cuenta->tipo_id= 1;
+                                }
+                                else{
+                                    $cuenta->tipo_id= 2;
+                                }
+                                $cuenta->padre_id=null;
+                                $cuenta->save();
+                            }
+                            else{
 
-        for ($i=2; $i < count($data); $i++) {
-            if($data[$i]["A"]!=null)
-            {
-                //En caso de ser nula es una cuenta padre
-                if($data[$i]["C"]==null){
-                    //Creando la nueva cuenta y asignando sus valores
-                    $idUsuarioLogeado=auth()->user()->id;
-                    $empresa= Empresa::where('user_id', $idUsuarioLogeado)->get();
-                    $busqueda_existe=Cuenta::where('codigo', $data[$i]["C"])->where('empresa_id',$empresa[0]->id)->first();
-                    //si no existe una cuenta con ese codigo si la crea
-                    if($busqueda_existe==null){
-                        $cuenta= new Cuenta();
-                        $cuenta->codigo= $data[$i]["A"];
-                        $cuenta->nombre= $data[$i]["B"];
-                        //La empresa sera tomada directamente de la empresa del usuario logeado
-                        $idUsuarioLogeado=auth()->user()->id;
-                        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->get();
-                        $cuenta->empresa_id= $empresa[0]->id;
-                        if(strtoupper($data[$i]["D"])=="A"){
-                            $cuenta->tipo_id= 1;
+                            }
+
                         }
                         else{
-                            $cuenta->tipo_id= 2;
+                            $padre=$data[$i]["C"];
+                            $existe=0;
+                            for ($j=2; $j < count($data); $j++) {
+                                if($padre==$data[$j]["A"]){
+                                    $existe=1;
+                                }
+                            }
+                            //Si existe el codigo se crea
+                            if($existe){
+
+                                //Creando la nueva cuenta y asignando sus valores
+                                $cuenta= new Cuenta();
+                                $cuenta->codigo= $data[$i]["A"];
+                                $cuenta->nombre= $data[$i]["B"];
+                                //La empresa sera tomada directamente de la empresa del usuario logeado
+                                $idUsuarioLogeado=auth()->user()->id;
+                                $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
+                                $cuenta->empresa_id = $empresa->id;
+                                if(strtoupper($data[$i]["D"])=="A"){
+                                    $cuenta->tipo_id= 1;
+                                }
+                                else{
+                                    $cuenta->tipo_id= 2;
+                                }
+                                $busqueda_padre2=Cuenta::where('codigo', $data[$i]["C"])->where('empresa_id',$empresa->id)->first();
+                                if($busqueda_padre2 != null){
+                                    $cuenta->padre_id=$busqueda_padre2->id;
+                                }
+                                $cuenta->save();
+                            }
+                            //Si no existe el codigo no se crea
+                            else{
+
+                            }
+
                         }
-                        $cuenta->padre_id=null;
-                        $cuenta->save();
-                    }
-                    else{
 
                     }
 
-                }
-                else{
-                    $padre=$data[$i]["C"];
-                    $existe=0;
-                    for ($j=2; $j < count($data); $j++) {
-                        if($padre==$data[$j]["A"]){
-                            $existe=1;
-                        }
-                    }
-                    //Si existe el codigo se crea
-                    if($existe){
-
-                        //Creando la nueva cuenta y asignando sus valores
-                        $cuenta= new Cuenta();
-                        $cuenta->codigo= $data[$i]["A"];
-                        $cuenta->nombre= $data[$i]["B"];
-                        //La empresa sera tomada directamente de la empresa del usuario logeado
-                        $idUsuarioLogeado=auth()->user()->id;
-                        $empresa= Empresa::where('user_id', $idUsuarioLogeado)->first();
-                        $cuenta->empresa_id = $empresa->id;
-                        if(strtoupper($data[$i]["D"])=="A"){
-                            $cuenta->tipo_id= 1;
-                        }
-                        else{
-                            $cuenta->tipo_id= 2;
-                        }
-                        $busqueda_padre2=Cuenta::where('codigo', $data[$i]["C"])->where('empresa_id',$empresa->id)->first();
-                        if($busqueda_padre2 != null){
-                            $cuenta->padre_id=$busqueda_padre2->id;
-                        }
-                        $cuenta->save();
-                    }
-                    //Si no existe el codigo no se crea
-                    else{
-
-                    }
 
                 }
+
+                //Eliminar el archivo subido, solo se utiliza para la importacion y luego de desecha
+                Storage::delete($ruta);
+                return redirect()->route('catalogo_prueba')->with('status', 'Archivo Procesado Exitosamente, compuebe a continuacion la informacion');
+                //return view('simpleViews.empresa.cuentas', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
 
             }
 
-            $message=['success'=>'La importacion de cuentas se efectuo exitosamente.'];
+
         }
 
-        //Eliminar el archivo subido, solo se utiliza para la importacion y luego de desecha
-        Storage::delete($ruta);
-        return redirect()->route('catalogo_prueba');
-        //return view('simpleViews.empresa.cuentas', ['tipoCuenta'=> $tipoCuenta,'cuentas'=>$cuentas]);
+
     }
 
     public function guardarCuenta($request, $empresa, $metodo){

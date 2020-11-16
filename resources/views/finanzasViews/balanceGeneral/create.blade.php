@@ -355,6 +355,7 @@
                             </div>
 
                             <div class="modal-body">
+                            <a href="{{URL::signedRoute('balance_general.download')}}" class="btn btn-primary">Presione aqui para descargar plantila</a>
 
                             <p>Formato admitido: xlsx</p>
 

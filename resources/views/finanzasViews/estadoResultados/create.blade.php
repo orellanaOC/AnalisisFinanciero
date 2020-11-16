@@ -114,7 +114,7 @@
                             </div>
 
                             <div class="modal-body">
-
+                                <a href="{{URL::signedRoute('estado_resultado.download')}}" class="btn btn-primary">Presione aqui para descargar plantila</a>
                             <p>Formato admitido: xlsx</p>
 
                             <div class="row">

@@ -47,35 +47,35 @@ class ParametroTableSeeder extends Seeder
             'tipo_id'=> 2,
         ]);
         DB::table('parametro')->insert([
-            'parametro'=>'Razón de rotación de cuentas por pagar',
+            'parametro'=>'Razon de rotacion de cuentas por cobrar',
             'tipo_id'=> 2,
         ]);
         DB::table('parametro')->insert([
-            'parametro'=>'Razón de período medio de pago',
+            'parametro'=>'Razon de periodo medio de cobranza',
             'tipo_id'=> 2,
         ]);
         DB::table('parametro')->insert([
-            'parametro'=>'Razón de rotación de cuentas por cobrar',
+            'parametro'=>'Razon de rotacion de cuentas por pagar',
             'tipo_id'=> 2,
         ]);
         DB::table('parametro')->insert([
-            'parametro'=>'Razón de período medio de cobranza',
+            'parametro'=>'Razon de periodo medio de pago',
             'tipo_id'=> 2,
         ]);
         DB::table('parametro')->insert([
-            'parametro'=>'Índice de rotación de activos totales',
+            'parametro'=>'Indice de rotacion de activos totales',
             'tipo_id'=> 2,
         ]);
         DB::table('parametro')->insert([
-            'parametro'=>'Índice de rotación de activos fijos',
+            'parametro'=>'Indice de rotacion de activos fijos',
             'tipo_id'=> 2,
         ]);
         DB::table('parametro')->insert([
-            'parametro'=>'Índice de margen bruto',
+            'parametro'=>'Indice de margen bruto',
             'tipo_id'=> 2,
         ]);
         DB::table('parametro')->insert([
-            'parametro'=>'Índice de margen operativo',
+            'parametro'=>'Indice de margen operativo',
             'tipo_id'=> 2,
         ]);
 
@@ -84,8 +84,8 @@ class ParametroTableSeeder extends Seeder
         DB::table('parametro')->insert([
             'parametro'=>'Grado de endeudamiento',
             'tipo_id'=> 3,
-            'min'=> 40,
-            'max'=> 60,
+            'min'=> 0.4,
+            'max'=> 0.6,
         ]);
         DB::table('parametro')->insert([
             'parametro'=>'Grado de propiedad',

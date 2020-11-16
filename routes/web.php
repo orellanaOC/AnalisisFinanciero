@@ -183,6 +183,7 @@ Route::middleware(['auth'])->group(function(){
 	/*------------------------------------------- BALANCE-GENERAL -------------------------------------------*/
 	Route::get('/balance_general_index', 'HomeController@balance_general_index')->name('balance_general_index');
     Route::get('/{id_periodo}/balance_general_create', 'BalanceGeneralController@create')->name('balance_general_create');
+    Route::get('balance_general/download/excel','BalanceGeneralController@dowloadExcel')->name('balance_general.download');
 
 	/*-----------------------------------------------------------------------------------------------------*/
 
@@ -191,6 +192,8 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('/{id_periodo}/estado_resultados_create', 'EstadoResultadoController@create')->name('estado_resultado_create');
     Route::post('/{id_periodo}/estado_resultados', 'EstadoResultadoController@store')->name('estado_resultado.store');
     Route::post('estado_resultado/upload/excel/{id_periodo}','EstadoResultadoController@uploadExcel')->name('estado_resultado.upload');
+    Route::get('estado_resultado/download/excel','EstadoResultadoController@dowloadExcel')->name('estado_resultado.download');
+
 	/*-----------------------------------------------------------------------------------------------------*/
 
 	/*------------------------------------------- CUENTA-PERIODO-------------------------------------------*/
@@ -221,6 +224,14 @@ Route::middleware(['auth'])->group(function(){
 
 	Route::get('/ratio/individual', 'RatioController@individual_padre')->name('ratio.individual_padre');
 	Route::get('/ratio/individual/{id_periodo}', 'RatioController@individual')->name('ratio.individual');
+
+	/*--------------------------------------------------------------------------------------------------------*/
+
+	/*------------------------------------ RATIOS POR SECTOR -------------------------------------------------*/
+
+	Route::get('/ratio/sector_calcular/{id_periodo}', 'RatioSectorController@calcular_ratios')->name('ratio_sector.calcular');
+	Route::get('/ratio/sector', 'RatioSectorController@sector_padre')->name('ratio_sector.padre');
+	Route::get('/ratio/sector/{id_periodo}', 'RatioSectorController@sector')->name('ratio.sector');
 
 	/*--------------------------------------------------------------------------------------------------------*/
 });

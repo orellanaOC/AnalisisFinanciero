@@ -152,6 +152,13 @@ class EstadoResultadoController extends Controller
         $ER->periodo_id=$id_periodo;
         return $ER;
     }
+    //Para descargar el excel
+    public function dowloadExcel(Request $request){
+        $idUsuarioLogeado=auth()->user()->id;
+        $nombre_descarga=$idUsuarioLogeado."-"."Plantilla-Estado-Resultado.xlsx";
+        $ruta='plantillasExcel/Plantilla-Estado-Resultado.xlsx';
+        return Storage::download($ruta,$nombre_descarga);
+    }
     public function uploadExcel(Request $request,$id_periodo){
 
         $id_user = auth()->user()->id;
@@ -238,7 +245,7 @@ class EstadoResultadoController extends Controller
                     $utilidad_neta=$utilidad_operativa_antes_de_impuesto-$impuesto_sobre_renta;
 
                     $estado_viejo=EstadoResultado::where('periodo_id',intval($id_periodo))->delete();
-                   
+
 
                     $estado_resultado= new EstadoResultado();
                     $estado_resultado->ventas_netas=$ventas_netas;

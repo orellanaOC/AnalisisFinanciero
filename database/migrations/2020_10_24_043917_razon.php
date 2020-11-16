@@ -15,7 +15,7 @@ class Razon extends Migration
     {
         Schema::create('razon', function (Blueprint $table) {
             $table->id();
-            $table->decimal('double');
+            $table->decimal('double')->nullable();
             $table->integer('parametro_id');
             $table->foreign('parametro_id')->references('id')->on('parametro')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('periodo_id');
