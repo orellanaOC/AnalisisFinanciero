@@ -9,6 +9,8 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use DB;
+use App\Sector;
+use App\Empresa;
 
 class UserController extends Controller
 {
@@ -28,9 +30,11 @@ class UserController extends Controller
     public function create(){
         $roles = DB::select('SELECT * FROM roles');
         $data = User::all();
+        $sectores = Sector::all();
         return view ('users.crear', [
             'roles'=> $roles, 
-            'data' => $data
+            'data' => $data,
+            "sectores" => $sectores
         ]);
     }
 
@@ -72,6 +76,14 @@ class UserController extends Controller
             ]);
         }
 
+        $empresa = new Empresa();
+        $empresa->nombre = request('nombre');
+        $empresa->nit = request('nit');
+        $empresa->nrc = request('nrc');
+        $empresa->sector_id = request('sector');
+        $empresa->user_id = $user->id;
+        $empresa->save();
+
         return redirect('/users');
 
     }
@@ -94,6 +106,8 @@ class UserController extends Controller
     {
         $data= User::all();
         $roles= DB::select('SELECT * FROM roles');
+        $sectores = Sector::all();
+        $empresa = Empresa::where('user_id', $id)->first();
     
         //Buscar user y su respectivo rol
         $user= User::findOrFail($id);
@@ -103,7 +117,9 @@ class UserController extends Controller
             'user'=>$user, 
             'roles' => $roles, 
             'data' => $data,
-            'roleuser'=>$roleuser
+            'roleuser'=>$roleuser,
+            'sectores'=>$sectores,
+            'empresa'=>$empresa
             ]);
     }
 
@@ -145,6 +161,13 @@ class UserController extends Controller
                 'user_id' => $id,
             ]);
         }
+
+        $empresa = Empresa::where('user_id', $id)->first();
+        $empresa->nombre = request('empresa');
+        $empresa->nit = request('nit');
+        $empresa->nrc = request('nrc');
+        $empresa->sector_id = request('sector');
+        $empresa->save();
 
         return redirect('/users');
     }
