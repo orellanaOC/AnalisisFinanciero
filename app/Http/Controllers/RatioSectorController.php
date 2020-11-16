@@ -183,9 +183,6 @@ class RatioSectorController extends Controller
             [$periodo->year]
         );
 
-        $instancia = new MetodosAnalisisController();
-        $analisis = $instancia->get_analisis($ratios, $empresa->nombre, $sector->nombre, $periodo->year);
-
         $empresa = Empresa::where('user_id', Auth::user()->id)->first();
         $periodos = Periodo::where('empresa_id', $empresa->id)->get();
 
@@ -193,6 +190,9 @@ class RatioSectorController extends Controller
         if(count($ratios)>0){
             $calculados = true;
         }
+
+        $instancia = new MetodosAnalisisController();
+        $analisis = $instancia->get_analisis($ratios, $empresa->nombre, $sector->nombre, $periodo->year, $calculados);
         return view('finanzasViews.ratios.sector', [
             'periodos'      => $periodos,
             'calculados'    => $calculados,
