@@ -31,13 +31,12 @@
                                     <table width='100%' class="table">
                                         @foreach ($permisos_usuario as $permiso)
                                             @if($permiso->id_tabla==$tb->id)  
-                                                <tr id="p{{$permiso->id}}" onMouseOver="ResaltarFila('p{{$permiso->id}}');" onMouseOut="RestablecerFila('p{{$permiso->id}}', '')" onClick="eliminarPermiso({{ $permiso->id }});" >   
+                                                <tr id="p{{$permiso->id}}" onMouseOver="ResaltarFila('p{{$permiso->id}}');" onMouseOut="RestablecerFila('p{{$permiso->id}}', '')" onClick="eliminarPermiso('{{$permiso->id}}');">   
                                                     <td>
                                                     </td>                  
                                                     <td id="$permiso->id">
-                                                        <form id="eliminarPermiso{{$permiso->id}}" method="post" action="{{route('permission.destroy')}}">
+                                                        <form id="eliminarPermiso{{$permiso->id}}" method="post" action="{{route ('permission.destroy')}}">
                                                             @csrf
-                                                            @method('DELETE')
                                                             <input hidden name="id_permiso" value="{{$permiso->id}}">
                                                             <input hidden name="id_usuario" value="{{$user->id}}">
                                                             &nbsp;&nbsp;{{$permiso->name}}
@@ -114,4 +113,5 @@
             </div>
         </div>
     </div>
+
 @endsection

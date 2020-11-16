@@ -31,7 +31,7 @@
                                 <table width='100%' class="table">
                                     @foreach ($permisos_role as $permiso)
                                         @if($permiso->id_tabla==$tb->id)  
-                                            <tr id="p{{$permiso->id}}" onMouseOver="ResaltarFila('p{{$permiso->id}}');" onMouseOut="RestablecerFila('p{{$permiso->id}}', '')" onClick="eliminarPermiso({{ $permiso->id }});" >   
+                                            <tr id="p{{$permiso->id}}" onMouseOver="ResaltarFila('p{{$permiso->id}}');" onMouseOut="RestablecerFila('p{{$permiso->id}}', '')" onClick="eliminarPermiso('{{$permiso->id}}');" >   
                                                 <td>
                                                 </td>                  
                                                 <td id="$permiso->id">

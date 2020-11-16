@@ -29,7 +29,7 @@
                             <tbody>
                                 @foreach ($data as $use) 
                                 <tr>                     
-                                    <td id={{$use->id}} onMouseOver="ResaltarFila({{$use->id}});" onMouseOut="RestablecerFila({{$use->id}}, '')" onClick="CrearEnlace('{{ route('users.show', $use->id)}}');">
+                                    <td id="{{$use->id}}" onMouseOver="ResaltarFila({{$use->id}});" onMouseOut="RestablecerFila({{$use->id}}, '')" onClick="CrearEnlace('{{ route('users.show', $use->id)}}');">
                                         {{$use->email}}
                                     </td>
                                     <form method="POST" id="formulario{{$use->id}}" action="{{route('users.destroy', $use->id)}}" >
@@ -44,7 +44,7 @@
 
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" onClick="confirmar(formulario{{$use->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
+                                                <button type="button" onClick="confirmar('formulario{{$use->id}}')" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button> 
                                             </div>

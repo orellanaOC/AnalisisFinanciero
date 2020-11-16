@@ -31,7 +31,7 @@ Roles
                             <tbody>
                                 @foreach ($data as $rol) 
                                 <tr>                     
-                                    <td width="80%" id={{$rol->id}} onMouseOver="ResaltarFila({{$rol->id}});" onMouseOut="RestablecerFila({{$rol->id}}, '')" onClick="CrearEnlace('{{ route('roles.show', $rol->id)}}');">
+                                    <td width="80%" id="{{$rol->id}}" onMouseOver="ResaltarFila({{$rol->id}});" onMouseOut="RestablecerFila({{$rol->id}}, '')" onClick="CrearEnlace('{{ route('roles.show', $rol->id)}}');">
                                         {{$rol->name}}
                                     </td>
                                     <form method="POST" id="formulario{{$rol->id}}" action="{{route('roles.destroy', $rol->id)}}" >
