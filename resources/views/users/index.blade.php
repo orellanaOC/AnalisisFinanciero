@@ -44,7 +44,7 @@
 
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" onClick="confirmar({{$use->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
+                                                <button type="button" onClick="confirmar(formulario{{$use->id}})" class="btn btn-warning btn-sm btn-icon btn-round confirmar">
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button> 
                                             </div>
