@@ -15,7 +15,7 @@
                 <!--a href="{{ route('home') }}"-->
                 <a href="{{ route('catalogo_show') }}">
                     <i class="tim-icons icon-bullet-list-67"></i>
-                    <p>{{ __('Catalogo de cuentas') }}</p>
+                    <p>{{ __('Catálogo de cuentas') }}</p>
                 </a>
             </li>
             <!--Menusito desplegable-->
@@ -51,14 +51,14 @@
             </li>
             <li @if ($pageSlug == 'periodo') class="active " @endif>
                 <a href="{{ route('periodo.index') }}">
-                    <i class="tim-icons icon-coins"></i>
-                    <p>{{ __('Periodos') }}</p>
+                    <i class="tim-icons icon-calendar-60"></i>
+                    <p>{{ __('Períodos') }}</p>
                 </a>
             </li>
             
             <li @if ($pageSlug == 'empresa') class="active " @endif>
                 <a href="{{ route('analisis_horizontal.index') }}">
-                    <i class="tim-icons icon-bank"></i>
+                    <i class="tim-icons icon-bulb-63"></i>
                     <p>{{ __('Análisis & Ratios') }}</p>
                 </a>
             </li>
@@ -70,7 +70,7 @@
             </li-->
             <li @if ($pageSlug == 'formulas') class="active " @endif>
                 <a href="{{ route('formulas') }}">
-                    <i class="tim-icons icon-bulb-63"></i>
+                    <i class="tim-icons icon-chat-33"></i>
                     <p>{{ __('Asistencia') }}</p>
                 </a>
             </li>
