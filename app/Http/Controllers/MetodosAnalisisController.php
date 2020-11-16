@@ -11,28 +11,30 @@ class MetodosAnalisisController extends Controller
 
 /*------------------------------ FUNCIÓN QUE DEVUELVE TODOS LOS ANALISIS -----------------------------------*/
 
-public function get_analisis($ratios, $empresa, $sector, $year){
+public function get_analisis($ratios, $empresa, $sector, $year, $calculados){
     $analisis = [];
-    array_push($analisis, $this->tres_casos($ratios[0], $empresa, $sector, $year));
-    array_push($analisis, $this->tres_casos($ratios[1], $empresa, $sector, $year));
-    array_push($analisis, $this->dos_casos($ratios[2], $empresa, $sector, $year));
-    array_push($analisis, $this->dos_casos($ratios[3], $empresa, $sector, $year));
-    array_push($analisis, $this->especial($ratios[4], $ratios[6], $empresa, $sector, $year));
-    array_push($analisis, $this->especial($ratios[5], $ratios[7], $empresa, $sector, $year));
-    array_push($analisis, $this->un_caso($ratios[6], $empresa, $sector, $year));
-    array_push($analisis, $this->un_caso($ratios[7], $empresa, $sector, $year));
-    array_push($analisis, $this->un_caso($ratios[8], $empresa, $sector, $year));
-    array_push($analisis, $this->un_caso($ratios[9], $empresa, $sector, $year));
-    array_push($analisis, $this->un_caso($ratios[10], $empresa, $sector, $year));
-    array_push($analisis, $this->un_caso($ratios[11], $empresa, $sector, $year));
-    array_push($analisis, $this->tres_casos($ratios[12], $empresa, $sector, $year));
-    array_push($analisis, $this->un_caso($ratios[13], $empresa, $sector, $year));
-    array_push($analisis, $this->un_caso($ratios[14], $empresa, $sector, $year));
-    array_push($analisis, $this->dos_casos($ratios[15], $empresa, $sector, $year));
-    array_push($analisis, $this->un_caso($ratios[16], $empresa, $sector, $year));
-    array_push($analisis, $this->un_caso($ratios[17], $empresa, $sector, $year));
-    array_push($analisis, $this->un_caso($ratios[18], $empresa, $sector, $year));
-    array_push($analisis, $this->un_caso($ratios[19], $empresa, $sector, $year));
+    if($calculados){
+        array_push($analisis, $this->tres_casos($ratios[0], $empresa, $sector, $year));
+        array_push($analisis, $this->tres_casos($ratios[1], $empresa, $sector, $year));
+        array_push($analisis, $this->dos_casos($ratios[2], $empresa, $sector, $year));
+        array_push($analisis, $this->dos_casos($ratios[3], $empresa, $sector, $year));
+        array_push($analisis, $this->especial($ratios[4], $ratios[6], $empresa, $sector, $year));
+        array_push($analisis, $this->especial($ratios[5], $ratios[7], $empresa, $sector, $year));
+        array_push($analisis, $this->un_caso($ratios[6], $empresa, $sector, $year));
+        array_push($analisis, $this->un_caso($ratios[7], $empresa, $sector, $year));
+        array_push($analisis, $this->un_caso($ratios[8], $empresa, $sector, $year));
+        array_push($analisis, $this->un_caso($ratios[9], $empresa, $sector, $year));
+        array_push($analisis, $this->un_caso($ratios[10], $empresa, $sector, $year));
+        array_push($analisis, $this->un_caso($ratios[11], $empresa, $sector, $year));
+        array_push($analisis, $this->tres_casos($ratios[12], $empresa, $sector, $year));
+        array_push($analisis, $this->un_caso($ratios[13], $empresa, $sector, $year));
+        array_push($analisis, $this->un_caso($ratios[14], $empresa, $sector, $year));
+        array_push($analisis, $this->dos_casos($ratios[15], $empresa, $sector, $year));
+        array_push($analisis, $this->un_caso($ratios[16], $empresa, $sector, $year));
+        array_push($analisis, $this->un_caso($ratios[17], $empresa, $sector, $year));
+        array_push($analisis, $this->un_caso($ratios[18], $empresa, $sector, $year));
+        array_push($analisis, $this->un_caso($ratios[19], $empresa, $sector, $year));
+    }
 
     return $analisis;
 }

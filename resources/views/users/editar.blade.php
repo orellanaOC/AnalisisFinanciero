@@ -77,6 +77,51 @@
                                 @endforeach
                             </select>                            
                         </div>
+                        @include('alerts.success', ['key' => 'empresa_status'])
+                        <div class="input-group{{ $errors->has('empresa') ? ' has-danger' : '' }}">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="tim-icons icon-bank"></i>
+                                </div>
+                            </div>
+                        <input required name="empresa" class="form-control" placeholder="{{ __('Nombre de la empresa') }}" value="{{$empresa->nombre}}">
+                            @include('alerts.feedback', ['field' => 'empresa'])
+                        </div>
+                        <div class="input-group {{ $errors->has('sector') ? ' has-danger' : '' }}">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="tim-icons icon-minimal-down"></i>
+                                </div>
+                            </div>
+                            <select required class="form-control selectorWapis" id="sector" name="sector">
+                                <option value="" selected disabled hidden>Seleccione un sector *</option>
+                                @foreach ($sectores as $sector)
+                                    @if (old('sector') == $sector->id || $empresa->sector_id == $sector->id)                                     
+                                        <option style="color: black !important;" value="{{$sector->id}}" selected>{{ $sector->nombre }}</option>
+                                    @else
+                                        <option style="color: black !important;" value="{{$sector->id}}">{{ $sector->nombre }}</option>
+                                    @endif                                
+                                @endforeach
+                            </select>                             
+                        </div>
+                        <div class="input-group{{ $errors->has('nit') ? ' has-danger' : '' }}">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="tim-icons icon-badge"></i>
+                                </div>
+                            </div>
+                            <input required pattern="[0-9]{14}" maxlength="14" name="nit" class="form-control" placeholder="{{ __('Número de Identificación Tributaria') }}" value="{{$empresa->nit}}">
+                            @include('alerts.feedback', ['field' => 'nit'])
+                        </div>
+                        <div class="input-group{{ $errors->has('nrc') ? ' has-danger' : '' }}">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="tim-icons icon-badge"></i>
+                                </div>
+                            </div>
+                            <input required pattern="[0-9]{14}" maxlength="14" name="nrc" class="form-control" placeholder="{{ __('Número de Registro de Contribuyentes') }}" value="{{$empresa->nrc}}">
+                            @include('alerts.feedback', ['field' => 'nrc'])
+                        </div>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Actualizar') }}</button>

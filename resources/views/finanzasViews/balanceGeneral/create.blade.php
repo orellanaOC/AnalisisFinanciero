@@ -396,7 +396,7 @@
                         </div>
                     </div-->
 
-
+                    <!--
                     <br><br>
                     <div class="row">
                         <div class="col-md-2"></div>
@@ -404,7 +404,7 @@
                             <button class="btn btn-primary"> Guardar </button>
                         </div>
                         <div class="col-md-2"></div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
