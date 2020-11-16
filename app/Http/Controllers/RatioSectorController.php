@@ -187,7 +187,7 @@ class RatioSectorController extends Controller
         $periodos = Periodo::where('empresa_id', $empresa->id)->get();
 
         $calculados = false;
-        if(count($ratios)>0){
+        if(count($ratios)==20){
             $calculados = true;
         }
 
