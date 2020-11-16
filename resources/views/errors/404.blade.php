@@ -16,10 +16,25 @@
     justify-content: center;
     align-items: center;      
 }
+#nombre-error{
+    position:absolute;
+    top: 0px;
+    color:white;
+    font-size:200px;
+    z-index: 3;
+}
+#message{
+    position: absolute;
+    top: 600px;
+    color: white;
+    font-size: 45px;
+    z-index:2;
+}
 </style>
 <body>
 <div class="error-container">
+    <div id="nombre-error">404</div>
     <img src="{{ asset('black') }}/img/404.png">
+    <div id="message">Página no encontrada</div>
 </div>   
 </body>
-</html>
