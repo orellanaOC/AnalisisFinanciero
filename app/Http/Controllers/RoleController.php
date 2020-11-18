@@ -59,7 +59,6 @@ class RoleController extends Controller
         $rol = new Role();
         $rol->name = request('name');
         $rol->slug = request('slug');
-        $rol->tipoRol = false;
 
         $rol->save();
 
