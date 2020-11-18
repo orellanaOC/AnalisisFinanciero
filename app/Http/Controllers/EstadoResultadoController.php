@@ -120,6 +120,9 @@ class EstadoResultadoController extends Controller
             $EstadoResultado= $this->calculosER($request, $EstadoResultado, $id_periodo);
         }
         $EstadoResultado->save();
+
+        DB::delete('delete from razon where periodo_id = ?', [$id_periodo]);        
+
         return redirect()->route('estado_resultado_create', $id_periodo)->with('status', 'Cuenta '.$request->nombre.' creada exitosamente');
     }
 
@@ -264,6 +267,8 @@ class EstadoResultadoController extends Controller
                     $estado_resultado->periodo_id=intval($id_periodo);
                     //return $estado_resultado;
                     $estado_resultado->save();
+
+                    DB::delete('delete from razon where periodo_id = ?', [$id_periodo]); 
 
                     //Eliminar el archivo subido, solo se utiliza para la importacion y luego de desecha
                     Storage::delete($ruta);

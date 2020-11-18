@@ -72,6 +72,9 @@ class CuentaSistemaController extends Controller
         $vinculacion->id_cuenta_sistema=$id;
         $vinculacion->id_empresa=$empresa->id;
         $vinculacion->save();
+
+        DB::delete('delete from razon where periodo_id in (select id from periodo where empresa_id = ?)', [$empresa->id]);    
+
         return back()->with('status', 'Cuenta '.$request->cuenta.' vinculada exitosamente');
 
         /*
@@ -95,6 +98,8 @@ class CuentaSistemaController extends Controller
             where id_empresa=?
             and id_cuenta_sistema=?',[$empresa->id, $id]);
         }
+
+        DB::delete('delete from razon where periodo_id in (select id from periodo where empresa_id = ?)', [$empresa->id]);    
 
         return back()->with('status', 'Cuenta desvinculada exitosamente');
     }

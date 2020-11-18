@@ -311,6 +311,9 @@ class CuentaPerioController extends Controller
             if($cuenta->padre_id!=null){
                 $repeticion=$this->modificarPadre($cuenta->padre_id, $id_periodo);
             }
+
+            DB::delete('delete from razon where periodo_id = ?', [$id_periodo]);        
+
             return true;
         }
 
