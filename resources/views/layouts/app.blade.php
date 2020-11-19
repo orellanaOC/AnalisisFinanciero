@@ -22,6 +22,33 @@
         <link href="{{ asset('black') }}/css/style.css" rel="stylesheet" />
     </head>
     <body class="{{ $class ?? '' }} white-content">
+        <!-- Load Facebook SDK for JavaScript -->
+      <div id="fb-root"></div>
+      <script>
+            window.fbAsyncInit = function() {
+            FB.init({
+                xfbml            : true,
+                version          : 'v9.0'
+            });
+            };
+
+            (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+      </script>
+
+      <!-- Your Chat Plugin code -->
+      <div class="fb-customerchat"
+        attribution=setup_tool
+        page_id="102811764988196"
+        theme_color="#c353ec"
+        logged_in_greeting="¡Hola! ¿en qué puedo ayudarte? "
+        logged_out_greeting="¡Hola! ¿en qué puedo ayudarte? ">
+      </div>
         @auth()
             <div class="wrapper">
                     @include('layouts.navbars.sidebar')
