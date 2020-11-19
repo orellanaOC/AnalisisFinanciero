@@ -66,14 +66,7 @@
                     <p>{{ __('Análisis & Ratios') }}</p>
                 </a>
             </li>
-            @endcan
-            <li @if ($pageSlug == 'formulas') class="active " @endif>
-                <a href="{{ route('formulas') }}">
-                    <i class="tim-icons icon-chat-33"></i>
-                    <p>{{ __('Asistencia') }}</p>
-                </a>
-            </li>
-            
+            @endcan            
             @canany(['users.index', 'roles.index', 'permission_user.index'])
             <li>
                 <a data-toggle="collapse" href="#seguridad" aria-expanded="false">
