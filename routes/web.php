@@ -141,24 +141,28 @@ Route::middleware(['auth'])->group(function(){
 	/*-----------------------------------------------------------------------------------------------------*/
 
 	/*------------------------------------------- CATALOGO0 ---------------------------------------------*/
-	Route::get('/catalogo', 'CatalogoController@index')->name('catalogo_prueba');
-
-    Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');
+	Route::get('/catalogo', 'CatalogoController@index')->name('catalogo_prueba')
+	->middleware('has.permission:cuenta.index');
+	//Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');	
     Route::get('download/excel','CatalogoController@dowloadExcel')->name('catalogo.download');
     Route::post('upload/excel','CatalogoController@uploadExcel')->name('catalogo.upload');
-    Route::get('/catalogo/create', 'HomeController@catalogo2')->name('catalogo_prueba_create');
-    Route::post('catalogo/deleteall','CatalogoController@BorrarCuentas')->name('cuenta.deleteall');
-    Route::post('catalogo/confirmar','CatalogoController@ConfirmarCatalogo')->name('catalogo.confirmar');
-    Route::post('catalogo/confirmarVinculacion','CuentaSistemaController@confirmarVinculacion')->name('cuenta.vinculacion');
+	Route::post('catalogo/deleteall','CatalogoController@BorrarCuentas')->name('cuenta.deleteall')
+	->middleware('has.permission:cuenta.destroy');	
+	Route::post('catalogo/confirmar','CatalogoController@ConfirmarCatalogo')->name('catalogo.confirmar');
+	->middleware('has.permission:cuenta.create');
+	Route::post('catalogo/confirmarVinculacion','CuentaSistemaController@confirmarVinculacion')->name('cuenta.vinculacion');
+	->middleware('has.permission:cuenta.create');
 	Route::get('/catalogo/show', 'CatalogoController@show')->name('catalogo_show')
-	->middleware('has.permission:cuenta.show');
+	->middleware('has.permission:cuenta.index');
 
 
 	//Guardar cuentas de forma manual
 	Route::post('/catalogo', 'CatalogoController@store')->name('cuenta_store')
-	->middleware('has.permission:cuenta.createshowshow');
-	Route::put('/catalogo','CatalogoController@update')->name('cuenta_update');
-    Route::delete('/catalogo/{id}', 'CatalogoController@destroy')->name('cuenta.destroy');
+	->middleware('has.permission:cuenta.create');
+	Route::put('/catalogo','CatalogoController@update')->name('cuenta_update')
+	->middleware('has.permission:cuenta.edit');
+	Route::delete('/catalogo/{id}', 'CatalogoController@destroy')->name('cuenta.destroy')
+	->middleware('has.permission:cuenta.destroy');
 
 
 
@@ -182,16 +186,20 @@ Route::middleware(['auth'])->group(function(){
 	/*------------------------------------------- BALANCE-GENERAL -------------------------------------------*/
 	Route::get('/balance_general_index', 'HomeController@balance_general_index')->name('balance_general_index')
 	->middleware('has.permission:balance_general.index');
-    Route::get('/{id_periodo}/balance_general_create', 'BalanceGeneralController@create')->name('balance_general_create');
+	Route::get('/{id_periodo}/balance_general_create', 'BalanceGeneralController@create')->name('balance_general_create')
+	->middleware('has.permission:balance_general.create');
     Route::get('balance_general/download/excel','BalanceGeneralController@dowloadExcel')->name('balance_general.download');
 
 	/*-----------------------------------------------------------------------------------------------------*/
 
 	/*------------------------------------------- ESTADO-RESULTADO -------------------------------------------*/
-	Route::get('/estado_resultados_index', 'HomeController@estado_resultado_index')->name('estado_resultado_index');
-	Route::get('/{id_periodo}/estado_resultados_create', 'EstadoResultadoController@create')->name('estado_resultado_create');
-    Route::post('/{id_periodo}/estado_resultados', 'EstadoResultadoController@store')->name('estado_resultado.store');
-    Route::post('estado_resultado/upload/excel/{id_periodo}','EstadoResultadoController@uploadExcel')->name('estado_resultado.upload');
+	Route::get('/estado_resultados_index', 'HomeController@estado_resultado_index')->name('estado_resultado_index')
+	->middleware('has.permission:estado_resultado.index');
+	Route::get('/{id_periodo}/estado_resultados_create', 'EstadoResultadoController@create')->name('estado_resultado_create')
+	->middleware('has.permission:estado_resultado.create');
+	Route::post('/{id_periodo}/estado_resultados', 'EstadoResultadoController@store')->name('estado_resultado.store')
+	->middleware('has.permission:estado_resultado.create');
+	Route::post('estado_resultado/upload/excel/{id_periodo}','EstadoResultadoController@uploadExcel')->name('estado_resultado.upload');
     Route::get('estado_resultado/download/excel','EstadoResultadoController@dowloadExcel')->name('estado_resultado.download');
 
 	/*-----------------------------------------------------------------------------------------------------*/
@@ -218,13 +226,15 @@ Route::middleware(['auth'])->group(function(){
 	//padre
 	Route::get('/analisis_horizontal', 'AnalisisHorizontalController@index')->name('analisis_horizontal.index');
 	//hijo
-	Route::get('/{id_periodo1}/{id_periodo2}/analisis_horizontal', 'AnalisisHorizontalController@show')->name('analisis_horizontal.show');
+	Route::get('/{id_periodo1}/{id_periodo2}/analisis_horizontal', 'AnalisisHorizontalController@show')->name('analisis_horizontal.show')
+	->middleware('has.permission:analisis.show');
 	/*--------------------------------------------------------------------------------------------------------*/
 
 	/*------------------------------------------- RATIOS --------------------------------------------------------*/
 
 	Route::get('/ratio/individual', 'RatioController@individual_padre')->name('ratio.individual_padre');
-	Route::get('/ratio/individual/{id_periodo}', 'RatioController@individual')->name('ratio.individual');
+	Route::get('/ratio/individual/{id_periodo}', 'RatioController@individual')->name('ratio.individual')
+	->middleware('has.permission:analisis.show');
 
 	/*--------------------------------------------------------------------------------------------------------*/
 
@@ -232,7 +242,8 @@ Route::middleware(['auth'])->group(function(){
 
 	Route::get('/ratio/sector_calcular/{id_periodo}', 'RatioSectorController@calcular_ratios')->name('ratio_sector.calcular');
 	Route::get('/ratio/sector', 'RatioSectorController@sector_padre')->name('ratio_sector.padre');
-	Route::get('/ratio/sector/{id_periodo}', 'RatioSectorController@sector')->name('ratio.sector');
+	Route::get('/ratio/sector/{id_periodo}', 'RatioSectorController@sector')->name('ratio.sector')
+	->middleware('has.permission:analisis.show');
 
 	/*--------------------------------------------------------------------------------------------------------*/
 });
