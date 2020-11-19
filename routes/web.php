@@ -148,9 +148,9 @@ Route::middleware(['auth'])->group(function(){
     Route::post('upload/excel','CatalogoController@uploadExcel')->name('catalogo.upload');
 	Route::post('catalogo/deleteall','CatalogoController@BorrarCuentas')->name('cuenta.deleteall')
 	->middleware('has.permission:cuenta.destroy');	
-	Route::post('catalogo/confirmar','CatalogoController@ConfirmarCatalogo')->name('catalogo.confirmar');
+	Route::post('catalogo/confirmar','CatalogoController@ConfirmarCatalogo')->name('catalogo.confirmar')
 	->middleware('has.permission:cuenta.create');
-	Route::post('catalogo/confirmarVinculacion','CuentaSistemaController@confirmarVinculacion')->name('cuenta.vinculacion');
+	Route::post('catalogo/confirmarVinculacion','CuentaSistemaController@confirmarVinculacion')->name('cuenta.vinculacion')
 	->middleware('has.permission:cuenta.create');
 	Route::get('/catalogo/show', 'CatalogoController@show')->name('catalogo_show')
 	->middleware('has.permission:cuenta.index');
